@@ -12,5 +12,56 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+		<!-- maven-compiler-plugin -->
+		<maven.compiler.target>1.7</maven.compiler.target>
+		<maven.compiler.source>1.7</maven.compiler.source>
+
+		<!-- Wildfly version -->
+		<version.wildfly>8.0.0.Final</version.wildfly>
+
+		<!-- Define the version of the used dependencies -->
+		<version.wildfly.bom>8.0.0.Final</version.wildfly.bom>
+		<version.arquillian.bom>1.1.3.Final</version.arquillian.bom>
+		<version.junit.jar>4.11</version.junit.jar>
+
+		<!-- Define the versions of used plugins -->
+		<version.ear.plugin>2.9</version.ear.plugin>
+		<version.ejb.plugin>2.3</version.ejb.plugin>
+		<version.surefire.plugin>2.16</version.surefire.plugin>
+		<version.war.plugin>2.4</version.war.plugin>
+		<version.wildfly.plugin>1.0.1.Final</version.wildfly.plugin>
+
 	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+
+			<dependency>
+				<groupId>org.wildfly.bom</groupId>
+				<artifactId>jboss-javaee-7.0-with-all</artifactId>
+				<version>${version.wildfly.bom}</version>
+				<type>pom</type>
+				<scope>provided</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>org.jboss.arquillian</groupId>
+				<artifactId>arquillian-bom</artifactId>
+				<version>${version.arquillian.bom}</version>
+				<type>pom</type>
+				<scope>test</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<version>${version.junit.jar}</version>
+				<type>jar</type>
+				<scope>test</scope>
+			</dependency>
+
+		</dependencies>
+	</dependencyManagement>
+
 </project>
