@@ -22,8 +22,6 @@
 
 		<!-- Define the version of the used dependencies -->
 		<version.wildfly.bom>8.0.0.Final</version.wildfly.bom>
-		<version.arquillian.bom>1.1.3.Final</version.arquillian.bom>
-		<version.junit.jar>4.11</version.junit.jar>
 
 		<!-- Define the versions of used plugins -->
 		<version.ear.plugin>2.9</version.ear.plugin>
@@ -42,26 +40,15 @@
 				<artifactId>jboss-javaee-7.0-with-all</artifactId>
 				<version>${version.wildfly.bom}</version>
 				<type>pom</type>
-				<scope>provided</scope>
-			</dependency>
-
-			<dependency>
-				<groupId>org.jboss.arquillian</groupId>
-				<artifactId>arquillian-bom</artifactId>
-				<version>${version.arquillian.bom}</version>
-				<type>pom</type>
-				<scope>test</scope>
-			</dependency>
-
-			<dependency>
-				<groupId>junit</groupId>
-				<artifactId>junit</artifactId>
-				<version>${version.junit.jar}</version>
-				<type>jar</type>
-				<scope>test</scope>
+				<scope>import</scope>
 			</dependency>
 
 		</dependencies>
 	</dependencyManagement>
-
+	<modules>
+		<module>rent-a-wreck-app</module>
+		<module>rent-a-wreck-webapp</module>
+		<module>rent-a-wreck-rentable</module>
+		<module>rent-a-wreck-aircraft</module>
+	</modules>
 </project>
