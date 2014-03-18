@@ -47,8 +47,9 @@
 	</dependencyManagement>
 	<modules>
 		<module>rent-a-wreck-app</module>
-		<module>rent-a-wreck-webapp</module>
+		<module>rent-a-wreck-client</module>
+		<module>rent-a-wreck-backend</module>
 		<module>rent-a-wreck-rentable</module>
-		<module>rent-a-wreck-aircraft</module>
+		<module>rent-a-wreck-test</module>
 	</modules>
 </project>
