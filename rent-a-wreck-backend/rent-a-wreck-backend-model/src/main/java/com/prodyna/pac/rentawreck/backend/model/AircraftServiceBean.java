@@ -4,11 +4,11 @@ import java.util.Collections;
 import java.util.List;
 
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
 @Named
@@ -19,11 +19,11 @@ import javax.persistence.TypedQuery;
 })
 public class AircraftServiceBean implements AircraftService {
 
-	@PersistenceContext
+	@Inject
 	private EntityManager em;
 
-	// @Inject @Named("log")
-	// private Logger log;
+//	 @Inject @Named("logger")
+//	 private Logger logger;
 
 	/**
 	 * Default constructor.

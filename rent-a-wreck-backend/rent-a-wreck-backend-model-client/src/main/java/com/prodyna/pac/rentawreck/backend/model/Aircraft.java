@@ -8,7 +8,7 @@ import javax.persistence.Table;
  *
  */
 @Entity
-@Table(name="rar_aircraft")
+@Table(name="raw_aircraft")
 public class Aircraft extends Rentable {
 
 	private static final long serialVersionUID = 1L;

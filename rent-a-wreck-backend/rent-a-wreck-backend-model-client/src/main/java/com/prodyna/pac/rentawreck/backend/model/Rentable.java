@@ -1,10 +1,11 @@
 package com.prodyna.pac.rentawreck.backend.model;
 
 import javax.persistence.Entity;
+import javax.persistence.MappedSuperclass;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="rar_rentable")
+@Table(name="raw_aircraft")
 public class Rentable extends AbstractEntity {
 
 	private static final long serialVersionUID = 1L;

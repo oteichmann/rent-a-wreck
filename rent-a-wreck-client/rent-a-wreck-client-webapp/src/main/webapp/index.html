@@ -1,0 +1,42 @@
+<!doctype html>
+<html ng-app="rawApp">
+	<head>
+		<meta charset="utf-8">
+		<title>Rent-A-Wreck</title>
+		<!-- 
+		<link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+		<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.8/angular.js"></script>
+		<script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.10.0.js"></script>
+		-->
+		<link href="css/lib/bootstrap.css" rel="stylesheet">
+		
+		<script src="js/lib/angular.js"></script>
+		<script src="js/lib/angular-resource.js"></script>
+		<script src="js/lib/ui-bootstrap-tpls-0.10.0.js"></script>
+
+		<script src="js/app.js"></script>
+		<script src="js/controllers.js"></script>
+		<script src="js/services.js"></script>
+	</head>
+	<body ng-controller="AircraftListCtrl">
+		<p>Let's go!</p>
+		 
+		<table class="table">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Name</th>
+					<th>Description</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="aircraft in aircrafts">
+					<td>{{aircraft.id}}</td>
+					<td>{{aircraft.name}}</td>
+					<td></td>
+				</tr>
+			</tbody>
+		</table>
+
+	</body>
+</html>

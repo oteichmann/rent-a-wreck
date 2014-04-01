@@ -21,6 +21,7 @@ import java.util.logging.Logger;
 
 import javax.enterprise.inject.Produces;
 import javax.enterprise.inject.spi.InjectionPoint;
+import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -44,7 +45,8 @@ public class CommonProducer {
 	private EntityManager em;
 
 	@Produces
-	public Logger produceLog(InjectionPoint injectionPoint) {
+	@Named("logger")
+	public Logger produceLogger(InjectionPoint injectionPoint) {
 		return Logger.getLogger(injectionPoint.getMember().getDeclaringClass().getName());
 	}
 

@@ -11,8 +11,6 @@
 	<modules>
 		<module>rent-a-wreck-backend-model</module>
 		<module>rent-a-wreck-backend-model-client</module>
-		<module>rent-a-wreck-backend-common</module>
-		<module>rent-a-wreck-backend-rest</module>
 	</modules>
 
 	<build>
