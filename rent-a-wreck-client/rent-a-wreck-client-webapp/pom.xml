@@ -8,5 +8,9 @@
 	</parent>
 	<artifactId>rent-a-wreck-client-webapp</artifactId>
 	<packaging>war</packaging>
+	
+	<build>
+		<finalName>${project.artifactId}</finalName>
+	</build>
 
 </project>

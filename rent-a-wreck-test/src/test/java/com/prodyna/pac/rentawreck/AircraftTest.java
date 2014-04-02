@@ -14,8 +14,8 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.prodyna.pac.rentawreck.backend.model.Aircraft;
-import com.prodyna.pac.rentawreck.backend.model.AircraftService;
+import com.prodyna.pac.rentawreck.backend.rentable.model.Aircraft;
+import com.prodyna.pac.rentawreck.backend.rentable.service.AircraftService;
 
 @RunWith(Arquillian.class)
 public class AircraftTest {

@@ -50,6 +50,60 @@
 				<scope>import</scope>
 			</dependency>
 
+			<dependency>
+				<groupId>com.prodyna.pac.rentawreck</groupId>
+				<artifactId>rent-a-wreck-app</artifactId>
+				<version>${project.version}</version>
+				<type>ear</type>
+			</dependency>
+			<dependency>
+				<groupId>com.prodyna.pac.rentawreck</groupId>
+				<artifactId>rent-a-wreck-backend</artifactId>
+				<version>${project.version}</version>
+				<type>pom</type>
+			</dependency>
+			<dependency>
+				<groupId>com.prodyna.pac.rentawreck</groupId>
+				<artifactId>rent-a-wreck-backend-common-api</artifactId>
+				<version>${project.version}</version>
+				<type>jar</type>
+			</dependency>
+			<dependency>
+				<groupId>com.prodyna.pac.rentawreck</groupId>
+				<artifactId>rent-a-wreck-backend-common</artifactId>
+				<version>${project.version}</version>
+				<type>ejb</type>
+			</dependency>
+			<dependency>
+				<groupId>com.prodyna.pac.rentawreck</groupId>
+				<artifactId>rent-a-wreck-backend-rentable-api</artifactId>
+				<version>${project.version}</version>
+				<type>jar</type>
+			</dependency>
+			<dependency>
+				<groupId>com.prodyna.pac.rentawreck</groupId>
+				<artifactId>rent-a-wreck-backend-rentable</artifactId>
+				<version>${project.version}</version>
+				<type>ejb</type>
+			</dependency>
+			<dependency>
+				<groupId>com.prodyna.pac.rentawreck</groupId>
+				<artifactId>rent-a-wreck-client</artifactId>
+				<version>${project.version}</version>
+				<type>pom</type>
+			</dependency>
+			<dependency>
+				<groupId>com.prodyna.pac.rentawreck</groupId>
+				<artifactId>rent-a-wreck-client-rest</artifactId>
+				<version>${project.version}</version>
+				<type>war</type>
+			</dependency>
+			<dependency>
+				<groupId>com.prodyna.pac.rentawreck</groupId>
+				<artifactId>rent-a-wreck-client-webapp</artifactId>
+				<version>${project.version}</version>
+				<type>war</type>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 

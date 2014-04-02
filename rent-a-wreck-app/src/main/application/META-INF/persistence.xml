@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence" version="1.0">
+	<persistence-unit name="rent-a-wreck">
+		<jta-data-source>java:jboss/datasources/ExampleDS</jta-data-source>
+		<jar-file>rent-a-wreck-app.ear/lib/rent-a-wreck-backend-rentable-api.jar</jar-file>
+		<properties>
+			<property name="hibernate.hbm2ddl.auto" value="update" />
+			<property name="hibernate.show_sql" value="false" />
+			<property name="hibernate.ejb.naming_strategy" value="org.hibernate.cfg.ImprovedNamingStrategy" />
+		</properties>
+	</persistence-unit>
+</persistence>

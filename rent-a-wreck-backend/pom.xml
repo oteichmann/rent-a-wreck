@@ -9,22 +9,25 @@
 	<artifactId>rent-a-wreck-backend</artifactId>
 	<packaging>pom</packaging>
 	<modules>
-		<module>rent-a-wreck-backend-model</module>
-		<module>rent-a-wreck-backend-model-client</module>
+		<module>rent-a-wreck-backend-common</module>
+		<module>rent-a-wreck-backend-rentable</module>
+		<module>rent-a-wreck-backend-rentable-api</module>
+		<module>rent-a-wreck-backend-common-api</module>
 	</modules>
 
 	<build>
-		<finalName>${project.artifactId}</finalName>
-		<plugins>
-			<plugin>
-				<artifactId>maven-ejb-plugin</artifactId>
-				<version>${version.ejb.plugin}</version>
-				<configuration>
-					<!-- Tell Maven we are using EJB 3.2 -->
-					<ejbVersion>3.2</ejbVersion>
-				</configuration>
-				<inherited>true</inherited>
-			</plugin>
-		</plugins>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<artifactId>maven-ejb-plugin</artifactId>
+					<version>${version.ejb.plugin}</version>
+					<configuration>
+						<!-- Tell Maven we are using EJB 3.2 -->
+						<ejbVersion>3.2</ejbVersion>
+					</configuration>
+					<inherited>true</inherited>
+				</plugin>
+			</plugins>
+		</pluginManagement>
 	</build>
 </project>

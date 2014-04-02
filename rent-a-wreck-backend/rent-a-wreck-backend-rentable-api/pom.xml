@@ -6,7 +6,7 @@
 		<artifactId>rent-a-wreck-backend</artifactId>
 		<version>1.0-SNAPSHOT</version>
 	</parent>
-	<artifactId>rent-a-wreck-backend-common</artifactId>
+	<artifactId>rent-a-wreck-backend-rentable-api</artifactId>
 	<dependencies>
 		<dependency>
 			<groupId>org.hibernate.javax.persistence</groupId>
@@ -14,17 +14,17 @@
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
-			<groupId>javax.enterprise</groupId>
-			<artifactId>cdi-api</artifactId>
+			<groupId>org.jboss.resteasy</groupId>
+			<artifactId>jaxrs-api</artifactId>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.prodyna.pac.rentawreck</groupId>
 			<artifactId>rent-a-wreck-backend-common-api</artifactId>
+			<scope>provided</scope>
 		</dependency>
 	</dependencies>
-	<packaging>ejb</packaging>
-	
+
 	<build>
 		<finalName>${project.artifactId}</finalName>
 	</build>

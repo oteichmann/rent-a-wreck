@@ -8,26 +8,6 @@
 	</parent>
 	<artifactId>rent-a-wreck-app</artifactId>
 	<packaging>ear</packaging>
-	<dependencies>
-		<dependency>
-			<groupId>com.prodyna.pac.rentawreck</groupId>
-			<artifactId>rent-a-wreck-backend-model</artifactId>
-			<version>1.0-SNAPSHOT</version>
-			<type>ejb</type>
-		</dependency>
-		<dependency>
-			<groupId>com.prodyna.pac.rentawreck</groupId>
-			<artifactId>rent-a-wreck-client-rest</artifactId>
-			<version>1.0-SNAPSHOT</version>
-			<type>war</type>
-		</dependency>
-		<dependency>
-			<groupId>com.prodyna.pac.rentawreck</groupId>
-			<artifactId>rent-a-wreck-client-webapp</artifactId>
-			<version>1.0-SNAPSHOT</version>
-			<type>war</type>
-		</dependency>
-	</dependencies>
 
 	<build>
 		<finalName>${project.artifactId}</finalName>
@@ -37,6 +17,19 @@
 				<version>${version.ear.plugin}</version>
 				<configuration>
 					<defaultLibBundleDir>lib</defaultLibBundleDir>
+					<modules>
+						<webModule>
+							<groupId>com.prodyna.pac.rentawreck</groupId>
+							<artifactId>rent-a-wreck-client-webapp</artifactId>
+							<contextRoot>/rent-a-wreck</contextRoot>
+						</webModule>
+						<webModule>
+							<groupId>com.prodyna.pac.rentawreck</groupId>
+							<artifactId>rent-a-wreck-client-rest</artifactId>
+							<contextRoot>/rent-a-wreck-rest</contextRoot>
+						</webModule>
+					</modules>
+					<fileNameMapping>no-version</fileNameMapping>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -48,4 +41,26 @@
 			</plugin>
 		</plugins>
 	</build>
+	<dependencies>
+		<dependency>
+			<groupId>com.prodyna.pac.rentawreck</groupId>
+			<artifactId>rent-a-wreck-backend-common</artifactId>
+			<type>ejb</type>
+		</dependency>
+		<dependency>
+			<groupId>com.prodyna.pac.rentawreck</groupId>
+			<artifactId>rent-a-wreck-backend-rentable</artifactId>
+			<type>ejb</type>
+		</dependency>
+		<dependency>
+			<groupId>com.prodyna.pac.rentawreck</groupId>
+			<artifactId>rent-a-wreck-client-rest</artifactId>
+			<type>war</type>
+		</dependency>
+		<dependency>
+			<groupId>com.prodyna.pac.rentawreck</groupId>
+			<artifactId>rent-a-wreck-client-webapp</artifactId>
+			<type>war</type>
+		</dependency>
+	</dependencies>
 </project>
