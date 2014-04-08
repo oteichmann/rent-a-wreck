@@ -1,2 +1,8 @@
 ﻿language: java
 script: mvn test
+after_success:
+  - git clone git://github.com/oteichmann/artifact-repo ../artifact-repo
+  - cd ../artifact-repo
+  - touch test
+  - git commit -am "test"
+  - git push
