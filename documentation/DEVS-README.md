@@ -26,4 +26,8 @@ formatting rules._
 This project uses Git. There is only one repository for the complete project.
 
 ### Build and Dependency Management
+Maven 3.x
+
+### Continous Integration
+Travis
 
