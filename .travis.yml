@@ -1,8 +1,20 @@
 ﻿language: java
-script: mvn test
+
+before_script:
+  - echo -e "Host github.com\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
+  - git config --global user.email "oteichmann@prodyna.com"
+  - git config --global user.name "Oliver Teichmann"
+  - git config credential.helper "store --file=~/.git/credentials"
+  - echo "https://${GH_TOKEN}:@github.com" > ~/.git/credentials
+
+script:
+  - mvn test
+
 after_success:
   - git clone git://github.com/oteichmann/artifact-repo ../artifact-repo
   - cd ../artifact-repo
+  - git remote rm origin
+  - git remote add origin https://oteichmann:${GH_TOKEN}@github.com/oteichmann/artifact-repo.git
   - touch test
   - git commit -am "test"
   - git push
