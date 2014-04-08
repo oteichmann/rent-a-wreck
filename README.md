@@ -1,4 +1,3 @@
-rent-a-wreck
-============
+# rent-a-wreck
 
-This is my PAC app.
+This is my PAC application.
