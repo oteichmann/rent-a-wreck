@@ -14,18 +14,18 @@ import com.prodyna.pac.rentawreck.backend.rentable.model.Rentable;
 
 /**
  * @author oteichmann
- *
+ * 
  */
 @Path("/rentables")
 public interface RentableService {
-	
+
 	@GET
 	@Path("/{id:[0-9][0-9]*}")
-    @Produces(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
 	public Rentable fetchById(long id);
-	
+
 	@GET
-    @Produces(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
 	public List<Rentable> fetchAll();
 
 }

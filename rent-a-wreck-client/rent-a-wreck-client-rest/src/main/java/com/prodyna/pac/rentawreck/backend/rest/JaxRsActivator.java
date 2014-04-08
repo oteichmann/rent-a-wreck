@@ -1,4 +1,5 @@
 package com.prodyna.pac.rentawreck.backend.rest;
+
 /*
  * JBoss, Home of Professional Open Source
  * Copyright 2013, Red Hat, Inc. and/or its affiliates, and individual
@@ -16,10 +17,8 @@ package com.prodyna.pac.rentawreck.backend.rest;
  * limitations under the License.
  */
 
-
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
-
 
 /**
  * A class extending {@link Application} and annotated with @ApplicationPath is

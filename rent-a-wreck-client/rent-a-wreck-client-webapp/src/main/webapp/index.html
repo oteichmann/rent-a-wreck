@@ -1,42 +1,58 @@
 <!doctype html>
 <html ng-app="rawApp">
-	<head>
-		<meta charset="utf-8">
-		<title>Rent-A-Wreck</title>
-		<!-- 
-		<link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
-		<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.8/angular.js"></script>
-		<script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.10.0.js"></script>
-		-->
-		<link href="css/lib/bootstrap.css" rel="stylesheet">
-		
-		<script src="js/lib/angular.js"></script>
-		<script src="js/lib/angular-resource.js"></script>
-		<script src="js/lib/ui-bootstrap-tpls-0.10.0.js"></script>
+<head>
+<meta charset="utf-8">
+<title>Rent-A-Wreck</title>
+<!-- 
+<link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.8/angular.js"></script>
+<script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.10.0.js"></script>
+-->
+<link href="css/lib/bootstrap.css" rel="stylesheet">
+<link href="css/main.css" rel="stylesheet">
 
-		<script src="js/app.js"></script>
-		<script src="js/controllers.js"></script>
-		<script src="js/services.js"></script>
-	</head>
-	<body ng-controller="AircraftListCtrl">
-		<p>Let's go!</p>
-		 
-		<table class="table">
-			<thead>
-				<tr>
-					<th>ID</th>
-					<th>Name</th>
-					<th>Description</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr ng-repeat="aircraft in aircrafts">
-					<td>{{aircraft.id}}</td>
-					<td>{{aircraft.name}}</td>
-					<td></td>
-				</tr>
-			</tbody>
-		</table>
+<script src="js/lib/angular.js" defer="defer"></script>
+<script src="js/lib/angular-resource.js" defer="defer"></script>
+<script src="js/lib/ui-bootstrap-tpls-0.10.0.js" defer="defer"></script>
 
-	</body>
+<script src="js/app.js" defer="defer"></script>
+<script src="js/controllers.js" defer="defer"></script>
+<script src="js/services.js" defer="defer"></script>
+</head>
+
+<body>
+	<div id="container" class="container">
+		<div id="header" class="header">
+			<ul class="nav nav-pills pull-right">
+				<li class="active"><a href="#">Home</a></li>
+				<li><a href="#/login">Login</a></li>
+				<li><a href="#/logout">Logout</a></li>
+			</ul>
+			<h3 class="text-primary headline">Rent-A-Wreck</h3>
+		</div>
+
+		<div id="content" class="content" ng-controller="AircraftListCtrl">
+			<table class="table">
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>Name</th>
+						<th>Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="aircraft in aircrafts">
+						<td>{{aircraft.id}}</td>
+						<td>{{aircraft.name}}</td>
+						<td>{{aircraft.description}}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+		<div id="footer" class="footer">
+			<p>&copy; 2014 by Oliver Teichmann</p>
+		</div>
+	</div>
+</body>
 </html>

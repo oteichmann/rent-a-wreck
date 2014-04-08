@@ -21,7 +21,7 @@ import javax.persistence.PersistenceContext;
  * </pre>
  */
 public class Producer {
-	
+
 	@Produces
 	@PersistenceContext
 	private EntityManager em;

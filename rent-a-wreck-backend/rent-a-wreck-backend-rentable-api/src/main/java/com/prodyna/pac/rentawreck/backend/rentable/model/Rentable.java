@@ -6,26 +6,26 @@ import javax.persistence.Table;
 import com.prodyna.pac.rentawreck.backend.common.model.AbstractEntity;
 
 @Entity
-@Table(name="raw_aircraft")
+@Table(name = "raw_aircraft")
 public class Rentable extends AbstractEntity {
 
 	private static final long serialVersionUID = 1L;
 
 	private String name;
 	private String description;
-	
+
 	public String getName() {
 		return name;
 	}
-	
+
 	public void setName(String name) {
 		this.name = name;
 	}
-	
+
 	public String getDescription() {
 		return description;
 	}
-	
+
 	public void setDescription(String description) {
 		this.description = description;
 	}
@@ -34,8 +34,8 @@ public class Rentable extends AbstractEntity {
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + ((description == null) ? 0 : description.hashCode());
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = (prime * result) + ((description == null) ? 0 : description.hashCode());
+		result = (prime * result) + ((name == null) ? 0 : name.hashCode());
 		return result;
 	}
 
@@ -67,6 +67,5 @@ public class Rentable extends AbstractEntity {
 		}
 		return true;
 	}
-	
 
 }

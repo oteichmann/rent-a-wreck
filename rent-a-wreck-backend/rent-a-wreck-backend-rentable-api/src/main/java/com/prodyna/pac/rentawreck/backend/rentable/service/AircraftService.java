@@ -24,30 +24,30 @@ import com.prodyna.pac.rentawreck.backend.rentable.model.Aircraft;
 public interface AircraftService {
 
 	@POST
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
 	public Aircraft create(Aircraft aircraft);
 
 	@PUT
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
 	public Aircraft update(Aircraft aircraft);
 
 	@DELETE
 	@Path("/{id:[0-9][0-9]*}")
-	public void delete(@PathParam("id") long id) ;
+	public void delete(@PathParam("id") long id);
 
 	@GET
 	@Path("/{id:[0-9][0-9]*}")
-    @Produces(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
 	public Aircraft findById(@PathParam("id") long id);
 
 	@GET
-    @Produces(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
 	public List<Aircraft> findAll();
-	
+
 	@GET
 	@Path("/count")
-    @Produces(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
 	public int findAllCount();
 }
