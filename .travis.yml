@@ -5,6 +5,8 @@ before_script:
   - git config --global user.email "oteichmann@prodyna.com"
   - git config --global user.name "Oliver Teichmann"
   - git config credential.helper "store --file=~/.git/credentials"
+  - rm -f ~/.git/credentials
+  - touch ~/.git/credentials
   - echo "https://${GH_TOKEN}:@github.com" > ~/.git/credentials
 
 script:
