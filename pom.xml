@@ -22,7 +22,7 @@
 		<version.surefire.plugin>2.16</version.surefire.plugin>
 		<version.war.plugin>2.4</version.war.plugin>
 		<version.wildfly.plugin>1.0.1.Final</version.wildfly.plugin>
-		<internal.snapshotRepository.path>file://d/GitHub/artifact-repo/master/snapshots</internal.snapshotRepository.path>
+		<internal.snapshotRepository.path>file:///d:/GitHub/artifact-repo/master/snapshots</internal.snapshotRepository.path>
 	</properties>
 	<distributionManagement>
 		<repository>
