@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence xmlns="http://java.sun.com/xml/ns/persistence" version="1.0">
 	<persistence-unit name="rent-a-wreck">
-		<jta-data-source>java:jboss/datasources/ExampleDS</jta-data-source>
+		<jta-data-source>java:jboss/datasources/rent-a-wreck</jta-data-source>
+		<jar-file>rent-a-wreck-app.ear/lib/rent-a-wreck-backend-common-api.jar</jar-file>
 		<jar-file>rent-a-wreck-app.ear/lib/rent-a-wreck-backend-rentable-api.jar</jar-file>
 		<properties>
 			<property name="hibernate.hbm2ddl.auto" value="update" />
