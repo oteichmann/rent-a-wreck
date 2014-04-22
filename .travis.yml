@@ -4,7 +4,7 @@ before_script:
 - git config --global user.email "${GIT_NAME}"
 - git config --global user.name "${GIT_EMAIL}"
 script:
-- mvn test
+- mvn test -Dinternal.snapshotRepository.path=../artifact-repo
 after_success:
 - git clone https://github.com/oteichmann/artifact-repo ../artifact-repo
 - cd ../artifact-repo
