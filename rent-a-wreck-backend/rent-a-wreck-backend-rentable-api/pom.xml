@@ -23,6 +23,10 @@
 			<artifactId>rent-a-wreck-backend-common-api</artifactId>
 			<scope>provided</scope>
 		</dependency>
+		<dependency>
+			<groupId>javax.validation</groupId>
+			<artifactId>validation-api</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>

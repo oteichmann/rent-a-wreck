@@ -2,6 +2,7 @@ package com.prodyna.pac.rentawreck.backend.rentable.model;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import com.prodyna.pac.rentawreck.backend.common.model.AbstractEntity;
 
@@ -14,6 +15,7 @@ public class Rentable extends AbstractEntity {
 	private String name;
 	private String description;
 
+	@NotNull
 	public String getName() {
 		return name;
 	}
