@@ -4,3 +4,4 @@ target/
 .settings/
 wiki/
 *.md.html
+/wiki
