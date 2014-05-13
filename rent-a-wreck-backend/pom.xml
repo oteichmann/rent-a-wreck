@@ -13,21 +13,6 @@
 		<module>rent-a-wreck-backend-rentable</module>
 		<module>rent-a-wreck-backend-rentable-api</module>
 		<module>rent-a-wreck-backend-common-api</module>
+		<module>rent-a-wreck-backend-rest</module>
 	</modules>
-
-	<build>
-		<pluginManagement>
-			<plugins>
-				<plugin>
-					<artifactId>maven-ejb-plugin</artifactId>
-					<version>${version.ejb.plugin}</version>
-					<configuration>
-						<!-- Tell Maven we are using EJB 3.2 -->
-						<ejbVersion>3.2</ejbVersion>
-					</configuration>
-					<inherited>true</inherited>
-				</plugin>
-			</plugins>
-		</pluginManagement>
-	</build>
 </project>

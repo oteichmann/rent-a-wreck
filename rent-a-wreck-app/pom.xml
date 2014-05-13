@@ -20,14 +20,15 @@
 					<modules>
 						<webModule>
 							<groupId>com.prodyna.pac.rentawreck</groupId>
-							<artifactId>rent-a-wreck-client-webapp</artifactId>
-							<contextRoot>/rent-a-wreck</contextRoot>
+							<artifactId>rent-a-wreck-backend-rest</artifactId>
+							<contextRoot>/rent-a-wreck-rest</contextRoot>
 						</webModule>
 						<webModule>
 							<groupId>com.prodyna.pac.rentawreck</groupId>
-							<artifactId>rent-a-wreck-client-rest</artifactId>
-							<contextRoot>/rent-a-wreck-rest</contextRoot>
+							<artifactId>rent-a-wreck-client-webapp</artifactId>
+							<contextRoot>/rent-a-wreck</contextRoot>
 						</webModule>
+
 					</modules>
 					<fileNameMapping>no-version</fileNameMapping>
 				</configuration>
@@ -54,7 +55,7 @@
 		</dependency>
 		<dependency>
 			<groupId>com.prodyna.pac.rentawreck</groupId>
-			<artifactId>rent-a-wreck-client-rest</artifactId>
+			<artifactId>rent-a-wreck-backend-rest</artifactId>
 			<type>war</type>
 		</dependency>
 		<dependency>

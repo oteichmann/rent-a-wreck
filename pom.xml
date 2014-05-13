@@ -97,15 +97,15 @@
 			</dependency>
 			<dependency>
 				<groupId>com.prodyna.pac.rentawreck</groupId>
-				<artifactId>rent-a-wreck-client</artifactId>
+				<artifactId>rent-a-wreck-backend-rest</artifactId>
 				<version>${project.version}</version>
-				<type>pom</type>
+				<type>war</type>
 			</dependency>
 			<dependency>
 				<groupId>com.prodyna.pac.rentawreck</groupId>
-				<artifactId>rent-a-wreck-client-rest</artifactId>
+				<artifactId>rent-a-wreck-client</artifactId>
 				<version>${project.version}</version>
-				<type>war</type>
+				<type>pom</type>
 			</dependency>
 			<dependency>
 				<groupId>com.prodyna.pac.rentawreck</groupId>
@@ -182,6 +182,24 @@
 	                    <source>${maven.compiler.source}</source>
 	                    <target>${maven.compiler.target}</target>
 	                </configuration>
+				</plugin>
+				<plugin>
+					<artifactId>maven-ejb-plugin</artifactId>
+					<version>${version.ejb.plugin}</version>
+					<configuration>
+						<!-- Tell Maven we are using EJB 3.2 -->
+						<ejbVersion>3.2</ejbVersion>
+					</configuration>
+					<inherited>true</inherited>
+				</plugin>
+				<plugin>
+					<artifactId>maven-war-plugin</artifactId>
+					<version>${version.war.plugin}</version>
+					<configuration>
+						<!-- Java EE 6 doesn't require web.xml, Maven needs to catch up! -->
+						<failOnMissingWebXml>false</failOnMissingWebXml>
+					</configuration>
+					<inherited>true</inherited>
 				</plugin>
 			</plugins>
 		</pluginManagement>
