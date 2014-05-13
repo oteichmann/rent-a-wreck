@@ -14,18 +14,43 @@
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
+			<groupId>javax.validation</groupId>
+			<artifactId>validation-api</artifactId>
+		</dependency>
+    	<dependency>
+	        <groupId>org.jboss.spec.javax.annotation</groupId>
+	        <artifactId>jboss-annotations-api_1.2_spec</artifactId>
+	        <scope>provided</scope>
+		</dependency>
+		<dependency>
+            <groupId>org.jboss.ejb3</groupId>
+            <artifactId>jboss-ejb3-ext-api</artifactId>
+	        <scope>provided</scope>
+        </dependency>
+        		<dependency>
+			<groupId>org.jboss.resteasy</groupId>
+			<artifactId>resteasy-jaxrs</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.resteasy</groupId>
+			<artifactId>resteasy-jaxb-provider</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
 			<groupId>org.jboss.resteasy</groupId>
 			<artifactId>jaxrs-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.enterprise</groupId>
+			<artifactId>cdi-api</artifactId>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.prodyna.pac.rentawreck</groupId>
 			<artifactId>rent-a-wreck-backend-common-api</artifactId>
 			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>javax.validation</groupId>
-			<artifactId>validation-api</artifactId>
 		</dependency>
 	</dependencies>
 

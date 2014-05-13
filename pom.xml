@@ -10,12 +10,13 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<!-- maven-compiler-plugin -->
-		<maven.compiler.target>1.7</maven.compiler.target>
 		<maven.compiler.source>1.7</maven.compiler.source>
+		<maven.compiler.target>1.7</maven.compiler.target>
 		<!-- Wildfly version -->
 		<version.wildfly>8.0.0.Final</version.wildfly>
 		<!-- Define the version of the used dependencies -->
 		<version.wildfly.bom>8.0.0.Final</version.wildfly.bom>
+		<version.jboss.spec.javaee.7.0>1.0.0.Final</version.jboss.spec.javaee.7.0>
 		<!-- Define the versions of used plugins -->
 		<version.ear.plugin>2.9</version.ear.plugin>
 		<version.ejb.plugin>2.3</version.ejb.plugin>
@@ -24,6 +25,7 @@
 		<version.wildfly.plugin>1.0.1.Final</version.wildfly.plugin>
 		<internal.snapshotRepository.path>file:///d:/GitHub/artifact-repo/master/snapshots</internal.snapshotRepository.path>
 	</properties>
+	<!-- 
 	<distributionManagement>
 		<repository>
 			<id>release-repository</id>
@@ -34,6 +36,7 @@
 			<url>https://raw.github.com/oteichmann/artifact-repo/master/snapshots</url>
 		</snapshotRepository>
 	</distributionManagement>
+	 -->
 	<modules>
 		<module>rent-a-wreck-app</module>
 		<module>rent-a-wreck-backend</module>
@@ -49,6 +52,13 @@
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
+        	<dependency>
+                <groupId>org.wildfly</groupId>
+                <artifactId>wildfly-ejb-client-bom</artifactId>
+                <version>${version.wildfly}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
 			<dependency>
 				<groupId>com.prodyna.pac.rentawreck</groupId>
 				<artifactId>rent-a-wreck-app</artifactId>
@@ -161,8 +171,17 @@
 					<artifactId>maven-deploy-plugin</artifactId>
 					<version>2.8.1</version>
 					<configuration>
-						<altDeploymentRepository>snapshot-repository::default::${internal.snapshotRepository.path}</altDeploymentRepository>
+			 			<altDeploymentRepository>snapshot-repository::default::${internal.snapshotRepository.path}</altDeploymentRepository>
 					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+	                <artifactId>maven-compiler-plugin</artifactId>
+	                <version>3.1</version>
+	                <configuration>
+	                    <source>${maven.compiler.source}</source>
+	                    <target>${maven.compiler.target}</target>
+	                </configuration>
 				</plugin>
 			</plugins>
 		</pluginManagement>

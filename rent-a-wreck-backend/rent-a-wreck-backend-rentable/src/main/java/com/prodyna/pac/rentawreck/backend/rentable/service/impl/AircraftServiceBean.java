@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.annotation.security.PermitAll;
+import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -13,10 +15,11 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.TypedQuery;
 
+import org.jboss.ejb3.annotation.SecurityDomain;
+
 import com.prodyna.pac.rentawreck.backend.rentable.model.Aircraft;
 import com.prodyna.pac.rentawreck.backend.rentable.service.AircraftService;
 
-@Named
 @Stateless
 @NamedQueries({ @NamedQuery(name = "Aircraft.findAll", query = "SELECT a FROM Aircraft a"),
 		@NamedQuery(name = "Aircraft.findAllCount", query = "SELECT COUNT(a) FROM Aircraft a") })

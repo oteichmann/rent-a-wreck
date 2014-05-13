@@ -14,7 +14,7 @@ after_success:
 - git remote add origin https://oteichmann:${GH_TOKEN}@github.com/oteichmann/artifact-repo.git
 - touch test
 - git commit -am "test"
-- git push
+- git push origin master
 env:
   global:
     secure: Ca5aEtnnq3AyEe4eicYcDA40ACJdWZzDm+ZcpuywQNtIMfAK+tbLN7v48hUsspTRk95ehy9FmT4OlV9wIuxo6ReAIq49BESB8g8gCu7R5NwRB2Hq9SCJvTlUSYHPrgwxIdD2sVbFvlM+VfRbwm4bQW1ofb6MWP5rEmPBMvo0OOE=

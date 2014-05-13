@@ -13,7 +13,7 @@
 		<module>rent-a-wreck-client-rest</module>
 		<module>rent-a-wreck-client-webapp</module>
 	</modules>
-	
+
 	<build>
 		<pluginManagement>
 			<plugins>
