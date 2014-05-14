@@ -53,7 +53,7 @@ public interface AircraftService {
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	@PermitAll
+	@RolesAllowed({"admin", "user"})
 	public List<Aircraft> findAll();
 
 	@GET

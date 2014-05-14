@@ -3,6 +3,7 @@
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
 	id="WebApp_ID" version="3.1">
 
+<!-- 
 	<context-param>
 		<param-name>resteasy.role.based.security</param-name>
 		<param-value>true</param-value>
@@ -27,19 +28,21 @@
 	        <url-pattern>/aircrafts/*</url-pattern>
 	        <http-method>GET</http-method>
 	    </web-resource-collection>
-	    <!-- no auth-constraint tag here -->
 	</security-constraint>
+-->	
 
 	<login-config>
 		<auth-method>BASIC</auth-method>
 		<realm-name>rent-a-wreck</realm-name>
 	</login-config>
 
+<!--
 	<security-role>
 		<role-name>admin</role-name>
 	</security-role>
 	<security-role>
 		<role-name>user</role-name>
 	</security-role>
+ -->
 
 </web-app>
