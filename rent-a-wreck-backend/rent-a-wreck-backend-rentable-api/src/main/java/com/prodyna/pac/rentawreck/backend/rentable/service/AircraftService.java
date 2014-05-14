@@ -37,7 +37,7 @@ public interface AircraftService {
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	@RolesAllowed({"admin", "user"})
+	@RolesAllowed({"admin"})
 	public Aircraft update(Aircraft aircraft);
 
 	@DELETE
@@ -48,7 +48,7 @@ public interface AircraftService {
 	@GET
 	@Path("/{id:[0-9][0-9]*}")
 	@Produces(MediaType.APPLICATION_JSON)
-	@RolesAllowed({"admin", "user"})
+	@PermitAll
 	public Aircraft findById(@PathParam("id") long id);
 
 	@GET
