@@ -21,17 +21,16 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 
 import javax.ws.rs.container.ContainerRequestContext;
 import javax.ws.rs.container.ContainerResponseContext;
 import javax.ws.rs.container.ContainerResponseFilter;
-import javax.ws.rs.core.Context;
+import javax.ws.rs.container.PreMatching;
 import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.NewCookie;
 import javax.ws.rs.ext.Provider;
 
-import org.jboss.resteasy.core.ServerResponse;
+import org.jboss.ejb3.annotation.Pool;
 import org.jboss.resteasy.spi.interception.PostProcessInterceptor;
 import org.jboss.resteasy.util.HttpHeaderNames;
 
@@ -46,7 +45,7 @@ import com.prodyna.pac.rentawreck.backend.rest.service.AuthenticationResponse;
 @Provider
 @AuthenticationResponse
 public class PostLoginInterception implements ContainerResponseFilter {
-    private static final String AUTH_TOKEN_HEADER_NAME = "Auth-Token";
+//    private static final String AUTH_TOKEN_HEADER_NAME = "Auth-Token";
     
 //    @Context ServletContext servletContext;
     
@@ -91,20 +90,20 @@ public class PostLoginInterception implements ContainerResponseFilter {
 			ContainerResponseContext responseContext) throws IOException {
 		
 		String token = (String) responseContext.getHeaders().getFirst("X-XSRF-TOKEN");
-		if(token == null) {
-			token = UUID.randomUUID().toString();
+		
+		if(token != null) {
+			NewCookie cookie = new NewCookie("XSRF-TOKEN", token, "/" , "localhost", 1, "no comment", Integer.MAX_VALUE / 2, new Date(Long.MAX_VALUE), true, true);
+			
+			MultivaluedMap<String,Object> headers = responseContext.getHeaders();
+			List<Object> cookies = headers.get(HttpHeaderNames.SET_COOKIE);
+			if (cookies == null) {
+				cookies = new ArrayList<Object>();
+			}
+			
+			cookies.add(cookie.toString());
+			
+			headers.put(HttpHeaderNames.SET_COOKIE, cookies);
 		}
-		  
-        NewCookie cookie = new NewCookie("XSRF-TOKEN", token, "/" , "localhost", 1, "no comment", Integer.MAX_VALUE / 2, new Date(Long.MAX_VALUE), true, true);
-
-        MultivaluedMap<String,Object> headers = responseContext.getHeaders();
-        List<Object> cookies = headers.get(HttpHeaderNames.SET_COOKIE);
-		if (cookies == null) {
-			cookies = new ArrayList<Object>();
-		}
-
-		cookies.add(cookie.toString());
-
-		headers.put(HttpHeaderNames.SET_COOKIE, cookies);
+		
 	}
 }

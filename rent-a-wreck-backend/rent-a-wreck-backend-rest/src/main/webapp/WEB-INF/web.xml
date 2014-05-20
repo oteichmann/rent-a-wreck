@@ -36,7 +36,7 @@
 		<realm-name>rent-a-wreck</realm-name>
 	</login-config>
 
-<!--
+<!-- 
 	<security-role>
 		<role-name>admin</role-name>
 	</security-role>

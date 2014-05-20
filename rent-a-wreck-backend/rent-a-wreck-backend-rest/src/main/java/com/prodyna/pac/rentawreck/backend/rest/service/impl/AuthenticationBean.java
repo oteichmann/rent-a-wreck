@@ -12,14 +12,13 @@ import com.prodyna.pac.rentawreck.backend.rest.service.Authetication;
 @ApplicationScoped
 public class AuthenticationBean implements Authetication {
 	
-	@Resource
-	private SessionContext context;
+//    @Resource
+//    private SessionContext context;
 	
-	@Override
 	public Response login() {
 		
-		StringBuilder sb = new StringBuilder();
-		sb.append("Token assigned for user: ").append(context.getCallerPrincipal().getName());
+//		StringBuilder sb = new StringBuilder();
+//		sb.append("Token assigned for user: ").append(context.getCallerPrincipal().getName());
 		String token = UUID.randomUUID().toString();
 		Response response = MessageBuilder.ok().token(token).message().build();
 		response.getHeaders().add("X-XSRF-TOKEN", token);

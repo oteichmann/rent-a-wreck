@@ -19,6 +19,7 @@ import javax.security.auth.Subject;
 import javax.security.auth.login.LoginContext;
 import javax.ws.rs.container.ContainerRequestContext;
 import javax.ws.rs.core.MultivaluedMap;
+import javax.ws.rs.core.SecurityContext;
 import javax.ws.rs.ext.Provider;
 
 import org.jboss.logging.Logger;
@@ -26,6 +27,8 @@ import org.jboss.resteasy.core.Headers;
 import org.jboss.resteasy.core.ResourceMethodInvoker;
 import org.jboss.resteasy.core.ServerResponse;
 import org.jboss.resteasy.util.Base64;
+import org.jboss.security.SecurityContextAssociation;
+import org.jboss.security.SecurityContextFactory;
 import org.jboss.security.SimplePrincipal;
 import org.jboss.security.auth.callback.JBossCallbackHandler;
  
@@ -47,8 +50,13 @@ public class SecurityInterceptor implements javax.ws.rs.container.ContainerReque
 	private static final String X_XSRF_TOKEN = "X-XSRF-TOKEN";
      
     @Override
-    public void filter(ContainerRequestContext requestContext)
-    {
+    public void filter(ContainerRequestContext requestContext) {
+    	
+    	SecurityContext securityContext = requestContext.getSecurityContext();
+    	String callerPrincipal = securityContext.getUserPrincipal() != null ? securityContext.getUserPrincipal().getName() : null;
+    	securityContext.isUserInRole("admin");
+    	securityContext.isUserInRole("user");
+
         ResourceMethodInvoker methodInvoker = (ResourceMethodInvoker) requestContext.getProperty("org.jboss.resteasy.core.ResourceMethodInvoker");
         Method method = methodInvoker.getMethod();
         //Access allowed for all
