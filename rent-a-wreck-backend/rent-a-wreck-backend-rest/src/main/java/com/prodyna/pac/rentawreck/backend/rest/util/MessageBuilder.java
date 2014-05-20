@@ -1,4 +1,4 @@
-package com.prodyna.pac.rentawreck.backend.rest.service.impl;
+package com.prodyna.pac.rentawreck.backend.rest.util;
 
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.ResponseBuilder;
@@ -34,6 +34,10 @@ public class MessageBuilder {
 
     public static MessageBuilder accessDenied() {
         return new MessageBuilder(Response.status(Response.Status.FORBIDDEN));
+    }
+    
+    public static MessageBuilder error() {
+    	return new MessageBuilder(Response.status(Response.Status.INTERNAL_SERVER_ERROR));
     }
 
     @SuppressWarnings("unchecked")

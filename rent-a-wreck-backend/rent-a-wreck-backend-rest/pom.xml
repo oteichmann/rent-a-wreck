@@ -8,6 +8,9 @@
 	</parent>
 	<artifactId>rent-a-wreck-backend-rest</artifactId>
 	<packaging>war</packaging>
+	
+	<properties>
+	</properties>
 
 	<dependencies>
 		<dependency>
@@ -72,6 +75,11 @@
 			<artifactId>junit</artifactId>
 			<version>4.8.2</version>
 			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-asl</artifactId>
+			<scope>provided</scope>
 		</dependency>
 	</dependencies>
 
