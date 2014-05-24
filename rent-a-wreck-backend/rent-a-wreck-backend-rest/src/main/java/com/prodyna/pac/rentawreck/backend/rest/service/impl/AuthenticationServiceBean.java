@@ -61,6 +61,15 @@ public class AuthenticationServiceBean implements AuthenticationService {
 		return tokenSubjectCache.get(token);
 	}
 
+	@Override
+	public String validateToken(String token) {
+		TokenSubject tokenSubject = getTokenSubject(token);
+		if(tokenSubject != null) {
+			return tokenSubject.getUsername();
+		}
+		return "";
+	}
+
 
 	
 }

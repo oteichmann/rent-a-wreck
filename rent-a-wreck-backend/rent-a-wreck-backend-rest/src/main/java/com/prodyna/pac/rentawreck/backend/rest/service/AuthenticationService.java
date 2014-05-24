@@ -1,6 +1,7 @@
 package com.prodyna.pac.rentawreck.backend.rest.service;
 
 import javax.annotation.security.PermitAll;
+import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -24,6 +25,13 @@ public interface AuthenticationService {
 	@PermitAll
 	@AuthenticationResponse
 	public Response login(AuthenticationRequest authenticationRequest);
+	
+	@POST
+	@Path("/validate")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	@RolesAllowed({"admin","user"})
+	public String validateToken(String token);
 
 	public TokenSubject getTokenSubject(String token);
 
