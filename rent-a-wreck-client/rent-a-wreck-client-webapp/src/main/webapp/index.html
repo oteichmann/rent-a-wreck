@@ -24,13 +24,15 @@
 
 <body>
 	<div id="container" class="container">
-		<div id="header" class="header">
+		<div id="header" class="header" ng-controller="loginCtrl">
 			<ul class="nav nav-pills pull-right">
-				<li class="active"><a href="#">Home</a></li>
-				<li><a href="#/login">Login</a></li>
-				<li><a href="#/logout">Logout</a></li>
+				<li ng-class="{'active': isActive('/')}"><a href="#">Home</a></li>
+				<li ng-class="{'active': isActive('/aircrafts')}"><a
+					href="#/aircrafts">Aircrafts</a></li>
+				<li ng-class="{'hidden': $root.loggedIn}"><a href="#/login">Login</a></li>
+				<li ng-class="{'hidden': !$root.loggedIn}"><a ng-click="logout()">Logout</a></li>
 			</ul>
-			<h1 class="text-primary headline">Rent-A-Wreck</h1>
+ 			<h1 class="text-primary headline">Rent-A-Wreck</h1>
 		</div>
 
 		<div ng-view></div>

@@ -1,5 +1,6 @@
 package com.prodyna.pac.rentawreck.backend.rest.service.impl;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -8,15 +9,18 @@ import java.util.UUID;
 import javax.enterprise.context.ApplicationScoped;
 import javax.security.auth.Subject;
 import javax.security.auth.login.LoginException;
+import javax.ws.rs.core.NewCookie;
 import javax.ws.rs.core.Response;
 
 import org.picketbox.util.StringUtil;
 
 import com.prodyna.pac.rentawreck.backend.rest.model.AuthenticationRequest;
+import com.prodyna.pac.rentawreck.backend.rest.model.TokenRequest;
 import com.prodyna.pac.rentawreck.backend.rest.model.TokenSubject;
 import com.prodyna.pac.rentawreck.backend.rest.service.AuthenticationService;
+import com.prodyna.pac.rentawreck.backend.rest.service.AuthenticationServiceConstants;
 import com.prodyna.pac.rentawreck.backend.rest.util.AuthenticationUtil;
-import com.prodyna.pac.rentawreck.backend.rest.util.MessageBuilder;
+import com.prodyna.pac.rentawreck.backend.rest.util.ResponseMessageBuilder;
 
 @ApplicationScoped
 public class AuthenticationServiceBean implements AuthenticationService {
@@ -35,7 +39,7 @@ public class AuthenticationServiceBean implements AuthenticationService {
 			} catch (LoginException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-				return MessageBuilder.accessDenied().message(String.format("Authentication of user %s failed.", username)).build();
+				return ResponseMessageBuilder.accessDenied().message(String.format("Authentication of user %s failed.", username)).build();
 			}
 		}
 
@@ -50,8 +54,13 @@ public class AuthenticationServiceBean implements AuthenticationService {
 			tokenSubjectCache.put(token, new TokenSubject(username, roles));
 		}
 		
-		Response response = MessageBuilder.ok().token(token).message(String.format("User %s has been successfully authenticated.", username)).build();
-		response.getHeaders().add("X-XSRF-TOKEN", token);
+		NewCookie cookie = new NewCookie(AuthenticationServiceConstants.XSRF_TOKEN, token, "/" , "localhost", 1, "no comment", Integer.MAX_VALUE / 2, new Date(Long.MAX_VALUE), true, false);
+		
+		ResponseMessageBuilder responseMessageBuilder = ResponseMessageBuilder.ok()
+				.message(String.format("User %s has been successfully authenticated.", username))
+				.cookie(cookie);
+		Response response = responseMessageBuilder.build();
+		response.getHeaders().add(AuthenticationServiceConstants.X_XSRF_TOKEN, token);
 		
 		return response;
 	}
@@ -62,12 +71,22 @@ public class AuthenticationServiceBean implements AuthenticationService {
 	}
 
 	@Override
-	public String validateToken(String token) {
-		TokenSubject tokenSubject = getTokenSubject(token);
-		if(tokenSubject != null) {
-			return tokenSubject.getUsername();
+	public Response validateToken(TokenRequest tokenRequest) {
+		
+		if(tokenSubjectCache.containsKey(tokenRequest.getToken())) {
+			return ResponseMessageBuilder.ok().message("Token is valid").build();
 		}
-		return "";
+		return ResponseMessageBuilder.authenticationRequired().message("Token is not valid.").build();
+	}
+
+	@Override
+	public Response logout(TokenRequest tokenRequest) {
+
+		if(tokenSubjectCache.containsKey(tokenRequest.getToken())) {
+			tokenSubjectCache.remove(tokenRequest.getToken());
+			return ResponseMessageBuilder.ok().message("Token has been removed. Logout successfull.").build();
+		}
+		return ResponseMessageBuilder.authenticationRequired().message("Token is not valid. Logout not possible.").build();
 	}
 
 

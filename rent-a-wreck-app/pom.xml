@@ -9,30 +9,71 @@
 	<artifactId>rent-a-wreck-app</artifactId>
 	<packaging>ear</packaging>
 
+	<profiles>
+		<profile>
+			<id>complete</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<artifactId>maven-ear-plugin</artifactId>
+						<version>${version.ear.plugin}</version>
+						<configuration>
+							<defaultLibBundleDir>lib</defaultLibBundleDir>
+							<modules>
+								<webModule>
+									<groupId>com.prodyna.pac.rentawreck</groupId>
+									<artifactId>rent-a-wreck-backend-rest</artifactId>
+									<contextRoot>/rent-a-wreck-rest</contextRoot>
+								</webModule>
+								<webModule>
+									<groupId>com.prodyna.pac.rentawreck</groupId>
+									<artifactId>rent-a-wreck-client-webapp</artifactId>
+									<contextRoot>/rent-a-wreck</contextRoot>
+								</webModule>
+							</modules>
+							<fileNameMapping>no-version</fileNameMapping>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+			<dependencies>
+				<dependency>
+					<groupId>com.prodyna.pac.rentawreck</groupId>
+					<artifactId>rent-a-wreck-client-webapp</artifactId>
+					<type>war</type>
+				</dependency>
+			</dependencies>
+		</profile>
+		<profile>
+			<id>without-webapp</id>
+			<build>
+				<plugins>
+					<plugin>
+						<artifactId>maven-ear-plugin</artifactId>
+						<version>${version.ear.plugin}</version>
+						<configuration>
+							<defaultLibBundleDir>lib</defaultLibBundleDir>
+							<modules>
+								<webModule>
+									<groupId>com.prodyna.pac.rentawreck</groupId>
+									<artifactId>rent-a-wreck-backend-rest</artifactId>
+									<contextRoot>/rent-a-wreck-rest</contextRoot>
+								</webModule>
+							</modules>
+							<fileNameMapping>no-version</fileNameMapping>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+
 	<build>
 		<finalName>${project.artifactId}</finalName>
 		<plugins>
-			<plugin>
-				<artifactId>maven-ear-plugin</artifactId>
-				<version>${version.ear.plugin}</version>
-				<configuration>
-					<defaultLibBundleDir>lib</defaultLibBundleDir>
-					<modules>
-						<webModule>
-							<groupId>com.prodyna.pac.rentawreck</groupId>
-							<artifactId>rent-a-wreck-backend-rest</artifactId>
-							<contextRoot>/rent-a-wreck-rest</contextRoot>
-						</webModule>
-						<webModule>
-							<groupId>com.prodyna.pac.rentawreck</groupId>
-							<artifactId>rent-a-wreck-client-webapp</artifactId>
-							<contextRoot>/rent-a-wreck</contextRoot>
-						</webModule>
-
-					</modules>
-					<fileNameMapping>no-version</fileNameMapping>
-				</configuration>
-			</plugin>
 			<plugin>
 				<groupId>org.wildfly.plugins</groupId>
 				<artifactId>wildfly-maven-plugin</artifactId>
@@ -56,11 +97,6 @@
 		<dependency>
 			<groupId>com.prodyna.pac.rentawreck</groupId>
 			<artifactId>rent-a-wreck-backend-rest</artifactId>
-			<type>war</type>
-		</dependency>
-		<dependency>
-			<groupId>com.prodyna.pac.rentawreck</groupId>
-			<artifactId>rent-a-wreck-client-webapp</artifactId>
 			<type>war</type>
 		</dependency>
 	</dependencies>

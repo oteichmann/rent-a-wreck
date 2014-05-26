@@ -27,8 +27,9 @@ import org.picketbox.util.StringUtil;
 
 import com.prodyna.pac.rentawreck.backend.rest.model.TokenSubject;
 import com.prodyna.pac.rentawreck.backend.rest.service.AuthenticationService;
+import com.prodyna.pac.rentawreck.backend.rest.service.AuthenticationServiceConstants;
 import com.prodyna.pac.rentawreck.backend.rest.util.AuthenticationUtil;
-import com.prodyna.pac.rentawreck.backend.rest.util.MessageBuilder;
+import com.prodyna.pac.rentawreck.backend.rest.util.ResponseMessageBuilder;
 
 /**
  * This interceptor verify the access permissions for a user
@@ -42,8 +43,6 @@ public class SecurityInterceptor implements javax.ws.rs.container.ContainerReque
     private static final String AUTHORIZATION_PROPERTY = "Authorization";
     private static final String AUTHENTICATION_SCHEME = "Basic";
 
-	private static final String X_XSRF_TOKEN = "X-XSRF-TOKEN";
-	
 	@Inject
 	private AuthenticationService authenticationService;
      
@@ -58,7 +57,7 @@ public class SecurityInterceptor implements javax.ws.rs.container.ContainerReque
             //Access denied for all
             if(method.isAnnotationPresent(DenyAll.class))
             {
-                requestContext.abortWith(MessageBuilder.accessDenied().message("Nobody can access this resource.").build());
+                requestContext.abortWith(ResponseMessageBuilder.accessDenied().message("Nobody can access this resource.").build());
                 return;
             }
              
@@ -72,14 +71,14 @@ public class SecurityInterceptor implements javax.ws.rs.container.ContainerReque
                 try {
 					if(!isUserAllowed(requestContext, annotatedRoles))
 					{
-					    requestContext.abortWith(MessageBuilder.accessDenied().message("You do not have the appropriate permission to access this resource.").build());
+					    requestContext.abortWith(ResponseMessageBuilder.accessDenied().message("You do not have the appropriate permission to access this resource.").build());
 					    return;
 					}
 				} catch (LoginException e) {
-			        requestContext.abortWith(MessageBuilder.authenticationRequired().message("Authentication failed.").build());
+			        requestContext.abortWith(ResponseMessageBuilder.authenticationRequired().message("Authentication failed.").build());
 			        return;
 				} catch (Exception e) {
-					requestContext.abortWith(MessageBuilder.error().build());
+					requestContext.abortWith(ResponseMessageBuilder.error().build());
 	                return;
 				}
             }
@@ -113,7 +112,7 @@ public class SecurityInterceptor implements javax.ws.rs.container.ContainerReque
          
         //Fetch authorization header
         final List<String> authorization = headers.get(AUTHORIZATION_PROPERTY);
-        final String token = headers.getFirst(X_XSRF_TOKEN);
+        final String token = headers.getFirst(AuthenticationServiceConstants.X_XSRF_TOKEN);
          
         //If no authorization information present; block access
         if((authorization == null || authorization.isEmpty()) && StringUtil.isNullOrEmpty(token)) {

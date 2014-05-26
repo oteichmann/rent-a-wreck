@@ -26,11 +26,9 @@ rawServices.factory('aircraftService2', [
                                 			          .success(function(data) {
 	                                			          // prepare data here
 	                                			          callback(data);
-                                			          }.error(function(status){
+                                			          }).error(function(status){
                                 			        	var httpStatus = status;
-                                			          }
-                                			        )
-                                			        );
+                                			          });
                                 			      }
                                 			    };
                                 		} ]);
@@ -39,7 +37,7 @@ rawServices.factory('loginService', [
 		'$resource',
 		function($resource) {
 			return $resource(
-				 serviceBaseURL + '/login', {}, {
+				 serviceBaseURL + '/auth/login', {}, {
 						login : {
 							method : 'POST',
 							isArray : false

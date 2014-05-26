@@ -8,9 +8,27 @@
 	</parent>
 	<artifactId>rent-a-wreck-client-webapp</artifactId>
 	<packaging>war</packaging>
-	
+
+	<profiles>
+		<profile>
+			<id>standalone</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.wildfly.plugins</groupId>
+						<artifactId>wildfly-maven-plugin</artifactId>
+						<configuration>
+							<skip>false</skip>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+
 	<build>
 		<finalName>${project.artifactId}</finalName>
 	</build>
+
 
 </project>
