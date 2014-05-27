@@ -49,7 +49,7 @@ public class SecurityInterceptor implements javax.ws.rs.container.ContainerReque
     @Override
     public void filter(ContainerRequestContext requestContext) {
     	
-         ResourceMethodInvoker methodInvoker = (ResourceMethodInvoker) requestContext.getProperty("org.jboss.resteasy.core.ResourceMethodInvoker");
+        ResourceMethodInvoker methodInvoker = (ResourceMethodInvoker) requestContext.getProperty("org.jboss.resteasy.core.ResourceMethodInvoker");
         Method method = methodInvoker.getMethod();
         //Access allowed for all
         if( ! method.isAnnotationPresent(PermitAll.class))

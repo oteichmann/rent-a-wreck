@@ -41,19 +41,19 @@ public interface AircraftService {
 	public Aircraft update(Aircraft aircraft);
 
 	@DELETE
-	@Path("/{id:[0-9][0-9]*}")
+	@Path("/{uuid}")
 	@RolesAllowed("admin")
-	public void delete(@PathParam("id") long id);
+	public void delete(@PathParam("uuid") String uuid);
 
 	@GET
-	@Path("/{id:[0-9][0-9]*}")
+	@Path("/{uuid}")
 	@Produces(MediaType.APPLICATION_JSON)
 	@PermitAll
-	public Aircraft findById(@PathParam("id") long id);
+	public Aircraft findById(@PathParam("uuid") String uuid);
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	@RolesAllowed({"admin", "user"})
+	@PermitAll
 	public List<Aircraft> findAll();
 
 	@GET

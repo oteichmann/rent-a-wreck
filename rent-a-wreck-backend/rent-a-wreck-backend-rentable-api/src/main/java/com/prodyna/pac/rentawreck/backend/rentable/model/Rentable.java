@@ -12,10 +12,10 @@ public class Rentable extends AbstractEntity {
 
 	private static final long serialVersionUID = 1L;
 
+	@NotNull
 	private String name;
 	private String description;
 
-	@NotNull
 	public String getName() {
 		return name;
 	}

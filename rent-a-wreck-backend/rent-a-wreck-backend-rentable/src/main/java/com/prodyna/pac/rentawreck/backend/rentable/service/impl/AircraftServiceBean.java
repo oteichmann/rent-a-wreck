@@ -5,17 +5,12 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javax.annotation.security.PermitAll;
-import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
-import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.TypedQuery;
-
-import org.jboss.ejb3.annotation.SecurityDomain;
 
 import com.prodyna.pac.rentawreck.backend.rentable.model.Aircraft;
 import com.prodyna.pac.rentawreck.backend.rentable.service.AircraftService;
@@ -39,6 +34,12 @@ public class AircraftServiceBean implements AircraftService {
 		em.persist(aircraft);
 		return aircraft;
 	}
+	
+	@Override
+	public Aircraft findById(String uuid) {
+		Aircraft aircraft = em.find(Aircraft.class, uuid);
+		return aircraft;
+	}
 
 	@Override
 	public Aircraft update(Aircraft aircraft) {
@@ -47,15 +48,9 @@ public class AircraftServiceBean implements AircraftService {
 	}
 
 	@Override
-	public void delete(long id) {
-		Aircraft aircraft = findById(id);
+	public void delete(String uuid) {
+		Aircraft aircraft = findById(uuid);
 		em.remove(aircraft);
-	}
-
-	@Override
-	public Aircraft findById(long id) {
-		Aircraft aircraft = em.find(Aircraft.class, id);
-		return aircraft;
 	}
 
 	@Override

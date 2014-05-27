@@ -2,33 +2,30 @@ package com.prodyna.pac.rentawreck.backend.common.model;
 
 import java.io.Serializable;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
 @MappedSuperclass
-public class AbstractEntity implements Serializable {
+public abstract class AbstractEntity implements Serializable {
 
-	private static final long serialVersionUID = 1L;
-
-	private Long id;
-
+	private static final long serialVersionUID = 3688888162019590339L;
+	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	public Long getId() {
-		return id;
+	private String uuid;
+
+	public String getUuid() {
+		return uuid;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setUuid(String id) {
+		this.uuid = id;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = (prime * result) + ((id == null) ? 0 : id.hashCode());
+		result = (prime * result) + ((uuid == null) ? 0 : uuid.hashCode());
 		return result;
 	}
 
@@ -44,14 +41,13 @@ public class AbstractEntity implements Serializable {
 			return false;
 		}
 		AbstractEntity other = (AbstractEntity) obj;
-		if (id == null) {
-			if (other.id != null) {
+		if (uuid == null) {
+			if (other.uuid != null) {
 				return false;
 			}
-		} else if (!id.equals(other.id)) {
+		} else if (!uuid.equals(other.uuid)) {
 			return false;
 		}
 		return true;
 	}
-
 }
