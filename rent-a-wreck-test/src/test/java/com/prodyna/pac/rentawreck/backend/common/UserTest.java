@@ -1,4 +1,4 @@
-package com.prodyna.pac.rentawreck;
+package com.prodyna.pac.rentawreck.backend.common;
 
 import java.util.UUID;
 
