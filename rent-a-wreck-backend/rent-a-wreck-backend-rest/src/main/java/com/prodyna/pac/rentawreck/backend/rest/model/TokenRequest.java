@@ -6,8 +6,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 
-@XmlRootElement
-@JsonSerialize
 public class TokenRequest implements Serializable {
 
 	private static final long serialVersionUID = 4972059447417760758L;

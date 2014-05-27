@@ -24,6 +24,11 @@
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
+			<groupId>org.picketbox</groupId>
+			<artifactId>picketbox</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
 			<groupId>com.prodyna.pac.rentawreck</groupId>
 			<artifactId>rent-a-wreck-backend-common-api</artifactId>
 		</dependency>

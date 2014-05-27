@@ -6,8 +6,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 
-@XmlRootElement
-@JsonSerialize
 public class AuthenticationRequest implements Serializable {
 
 	private static final long serialVersionUID = -1163838278679161405L;

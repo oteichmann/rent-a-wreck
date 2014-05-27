@@ -1,9 +1,12 @@
 package com.prodyna.pac.rentawreck.backend.rest.model;
 
+import java.io.Serializable;
 import java.util.Collections;
 import java.util.Set;
 
-public class TokenSubject {
+public class TokenSubject implements Serializable {
+	
+	private static final long serialVersionUID = -5045644046212078643L;
 	
 	private String username;
 	private Set<String> roles;

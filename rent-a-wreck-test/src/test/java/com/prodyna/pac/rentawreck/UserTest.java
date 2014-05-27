@@ -50,6 +50,7 @@ public class UserTest {
 		instance0.setEmail("admin@rent-a-wreck.com");
 		User instance1 = service.create(instance0);
 		Assert.assertNotNull(instance1.getUuid());
+//		Assert.assertNotEquals(instance0.getPassword(), instance1.getPassword());
 //		assertEquals(1, service.findAllCount());
 		service.delete(instance1.getUuid());
 //		assertEquals(0, service.findAllCount());
