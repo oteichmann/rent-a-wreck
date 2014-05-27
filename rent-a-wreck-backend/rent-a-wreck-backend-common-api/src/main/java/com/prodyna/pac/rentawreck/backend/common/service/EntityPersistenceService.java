@@ -15,32 +15,51 @@ import javax.ws.rs.core.MediaType;
 import com.prodyna.pac.rentawreck.backend.common.model.AbstractEntity;
 
 /**
- * Basis crud interface for all RAW entities.
- * 
- * @author oteichmann
+ * Basic CRUD interface for all domain entities.
  *
- * @param <T>
+ * @author Oliver Teichmann
+ *
+ * @param <T> A {@link AbstractEntity} implementation.
  */
 public interface EntityPersistenceService<T extends AbstractEntity> {
 
+	/**
+	 * Persists a new entity.
+	 * @param entity The new entity.
+	 * @return The persisted version of the entity.
+	 */
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	@RolesAllowed("admin")
 	public T create(T entity);
 
+	/**
+	 * Reads the entity identified by the given identifier.
+	 * @param uuid The identifier of the entity to read.
+	 * @return The entity identified by the given identifier.
+	 */
 	@GET
 	@Path("/{uuid}")
 	@Produces(MediaType.APPLICATION_JSON)
 	@PermitAll
 	public T findById(@PathParam("uuid") String uuid);
 
+	/**
+	 * Updates an existing entity.
+	 * @param entity The entity to update.
+	 * @return The updated version of the entity.
+	 */
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	@RolesAllowed({"admin"})
 	public T update(T entity);
 
+	/**
+	 * Deletes the entity identified by the given identifier.
+	 * @param uuid he identifier of the entity to delete.
+	 */
 	@DELETE
 	@Path("/{uuid}")
 	@RolesAllowed("admin")

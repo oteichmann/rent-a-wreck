@@ -6,6 +6,12 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 
+/**
+ * The User entity.
+ *
+ * @author Oliver Teichmann
+ *
+ */
 @Entity
 @Table(name = "raw_users", uniqueConstraints=@UniqueConstraint(columnNames="USERNAME"))
 public class User extends AbstractEntity {

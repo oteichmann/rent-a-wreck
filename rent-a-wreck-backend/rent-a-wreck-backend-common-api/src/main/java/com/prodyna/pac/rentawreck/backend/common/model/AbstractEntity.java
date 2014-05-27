@@ -5,6 +5,12 @@ import java.io.Serializable;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
+/**
+ * Abstract base class for all domain entities.
+ *
+ * @author Oliver Teichmann
+ *
+ */
 @MappedSuperclass
 public abstract class AbstractEntity implements Serializable {
 

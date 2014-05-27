@@ -9,61 +9,86 @@ import org.jboss.security.auth.spi.Util;
 
 import com.prodyna.pac.rentawreck.backend.common.model.User;
 import com.prodyna.pac.rentawreck.backend.common.service.UserService;
-import com.prodyna.pac.rentawreck.backend.common.service.request.UpdateUserPasswordRequest;
 
+/**
+ * Implementation of the {@link UserService} interface.
+ * 
+ * @author Oliver Teichmann
+ * 
+ */
 @Stateless
-public class UserServiceBean extends EntityPersistenceServiceBean<User> implements
-		UserService {
-	
-	private static final String REALM = "rent-a-wreck";
-	
+public class UserServiceBean extends EntityPersistenceServiceBean<User> implements UserService {
+
 	@Inject
 	private Logger log;
-	
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.prodyna.pac.rentawreck.backend.common.service.impl. EntityPersistenceServiceBean
+	 * #create(com.prodyna.pac.rentawreck.backend.common.model.AbstractEntity)
+	 */
 	@Override
 	public User create(User user) {
 		// Encrypt initial user password before persisting.
 		encryptUserPassword(user);
-		
+
 		return super.create(user);
 	}
-	
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.prodyna.pac.rentawreck.backend.common.service.impl. EntityPersistenceServiceBean
+	 * #update(com.prodyna.pac.rentawreck.backend.common.model.AbstractEntity)
+	 */
 	@Override
 	public User update(User user) {
-		// Assure that update does not change the password. Special method must be used.
+		// Assure that update does not change the password. Special method must
+		// be used.
 		User originalUser = em.find(User.class, user.getUuid());
 		user.setPassword(originalUser.getPassword());
 		return super.update(user);
 	}
-	
+
+	/* (non-Javadoc)
+	 * @see com.prodyna.pac.rentawreck.backend.common.service.UserService#updateUserPassword(java.lang.String, java.lang.String)
+	 */
 	@Override
-	public User updateUserPassword(
-			UpdateUserPasswordRequest updateUserPasswordRequest) {
-		User user = em.find(User.class, updateUserPasswordRequest.getUuid());
-		user.setPassword(updateUserPasswordRequest.getPassword());
+	public User updateUserPassword(String uuid, String password) {
+		User user = em.find(User.class, uuid);
+		user.setPassword(password);
 		encryptUserPassword(user);
-		
+
 		return super.update(user);
 	}
-	
+
 	private void encryptUserPassword(User user) {
-        String A1 = user.getUsername() + ":" + REALM + ":" + user.getPassword();
-		String enryptedPassword = Util.createPasswordHash("MD5",
-                Util.RFC2617_ENCODING, null, null, A1);
-		
+		// String A1 = user.getUsername() + ":" + "rent-a-wreck" + ":" +
+		// user.getPassword();
+		String enryptedPassword = Util.createPasswordHash("MD5", Util.RFC2617_ENCODING, null, null, user.getPassword());
+
 		user.setPassword(enryptedPassword);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.prodyna.pac.rentawreck.backend.common.service.impl. EntityPersistenceServiceBean#getEntityClass()
+	 */
 	@Override
 	protected Class<User> getEntityClass() {
 		return User.class;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.prodyna.pac.rentawreck.backend.common.service.impl. EntityPersistenceServiceBean#getLooger()
+	 */
 	@Override
 	protected Logger getLooger() {
 		return log;
 	}
-
-
 
 }

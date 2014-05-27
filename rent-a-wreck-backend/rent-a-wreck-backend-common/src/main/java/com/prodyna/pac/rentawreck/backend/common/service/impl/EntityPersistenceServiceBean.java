@@ -19,7 +19,7 @@ public abstract class EntityPersistenceServiceBean<T extends AbstractEntity> imp
 		if (getLooger().isLoggable(Level.FINE)) {
 			getLooger().fine("Creating a new " + entity.getClass().getName());
 		}
-		getEntityManager().persist(entity);
+		em.persist(entity);
 		return entity;
 	}
 	
