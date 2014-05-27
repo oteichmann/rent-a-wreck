@@ -1,8 +1,8 @@
-package com.prodyna.pac.rentawreck.backend.rest.model;
+package com.prodyna.pac.rentawreck.backend.rest.service.request;
 
 import java.io.Serializable;
 
-public class AuthenticationRequest implements Serializable {
+public class LoginRequest implements Serializable {
 
 	private static final long serialVersionUID = -1163838278679161405L;
 	

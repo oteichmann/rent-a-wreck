@@ -14,11 +14,12 @@ import javax.ws.rs.core.Response;
 
 import org.picketbox.util.StringUtil;
 
-import com.prodyna.pac.rentawreck.backend.rest.model.AuthenticationRequest;
-import com.prodyna.pac.rentawreck.backend.rest.model.TokenRequest;
 import com.prodyna.pac.rentawreck.backend.rest.model.TokenSubject;
 import com.prodyna.pac.rentawreck.backend.rest.service.AuthenticationService;
 import com.prodyna.pac.rentawreck.backend.rest.service.AuthenticationServiceConstants;
+import com.prodyna.pac.rentawreck.backend.rest.service.request.LoginRequest;
+import com.prodyna.pac.rentawreck.backend.rest.service.request.LogoutRequest;
+import com.prodyna.pac.rentawreck.backend.rest.service.request.ValidateTokenRequest;
 import com.prodyna.pac.rentawreck.backend.rest.util.AuthenticationUtil;
 import com.prodyna.pac.rentawreck.backend.rest.util.ResponseMessageBuilder;
 
@@ -28,9 +29,9 @@ public class AuthenticationServiceBean implements AuthenticationService {
 	private Map<String, TokenSubject> tokenSubjectCache = new HashMap<String, TokenSubject>();
 
 	@Override
-	public Response login(AuthenticationRequest authenticationRequest) {
-		String username = authenticationRequest.getUsername();
-		String password = authenticationRequest.getPassword();
+	public Response login(LoginRequest loginRequest) {
+		String username = loginRequest.getUsername();
+		String password = loginRequest.getPassword();
 		
         Subject subject = null;
 		if (StringUtil.isNotNull(username) && StringUtil.isNotNull(password)) {
@@ -71,19 +72,19 @@ public class AuthenticationServiceBean implements AuthenticationService {
 	}
 
 	@Override
-	public Response validateToken(TokenRequest tokenRequest) {
+	public Response validateToken(ValidateTokenRequest validateTokenRequest) {
 		
-		if(tokenSubjectCache.containsKey(tokenRequest.getToken())) {
+		if(tokenSubjectCache.containsKey(validateTokenRequest.getToken())) {
 			return ResponseMessageBuilder.ok().message("Token is valid").build();
 		}
 		return ResponseMessageBuilder.authenticationRequired().message("Token is not valid.").build();
 	}
 
 	@Override
-	public Response logout(TokenRequest tokenRequest) {
+	public Response logout(LogoutRequest logoutRequest) {
 
-		if(tokenSubjectCache.containsKey(tokenRequest.getToken())) {
-			tokenSubjectCache.remove(tokenRequest.getToken());
+		if(tokenSubjectCache.containsKey(logoutRequest.getToken())) {
+			tokenSubjectCache.remove(logoutRequest.getToken());
 			return ResponseMessageBuilder.ok().message("Token has been removed. Logout successfull.").build();
 		}
 		return ResponseMessageBuilder.authenticationRequired().message("Token is not valid. Logout not possible.").build();

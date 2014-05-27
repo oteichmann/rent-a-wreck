@@ -11,9 +11,10 @@ import javax.ws.rs.core.Response;
 
 import org.jboss.ejb3.annotation.SecurityDomain;
 
-import com.prodyna.pac.rentawreck.backend.rest.model.AuthenticationRequest;
-import com.prodyna.pac.rentawreck.backend.rest.model.TokenRequest;
 import com.prodyna.pac.rentawreck.backend.rest.model.TokenSubject;
+import com.prodyna.pac.rentawreck.backend.rest.service.request.LoginRequest;
+import com.prodyna.pac.rentawreck.backend.rest.service.request.LogoutRequest;
+import com.prodyna.pac.rentawreck.backend.rest.service.request.ValidateTokenRequest;
 
 
 @Path("/auth")
@@ -25,21 +26,21 @@ public interface AuthenticationService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	@PermitAll
-	public Response login(AuthenticationRequest authenticationRequest);
+	public Response login(LoginRequest loginRequest);
 	
 	@POST
 	@Path("/validate")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	@RolesAllowed({"admin","user"})
-	public Response validateToken(TokenRequest tokenRequest);
+	public Response validateToken(ValidateTokenRequest validateTokenRequest);
 	
 	@POST
 	@Path("/logout")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	@RolesAllowed({"admin","user"})
-	public Response logout(TokenRequest tokenRequest);
+	public Response logout(LogoutRequest logoutRequest);
 
 	public TokenSubject getTokenSubject(String token);
 
