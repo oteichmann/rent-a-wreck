@@ -21,7 +21,8 @@ import com.prodyna.pac.rentawreck.backend.common.model.AbstractEntity;
  *
  * @param <T> A {@link AbstractEntity} implementation.
  */
-public interface EntityPersistenceService<T extends AbstractEntity> {
+//@SecurityDomain("rent-a-wreck")
+public interface AbstractEntityPersistenceService<T extends AbstractEntity> {
 
 	/**
 	 * Persists a new entity.

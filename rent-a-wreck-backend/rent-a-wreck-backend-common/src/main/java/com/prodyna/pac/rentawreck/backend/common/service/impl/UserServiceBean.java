@@ -17,7 +17,7 @@ import com.prodyna.pac.rentawreck.backend.common.service.UserService;
  * 
  */
 @Stateless
-public class UserServiceBean extends EntityPersistenceServiceBean<User> implements UserService {
+public class UserServiceBean extends AbstractEntityPersistenceServiceBean<User> implements UserService {
 
 	@Inject
 	private Logger log;
@@ -25,7 +25,7 @@ public class UserServiceBean extends EntityPersistenceServiceBean<User> implemen
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.prodyna.pac.rentawreck.backend.common.service.impl. EntityPersistenceServiceBean
+	 * @see com.prodyna.pac.rentawreck.backend.common.service.impl. AbstractEntityPersistenceServiceBean
 	 * #create(com.prodyna.pac.rentawreck.backend.common.model.AbstractEntity)
 	 */
 	@Override
@@ -39,7 +39,7 @@ public class UserServiceBean extends EntityPersistenceServiceBean<User> implemen
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.prodyna.pac.rentawreck.backend.common.service.impl. EntityPersistenceServiceBean
+	 * @see com.prodyna.pac.rentawreck.backend.common.service.impl. AbstractEntityPersistenceServiceBean
 	 * #update(com.prodyna.pac.rentawreck.backend.common.model.AbstractEntity)
 	 */
 	@Override
@@ -74,7 +74,7 @@ public class UserServiceBean extends EntityPersistenceServiceBean<User> implemen
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.prodyna.pac.rentawreck.backend.common.service.impl. EntityPersistenceServiceBean#getEntityClass()
+	 * @see com.prodyna.pac.rentawreck.backend.common.service.impl. AbstractEntityPersistenceServiceBean#getEntityClass()
 	 */
 	@Override
 	protected Class<User> getEntityClass() {
@@ -84,7 +84,7 @@ public class UserServiceBean extends EntityPersistenceServiceBean<User> implemen
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.prodyna.pac.rentawreck.backend.common.service.impl. EntityPersistenceServiceBean#getLooger()
+	 * @see com.prodyna.pac.rentawreck.backend.common.service.impl. AbstractEntityPersistenceServiceBean#getLooger()
 	 */
 	@Override
 	protected Logger getLooger() {

@@ -17,7 +17,7 @@ import com.prodyna.pac.rentawreck.backend.common.model.User;
  * 
  */
 @Path("/users")
-public interface UserService extends EntityPersistenceService<User> {
+public interface UserService extends AbstractEntityPersistenceService<User> {
 
 	/**
 	 * Updates the password of a user.

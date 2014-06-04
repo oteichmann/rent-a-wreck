@@ -13,7 +13,7 @@ import com.prodyna.pac.rentawreck.backend.common.service.RoleService;
  * @author Oliver Teichmann
  * 
  */
-public class RoleServiceBean extends EntityPersistenceServiceBean<Role> implements RoleService {
+public class RoleServiceBean extends AbstractEntityPersistenceServiceBean<Role> implements RoleService {
 
 	@Inject
 	private Logger log;

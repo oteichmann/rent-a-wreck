@@ -7,9 +7,9 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
 import com.prodyna.pac.rentawreck.backend.common.model.AbstractEntity;
-import com.prodyna.pac.rentawreck.backend.common.service.EntityPersistenceService;
+import com.prodyna.pac.rentawreck.backend.common.service.AbstractEntityPersistenceService;
 
-public abstract class EntityPersistenceServiceBean<T extends AbstractEntity> implements EntityPersistenceService<T> {
+public abstract class AbstractEntityPersistenceServiceBean<T extends AbstractEntity> implements AbstractEntityPersistenceService<T> {
 	
 	@Inject
 	protected EntityManager em;
