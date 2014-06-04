@@ -58,8 +58,7 @@ public class AircraftServiceBean implements AircraftService {
 		if (log.isLoggable(Level.FINE)) {
 			log.fine("Creating a new aircraft");
 		}
-		// TypedQuery<Aircraft> query = em.createNamedQuery("Aircraft.findAll",
-		// Aircraft.class);
+//		TypedQuery<Aircraft> query = em.createNamedQuery("Aircraft.findAll", Aircraft.class);
 		TypedQuery<Aircraft> query = em.createQuery("SELECT a FROM Aircraft a", Aircraft.class);
 		List<Aircraft> results = query.getResultList();
 

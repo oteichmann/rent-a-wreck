@@ -20,7 +20,7 @@ public abstract class AbstractBackendCommonTest<T extends AbstractEntity> extend
 	@Deployment
 	public static WebArchive createDeployment() {
 		WebArchive wa = ShrinkWrap.create(WebArchive.class, "test.war");
-		wa.addPackages(true, "com.prodyna.pac.rentawreck.backend");
+		wa.addPackages(true, "com.prodyna.pac.rentawreck.backend.common");
 		wa.addAsResource("META-INF/test-persistence.xml", "META-INF/persistence.xml");
 		wa.addAsResource("META-INF/beans.xml");
 		wa.addAsWebInfResource("test-ds.xml", "test-ds.xml");
