@@ -2,8 +2,10 @@ package com.prodyna.pac.rentawreck.backend.rentable.service.impl;
 
 import java.util.logging.Logger;
 
+import javax.ejb.Stateless;
 import javax.inject.Inject;
 
+import com.prodyna.pac.rentawreck.backend.common.monitoring.Monitored;
 import com.prodyna.pac.rentawreck.backend.common.service.impl.AbstractEntityPersistenceServiceBean;
 import com.prodyna.pac.rentawreck.backend.rentable.model.License;
 import com.prodyna.pac.rentawreck.backend.rentable.service.LicenseService;
@@ -14,6 +16,8 @@ import com.prodyna.pac.rentawreck.backend.rentable.service.LicenseService;
  * @author Oliver Teichmann
  *
  */
+@Stateless
+@Monitored
 public class LicenseServiceBean extends AbstractEntityPersistenceServiceBean<License> implements LicenseService {
 
 	@Inject

@@ -2,8 +2,10 @@ package com.prodyna.pac.rentawreck.backend.rentable.service.impl;
 
 import java.util.logging.Logger;
 
+import javax.ejb.Stateless;
 import javax.inject.Inject;
 
+import com.prodyna.pac.rentawreck.backend.common.monitoring.Monitored;
 import com.prodyna.pac.rentawreck.backend.common.service.impl.AbstractEntityPersistenceServiceBean;
 import com.prodyna.pac.rentawreck.backend.rentable.model.Charter;
 import com.prodyna.pac.rentawreck.backend.rentable.service.CharterService;
@@ -14,6 +16,8 @@ import com.prodyna.pac.rentawreck.backend.rentable.service.CharterService;
  * @author Oliver Teichmann
  *
  */
+@Stateless
+@Monitored
 public class CharterServiceBean extends AbstractEntityPersistenceServiceBean<Charter> implements CharterService {
 
 	@Inject

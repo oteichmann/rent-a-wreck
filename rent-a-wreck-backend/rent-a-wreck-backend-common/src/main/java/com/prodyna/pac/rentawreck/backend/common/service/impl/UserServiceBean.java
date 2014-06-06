@@ -3,11 +3,13 @@ package com.prodyna.pac.rentawreck.backend.common.service.impl;
 import java.util.logging.Logger;
 
 import javax.ejb.Stateless;
+import javax.enterprise.inject.Model;
 import javax.inject.Inject;
 
 import org.jboss.security.auth.spi.Util;
 
 import com.prodyna.pac.rentawreck.backend.common.model.User;
+import com.prodyna.pac.rentawreck.backend.common.monitoring.Monitored;
 import com.prodyna.pac.rentawreck.backend.common.service.UserService;
 
 /**
@@ -17,6 +19,7 @@ import com.prodyna.pac.rentawreck.backend.common.service.UserService;
  * 
  */
 @Stateless
+@Monitored
 public class UserServiceBean extends AbstractEntityPersistenceServiceBean<User> implements UserService {
 
 	@Inject

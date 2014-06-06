@@ -2,9 +2,11 @@ package com.prodyna.pac.rentawreck.backend.common.service.impl;
 
 import java.util.logging.Logger;
 
+import javax.ejb.Stateless;
 import javax.inject.Inject;
 
 import com.prodyna.pac.rentawreck.backend.common.model.Role;
+import com.prodyna.pac.rentawreck.backend.common.monitoring.Monitored;
 import com.prodyna.pac.rentawreck.backend.common.service.RoleService;
 
 /**
@@ -13,6 +15,8 @@ import com.prodyna.pac.rentawreck.backend.common.service.RoleService;
  * @author Oliver Teichmann
  * 
  */
+@Stateless
+@Monitored
 public class RoleServiceBean extends AbstractEntityPersistenceServiceBean<Role> implements RoleService {
 
 	@Inject
