@@ -11,8 +11,7 @@ public interface MonitoringServiceMXBean {
 	/**
 	 * Adds the execution duration for given method to monitoring data.
 	 * 
-	 * @param className
-	 * 			  Class name of the method to save the execution duration for.
+	 * @param className Class name of the method class.
 	 * @param methodName
 	 *            Method to save the execution duration for.
 	 * @param durationMs
@@ -23,6 +22,7 @@ public interface MonitoringServiceMXBean {
 	/**
 	 * Returns the max execution duration for the given method.
 	 * 
+	 * @param className Class name of the methods class.
 	 * @param methodName Name of the method.
 	 * @return Execution duration for given method.
 	 */
@@ -31,6 +31,7 @@ public interface MonitoringServiceMXBean {
 	/**
 	 * Returns the min execution duration for the given method.
 	 * 
+	 * @param className Class name of the methods class.
 	 * @param methodName Name of the method.
 	 * @return Execution duration for given method.
 	 */
@@ -40,14 +41,32 @@ public interface MonitoringServiceMXBean {
 	/**
 	 * Returns the average execution duration for the given method.
 	 * 
+	 * @param className Class name of the methods class.
 	 * @param methodName Name of the method.
 	 * @return Execution duration for given method.
 	 */
 	long getAverageDuration(String className, String methodName);
 
 	/**
+	 * Create Diagnostics Report.
+	 * 
+	 * @param className Class name of the methods class.
+	 * @param methodName Name of the method.
+	 * @return Monitoring data report.
+	 */
+	String createReport(String className, String methodName);
+
+	/**
+	 * Create Diagnostics Report.
+	 * 
+	 * @return Monitoring data report.
+	 */
+	String createReport();
+
+	/**
 	 * Clears monitoring data for given method.
 	 * 
+	 * @param className Class name of the methods class.
 	 * @param methodName
 	 *            Method to clear the monitoring data for.
 	 */
@@ -58,11 +77,5 @@ public interface MonitoringServiceMXBean {
 	 */
 	void clearMonitoringData();
 
-	/**
-	 * Create Diagnostics Report.
-	 * 
-	 * @return Monitoring data report.
-	 */
-	String createReport();
 
 }
