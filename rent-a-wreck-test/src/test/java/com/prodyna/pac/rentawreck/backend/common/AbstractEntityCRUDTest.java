@@ -3,6 +3,7 @@
  */
 package com.prodyna.pac.rentawreck.backend.common;
 
+import org.jboss.arquillian.junit.InSequence;
 import org.jboss.arquillian.transaction.api.annotation.TransactionMode;
 import org.jboss.arquillian.transaction.api.annotation.Transactional;
 import org.junit.Assert;
@@ -24,6 +25,7 @@ public abstract class AbstractEntityCRUDTest<T extends AbstractEntity> {
 	protected abstract T getCRUDEntity();
 
 	@Test
+	@InSequence(0)
 	@Transactional(TransactionMode.ROLLBACK)
 	public void testCRUDOperations(){
 		

@@ -39,17 +39,17 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-		    <groupId>org.jboss.arquillian.extension</groupId>
-		    <artifactId>arquillian-persistence-core</artifactId>
-		    <version>1.0.0.Alpha7</version>
-		    <scope>test</scope>
+			<groupId>org.jboss.arquillian.extension</groupId>
+			<artifactId>arquillian-persistence-core</artifactId>
+			<version>1.0.0.Alpha7</version>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
 
 	<profiles>
 		<profile>
-			<!-- Default test profile that runs all Arquillian tests against a remot Wildfly instance. -->
-			<id>default</id>
+			<!-- Default test profile that runs all Arquillian tests against a remote Wildfly instance. -->
+			<id>arquillian-remote</id>
 			<activation>
 				<activeByDefault>true</activeByDefault>
 			</activation>
@@ -74,26 +74,112 @@
 		</profile>
 
 		<profile>
-			<!-- An optional Arquillian testing profile that executes tests in an embedded Wildfly instance,
-				 Run with: mvn clean test -Parquillian-embedded -->
+			<!-- An optional Arquillian testing profile that executes tests in an embedded Wildfly instance. Useful for continous 
+				integration environments. Run with: mvn clean test -Parquillian-embedded -->
 			<id>arquillian-embedded</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-surefire-plugin</artifactId>
+						<configuration>
+							<!-- Fork every test because it will launch a separate AS instance -->
+							<forkMode>always</forkMode>
+							<systemPropertyVariables>
+								<java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
+								<jboss.home>${project.build.directory}/wildfly-${version.wildfly}</jboss.home>
+								<module.path>${project.build.directory}/wildfly-${version.wildfly}/modules</module.path>
+							</systemPropertyVariables>
+							<redirectTestOutputToFile>false</redirectTestOutputToFile>
+						</configuration>
+					</plugin>
+					<plugin>
+						<artifactId>maven-resources-plugin</artifactId>
+						<version>2.6</version>
+						<executions>
+							<execution>
+								<id>copy-resources</id>
+								<phase>process-test-resources</phase>
+								<goals>
+									<goal>copy-resources</goal>
+								</goals>
+								<configuration>
+									<outputDirectory>${project.build.directory}/wildfly-${version.wildfly}/standalone/configuration</outputDirectory>
+									<resources>
+										<resource>
+											<directory>src/test/configuration</directory>
+										</resource>
+									</resources>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<artifactId>maven-dependency-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>unpack</id>
+								<phase>generate-test-resources</phase>
+								<goals>
+									<goal>unpack</goal>
+								</goals>
+								<configuration>
+									<artifactItems>
+										<artifactItem>
+											<groupId>org.wildfly</groupId>
+											<artifactId>wildfly-dist</artifactId>
+											<version>${version.wildfly}</version>
+											<type>zip</type>
+											<overWrite>false</overWrite>
+											<outputDirectory>${project.build.directory}</outputDirectory>
+										</artifactItem>
+									</artifactItems>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+				<pluginManagement>
+					<plugins>
+						<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build 
+							itself. -->
+						<plugin>
+							<groupId>org.eclipse.m2e</groupId>
+							<artifactId>lifecycle-mapping</artifactId>
+							<version>1.0.0</version>
+							<configuration>
+								<lifecycleMappingMetadata>
+									<pluginExecutions>
+										<pluginExecution>
+											<pluginExecutionFilter>
+												<groupId>
+													org.apache.maven.plugins
+												</groupId>
+												<artifactId>
+													maven-dependency-plugin
+												</artifactId>
+												<versionRange>
+													[2.1,)
+												</versionRange>
+												<goals>
+													<goal>unpack</goal>
+												</goals>
+											</pluginExecutionFilter>
+											<action>
+												<ignore></ignore>
+											</action>
+										</pluginExecution>
+									</pluginExecutions>
+								</lifecycleMappingMetadata>
+							</configuration>
+						</plugin>
+					</plugins>
+				</pluginManagement>
+			</build>
 			<dependencies>
 				<dependency>
 					<groupId>org.wildfly</groupId>
 					<artifactId>wildfly-arquillian-container-embedded</artifactId>
-					<scope>test</scope>
-				</dependency>
-			</dependencies>
-		</profile>
-
-		<profile>
-			<!-- An optional Arquillian testing profile that executes tests in a managed Wildfly instance.
-				 Run with: mvn clean test -Parquillian-remote -->
-			<id>arquillian-remote</id>
-			<dependencies>
-				<dependency>
-					<groupId>org.wildfly</groupId>
-					<artifactId>wildfly-arquillian-container-managed</artifactId>
 					<scope>test</scope>
 				</dependency>
 			</dependencies>

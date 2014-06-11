@@ -3,10 +3,10 @@ before_script:
 - echo -e "Host github.com\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
 - git config --global user.email "${GIT_NAME}"
 - git config --global user.name "${GIT_EMAIL}"
-script:
-- mvn test -Dinternal.snapshotRepository.path=../artifact-repo
-after_success:
 - git clone https://github.com/oteichmann/artifact-repo ../artifact-repo
+script:
+- mvn -P arquillian-embedded -Dinternal.snapshotRepository.path=../artifact-repo clean deploy
+after_success:
 - cd ../artifact-repo
 - git config credential.helper "store --file=.git/credentials"
 - echo "https://${GH_TOKEN}:@github.com" > .git/credentials
