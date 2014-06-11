@@ -5,3 +5,5 @@ target/
 wiki/
 *.md.html
 /wiki
+.idea
+*.iml
