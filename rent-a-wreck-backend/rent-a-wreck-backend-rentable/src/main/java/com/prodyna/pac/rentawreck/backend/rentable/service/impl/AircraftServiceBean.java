@@ -8,8 +8,6 @@ import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.TypedQuery;
 
 import com.prodyna.pac.rentawreck.backend.common.monitoring.Monitored;
@@ -18,8 +16,6 @@ import com.prodyna.pac.rentawreck.backend.rentable.service.AircraftService;
 
 @Stateless
 @Monitored
-@NamedQueries({ @NamedQuery(name = "Aircraft.findAll", query = "SELECT a FROM Aircraft a"),
-		@NamedQuery(name = "Aircraft.findAllCount", query = "SELECT COUNT(a) FROM Aircraft a") })
 public class AircraftServiceBean implements AircraftService {
 
 	@Inject
@@ -60,8 +56,8 @@ public class AircraftServiceBean implements AircraftService {
 		if (log.isLoggable(Level.FINE)) {
 			log.fine("Creating a new aircraft");
 		}
-//		TypedQuery<Aircraft> query = em.createNamedQuery("Aircraft.findAll", Aircraft.class);
-		TypedQuery<Aircraft> query = em.createQuery("SELECT a FROM Aircraft a", Aircraft.class);
+		TypedQuery<Aircraft> query = em.createNamedQuery(Aircraft.NQ_FIND_ALL, Aircraft.class);
+//		TypedQuery<Aircraft> query = em.createQuery("SELECT a FROM Aircraft a", Aircraft.class);
 		List<Aircraft> results = query.getResultList();
 
 		return Collections.unmodifiableList(results);
@@ -69,9 +65,8 @@ public class AircraftServiceBean implements AircraftService {
 
 	@Override
 	public int findAllCount() {
-		// int count =
-		// ((Number)em.createNamedQuery("Aircraft.findAllCount").getSingleResult()).intValue();
-		int count = ((Number) em.createQuery("SELECT COUNT(a) FROM Aircraft a").getSingleResult()).intValue();
+		 int count = ((Number)em.createNamedQuery(Aircraft.NQ_FIND_ALL_COUNT).getSingleResult()).intValue();
+//		int count = ((Number) em.createQuery("SELECT COUNT(a) FROM Aircraft a").getSingleResult()).intValue();
 		return count;
 	}
 
