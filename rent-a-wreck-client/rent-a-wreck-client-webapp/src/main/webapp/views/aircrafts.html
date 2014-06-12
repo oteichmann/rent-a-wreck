@@ -1,0 +1,66 @@
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-6">
+		
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<span>Aircraft List</span>
+				</div>
+				
+				<table class="table">
+					<thead>
+						<tr>
+							<th>ID</th>
+							<th>Type</th>
+							<th>Actions</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="a in aircrafts">
+							<td>{{a.id}}</td>
+							<td>{{a.type}}</td>
+							<td>
+								<button class="btn btn-xs btn-default" ng-click="editAircraft(a);"><i class="fa fa-edit"></i> Edit</button>
+								<button class="btn btn-xs btn-default" ng-click="deleteAircraft(a);"><i class="fa fa-trash-o"></i> Delete</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			
+		</div>
+		<div class="col-md-6">
+			
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<span>Aircraft Details</span>
+				</div>
+
+				<div class="panel-body">
+					<form name="addAircraftForm" ng-submit="submitForm()" novalidate>
+	        			<div class="form-group" ng-class="{ 'has-error' : aircraft.name.$invalid && !aircraft.name.$pristine }">
+							<label for="aircraftName">Name</label>
+							<input type="text" class="form-control" id="aircraftName" ng-model="aircraft.name" placeholder="Enter name" required>
+	            			<p ng-show="aircraft.name.$invalid && !aircraft.name.$pristine" class="help-block">Name is required.</p>
+						</div>
+						<div class="form-group" ng-class="{ 'has-error' : aircraft.type.$invalid && !aircraft.type.$pristine }">
+							<select data-placeholder="Choose a type..." id="aircraftType" class="form-control" ng-model="aircraft.type"
+							        ng-options="at.id as at.name for at in aircraftTypes">
+							     <option value="">Please select a type</option>
+							</select>
+						</div>
+						
+						<div class="pull-right" ng-show="aircraft.uuid === undefined">
+							<button type="submit" class="btn btn-default" ng-click="addAircraft();" ng-disabled="addAircraftForm.$invalid"><i class="fa fa-plus"></i> Add</button>
+						</div>
+						<div class="pull-right" ng-show="aircraft.uuid">
+							<button type="submit" class="btn btn-default" ng-click="editAircraftSave();" ng-disabled="editAircraftForm.$invalid"><i class="fa fa-save"></i> Save</button>
+							<button class="btn btn-default" ng-click="editAircraftCancel();"><i class="fa fa-ban"></i> Cancel</button>
+						</div>
+					</form>
+				</div>
+			</div>
+			
+		</div>
+	</div>
+</div>

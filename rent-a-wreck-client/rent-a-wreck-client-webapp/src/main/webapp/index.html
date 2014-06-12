@@ -8,29 +8,35 @@
 <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.8/angular.js"></script>
 <script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.10.0.js"></script>
 -->
-<link href="css/lib/bootstrap.css" rel="stylesheet">
-<link href="css/main.css" rel="stylesheet">
+<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+<link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
+<link href="styles/main.css" rel="stylesheet">
 
-<script src="js/lib/angular.js" defer="defer"></script>
-<script src="js/lib/angular-resource.js" defer="defer"></script>
-<script src="js/lib/angular-route.js" defer="defer"></script>
-<script src="js/lib/angular-cookies.js" defer="defer"></script>
-<script src="js/lib/ui-bootstrap-tpls-0.10.0.js" defer="defer"></script>
+<script src="bower_components/jquery/dist/jquery.js"></script>
+<script src="bower_components/angular/angular.js"></script>
+<script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+<script src="bower_components/angular-resource/angular-resource.js"></script>
+<script src="bower_components/angular-cookies/angular-cookies.js"></script>
+<script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+<script src="bower_components/angular-route/angular-route.js"></script>
+<script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
 
-<script src="js/app.js" defer="defer"></script>
-<script src="js/controllers.js" defer="defer"></script>
-<script src="js/services.js" defer="defer"></script>
+<script src="scripts/app.js"></script>
+<script src="scripts/controllers/navigation.js"></script>
+<script src="scripts/controllers/login.js"></script>
+<script src="scripts/controllers/aircraft.js"></script>
+<script src="scripts/services.js"></script>
 </head>
 
 <body>
 	<div id="container" class="container">
-		<div id="header" class="header" ng-controller="loginCtrl">
+		<div id="header" class="header" ng-controller="navigationCtrl">
 			<ul class="nav nav-pills pull-right">
 				<li ng-class="{'active': isActive('/')}"><a href="#">Home</a></li>
 				<li ng-class="{'active': isActive('/aircrafts')}"><a
 					href="#/aircrafts">Aircrafts</a></li>
-				<li ng-class="{'hidden': $root.loggedIn}"><a href="#/login">Login</a></li>
-				<li ng-class="{'hidden': !$root.loggedIn}"><a ng-click="logout()">Logout</a></li>
+				<li ng-class="{'hidden': loggedIn}"><a href="#/login">Login</a></li>
+				<li ng-class="{'hidden': !loggedIn}"><a ng-click="logout()">Logout</a></li>
 			</ul>
  			<h1 class="text-primary headline">Rent-A-Wreck</h1>
 		</div>
