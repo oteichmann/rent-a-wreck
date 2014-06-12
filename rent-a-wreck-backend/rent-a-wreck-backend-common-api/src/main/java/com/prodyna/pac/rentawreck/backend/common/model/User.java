@@ -1,10 +1,20 @@
 package com.prodyna.pac.rentawreck.backend.common.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
+
 
 /**
  * The User entity.
@@ -14,9 +24,16 @@ import javax.validation.constraints.NotNull;
  */
 @Entity
 @Table(name = "raw_users", uniqueConstraints=@UniqueConstraint(columnNames="USERNAME"))
+@NamedQueries({ 
+	@NamedQuery(name = User.NQ_FIND_ALL, query = "SELECT x FROM User x"),
+	@NamedQuery(name = User.NQ_FIND_ALL_COUNT, query = "SELECT COUNT(x) FROM User x") 
+})
 public class User extends AbstractEntity {
 
 	private static final long serialVersionUID = -5973878597842495317L;
+	
+	public static final String NQ_FIND_ALL = "User.findAll";
+	public static final String NQ_FIND_ALL_COUNT = "User.findAllCount";
 
 	@NotNull
  	@Column(unique=true)
@@ -27,6 +44,13 @@ public class User extends AbstractEntity {
  	private String email;
  	private String firstName;
  	private String lastName;
+ 	
+	@NotNull
+	@ManyToMany(fetch=FetchType.EAGER)
+    @JoinTable(name = "raw_users_roles",
+               joinColumns = @JoinColumn(name = "user_uuid"),
+               inverseJoinColumns = @JoinColumn(name = "role_uuid"))
+ 	private List<Role> roles = new ArrayList<Role>();
  	
 	public String getUsername() {
 		return username;
@@ -58,5 +82,10 @@ public class User extends AbstractEntity {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-	
+	public List<Role> getRoles() {
+		return roles;
+	}
+	public void setRoles(List<Role> roles) {
+		this.roles = roles;
+	}
 }

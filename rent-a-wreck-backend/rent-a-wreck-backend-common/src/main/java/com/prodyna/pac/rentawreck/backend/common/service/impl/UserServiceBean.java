@@ -94,4 +94,20 @@ public class UserServiceBean extends AbstractEntityPersistenceServiceBean<User> 
 		return log;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.prodyna.pac.rentawreck.backend.common.service.impl.AbstractEntityPersistenceServiceBean#getFindAllNamedQuery()
+	 */
+	@Override
+	protected String getFindAllNamedQuery() {
+		return User.NQ_FIND_ALL;
+	}
+
+	/* (non-Javadoc)
+	 * @see com.prodyna.pac.rentawreck.backend.common.service.impl.AbstractEntityPersistenceServiceBean#getFindAllCountNamedQuery()
+	 */
+	@Override
+	protected String getFindAllCountNamedQuery() {
+		return User.NQ_FIND_ALL_COUNT;
+	}
+
 }

@@ -1,73 +1,52 @@
 package com.prodyna.pac.rentawreck.backend.rentable.service.impl;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
-import javax.persistence.EntityManager;
-import javax.persistence.TypedQuery;
 
 import com.prodyna.pac.rentawreck.backend.common.monitoring.Monitored;
+import com.prodyna.pac.rentawreck.backend.common.service.impl.AbstractEntityPersistenceServiceBean;
 import com.prodyna.pac.rentawreck.backend.rentable.model.Aircraft;
 import com.prodyna.pac.rentawreck.backend.rentable.service.AircraftService;
 
 @Stateless
 @Monitored
-public class AircraftServiceBean implements AircraftService {
-
-	@Inject
-	private EntityManager em;
+public class AircraftServiceBean extends AbstractEntityPersistenceServiceBean<Aircraft> implements AircraftService {
 
 	@Inject
 	private Logger log;
 
+	/* (non-Javadoc)
+	 * @see com.prodyna.pac.rentawreck.backend.common.service.impl.AbstractEntityPersistenceServiceBean#getEntityClass()
+	 */
 	@Override
-	public Aircraft create(Aircraft aircraft) {
-		if (log.isLoggable(Level.FINE)) {
-			log.fine("Creating a new aircraft");
-		}
-		em.persist(aircraft);
-		return aircraft;
-	}
-	
-	@Override
-	public Aircraft findById(String uuid) {
-		Aircraft aircraft = em.find(Aircraft.class, uuid);
-		return aircraft;
+	protected Class<Aircraft> getEntityClass() {
+		return Aircraft.class;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.prodyna.pac.rentawreck.backend.common.service.impl.AbstractEntityPersistenceServiceBean#getLooger()
+	 */
 	@Override
-	public Aircraft update(Aircraft aircraft) {
-		aircraft = em.merge(aircraft);
-		return aircraft;
+	protected Logger getLooger() {
+		return log;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.prodyna.pac.rentawreck.backend.common.service.impl.AbstractEntityPersistenceServiceBean#getFindAllNamedQuery()
+	 */
 	@Override
-	public void delete(String uuid) {
-		Aircraft aircraft = findById(uuid);
-		em.remove(aircraft);
+	protected String getFindAllNamedQuery() {
+		return Aircraft.NQ_FIND_ALL;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.prodyna.pac.rentawreck.backend.common.service.impl.AbstractEntityPersistenceServiceBean#getFindAllCountNamedQuery()
+	 */
 	@Override
-	public List<Aircraft> findAll() {
-		if (log.isLoggable(Level.FINE)) {
-			log.fine("Creating a new aircraft");
-		}
-		TypedQuery<Aircraft> query = em.createNamedQuery(Aircraft.NQ_FIND_ALL, Aircraft.class);
-//		TypedQuery<Aircraft> query = em.createQuery("SELECT a FROM Aircraft a", Aircraft.class);
-		List<Aircraft> results = query.getResultList();
-
-		return Collections.unmodifiableList(results);
-	}
-
-	@Override
-	public int findAllCount() {
-		 int count = ((Number)em.createNamedQuery(Aircraft.NQ_FIND_ALL_COUNT).getSingleResult()).intValue();
-//		int count = ((Number) em.createQuery("SELECT COUNT(a) FROM Aircraft a").getSingleResult()).intValue();
-		return count;
+	protected String getFindAllCountNamedQuery() {
+		return Aircraft.NQ_FIND_ALL_COUNT;
 	}
 
 }

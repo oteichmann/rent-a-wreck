@@ -17,15 +17,15 @@ import com.prodyna.pac.rentawreck.backend.common.model.AbstractEntity;
 @Entity
 @Table(name = "raw_aircrafts")
 @NamedQueries({ 
-	@NamedQuery(name = Aircraft.NQ_FIND_ALL, query = "SELECT a FROM Aircraft a"),
-	@NamedQuery(name = Aircraft.NQ_FIND_ALL_COUNT, query = "SELECT COUNT(a) FROM Aircraft a") 
+	@NamedQuery(name = Aircraft.NQ_FIND_ALL, query = "SELECT x FROM Aircraft x"),
+	@NamedQuery(name = Aircraft.NQ_FIND_ALL_COUNT, query = "SELECT COUNT(x) FROM Aircraft x") 
 })
 public class Aircraft extends AbstractEntity {
 
 	private static final long serialVersionUID = -6523878611712737965L;
 	
 	public static final String NQ_FIND_ALL = "Aircraft.findAll";
-	public static final String NQ_FIND_ALL_COUNT = "Aircraft.findAll";
+	public static final String NQ_FIND_ALL_COUNT = "Aircraft.findAllCount";
 
 	@NotNull
 	private String id;

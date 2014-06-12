@@ -61,16 +61,16 @@ public class AircraftTest extends AbstractEntityCRUDTest<Aircraft>{
 	@Transactional(TransactionMode.ROLLBACK)
 	public void simpleTest() {
 		service.findAll();
-		assertEquals(0, service.findAllCount());
+		assertEquals(0, service.findAllCount().intValue());
 		Aircraft instance0 = new Aircraft();
 		instance0.setUuid(UUID.randomUUID().toString());
 		instance0.setId("B52");
 		instance0.setType(AircraftType.TYPE_X);
 		Aircraft instance1 = service.create(instance0);
 		Assert.assertNotNull(instance1.getUuid());
-		assertEquals(1, service.findAllCount());
+		assertEquals(1, service.findAllCount().intValue());
 		service.delete(instance1.getUuid());
-		assertEquals(0, service.findAllCount());
+		assertEquals(0, service.findAllCount().intValue());
 	}
 
 }

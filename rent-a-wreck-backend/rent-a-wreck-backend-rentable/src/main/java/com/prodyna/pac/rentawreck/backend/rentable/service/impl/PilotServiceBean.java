@@ -38,5 +38,21 @@ public class PilotServiceBean extends AbstractEntityPersistenceServiceBean<Pilot
 	protected Logger getLooger() {
 		return log;
 	}
+	
+	/* (non-Javadoc)
+	 * @see com.prodyna.pac.rentawreck.backend.common.service.impl.AbstractEntityPersistenceServiceBean#getFindAllNamedQuery()
+	 */
+	@Override
+	protected String getFindAllNamedQuery() {
+		return Pilot.NQ_FIND_ALL;
+	}
+
+	/* (non-Javadoc)
+	 * @see com.prodyna.pac.rentawreck.backend.common.service.impl.AbstractEntityPersistenceServiceBean#getFindAllCountNamedQuery()
+	 */
+	@Override
+	protected String getFindAllCountNamedQuery() {
+		return Pilot.NQ_FIND_ALL_COUNT;
+	}
 
 }

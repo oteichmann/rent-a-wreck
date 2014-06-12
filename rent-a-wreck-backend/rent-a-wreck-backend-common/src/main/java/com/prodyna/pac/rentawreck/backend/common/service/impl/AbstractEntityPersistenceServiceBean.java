@@ -1,10 +1,13 @@
 package com.prodyna.pac.rentawreck.backend.common.service.impl;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 
 import com.prodyna.pac.rentawreck.backend.common.model.AbstractEntity;
 import com.prodyna.pac.rentawreck.backend.common.service.AbstractEntityPersistenceService;
@@ -20,11 +23,12 @@ public abstract class AbstractEntityPersistenceServiceBean<T extends AbstractEnt
 			getLooger().fine("Creating a new " + entity.getClass().getName());
 		}
 		em.persist(entity);
+		em.flush();
 		return entity;
 	}
 	
 	@Override
-	public T findById(String uuid) {
+	public T read(String uuid) {
 		T entity = getEntityManager().find(getEntityClass(), uuid);
 		return entity;
 	}
@@ -37,8 +41,22 @@ public abstract class AbstractEntityPersistenceServiceBean<T extends AbstractEnt
 
 	@Override
 	public void delete(String uuid) {
-		T entity = findById(uuid);
+		T entity = read(uuid);
 		getEntityManager().remove(entity);
+	}
+	
+	@Override
+	public List<T> findAll() {
+		TypedQuery<T> query = em.createNamedQuery(getFindAllNamedQuery(), getEntityClass());
+		List<T> results = query.getResultList();
+
+		return Collections.unmodifiableList(results);
+	}
+
+	@Override
+	public Integer findAllCount() {
+		int count = ((Number)em.createNamedQuery(getFindAllCountNamedQuery()).getSingleResult()).intValue();
+		return count;
 	}
 	
 	protected EntityManager getEntityManager() {
@@ -48,4 +66,8 @@ public abstract class AbstractEntityPersistenceServiceBean<T extends AbstractEnt
 	protected abstract Class<T> getEntityClass();
 	
 	protected abstract Logger getLooger();
+
+	protected abstract String getFindAllNamedQuery();
+
+	protected abstract String getFindAllCountNamedQuery();
 }

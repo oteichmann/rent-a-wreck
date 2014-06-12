@@ -22,14 +22,36 @@ public class RoleServiceBean extends AbstractEntityPersistenceServiceBean<Role> 
 	@Inject
 	private Logger log;
 
+	/* (non-Javadoc)
+	 * @see com.prodyna.pac.rentawreck.backend.common.service.impl.AbstractEntityPersistenceServiceBean#getEntityClass()
+	 */
 	@Override
 	protected Class<Role> getEntityClass() {
 		return Role.class;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.prodyna.pac.rentawreck.backend.common.service.impl.AbstractEntityPersistenceServiceBean#getLooger()
+	 */
 	@Override
 	protected Logger getLooger() {
 		return log;
+	}
+	
+	/* (non-Javadoc)
+	 * @see com.prodyna.pac.rentawreck.backend.common.service.impl.AbstractEntityPersistenceServiceBean#getFindAllNamedQuery()
+	 */
+	@Override
+	protected String getFindAllNamedQuery() {
+		return Role.NQ_FIND_ALL;
+	}
+
+	/* (non-Javadoc)
+	 * @see com.prodyna.pac.rentawreck.backend.common.service.impl.AbstractEntityPersistenceServiceBean#getFindAllCountNamedQuery()
+	 */
+	@Override
+	protected String getFindAllCountNamedQuery() {
+		return Role.NQ_FIND_ALL_COUNT;
 	}
 
 }

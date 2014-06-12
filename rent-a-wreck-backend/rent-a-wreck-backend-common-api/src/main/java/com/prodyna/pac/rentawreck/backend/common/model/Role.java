@@ -5,6 +5,11 @@ import java.util.Set;
 
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -16,35 +21,25 @@ import javax.validation.constraints.NotNull;
  */
 @Entity
 @Table(name = "raw_roles")
+@NamedQueries({ 
+	@NamedQuery(name = Role.NQ_FIND_ALL, query = "SELECT x FROM Role x"),
+	@NamedQuery(name = Role.NQ_FIND_ALL_COUNT, query = "SELECT COUNT(x) FROM Role x") 
+})
 public class Role extends AbstractEntity {
 
  	private static final long serialVersionUID = -4798391667549974653L;
-	
+
+	public static final String NQ_FIND_ALL = "Role.findAll";
+	public static final String NQ_FIND_ALL_COUNT = "Role.findAllCount";
+
  	@NotNull
- 	private String username;
- 	@NotNull
- 	@ElementCollection  
-    protected Set<String> roles = new HashSet<String>();
- 	@NotNull
- 	private String roleGroup;
+ 	private String name;
  	
-	public String getUsername() {
-		return username;
+	public String getName() {
+		return name;
 	}
-	public void setUsername(String username) {
-		this.username = username;
-	}
-	public Set<String> getRoles() {
-		return roles;
-	}
-	public void setRoles(Set<String> roles) {
-		this.roles = roles;
-	}
-	public String getRoleGroup() {
-		return roleGroup;
-	}
-	public void setRoleGroup(String roleGroup) {
-		this.roleGroup = roleGroup;
+	public void setName(String name) {
+		this.name = name;
 	}
 	
 }

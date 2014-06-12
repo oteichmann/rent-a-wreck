@@ -4,6 +4,8 @@
 package com.prodyna.pac.rentawreck.backend.rentable.model;
 
 import javax.persistence.Entity;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -17,9 +19,16 @@ import com.prodyna.pac.rentawreck.backend.common.model.AbstractEntity;
  */
 @Entity
 @Table(name = "raw_charters")
+@NamedQueries({ 
+	@NamedQuery(name = Charter.NQ_FIND_ALL, query = "SELECT x FROM Charter x"),
+	@NamedQuery(name = Charter.NQ_FIND_ALL_COUNT, query = "SELECT COUNT(x) FROM Charter x") 
+})
 public class Charter extends AbstractEntity {
 
 	private static final long serialVersionUID = -36897664127654744L;
+	
+	public static final String NQ_FIND_ALL = "Charter.findAll";
+	public static final String NQ_FIND_ALL_COUNT = "Charter.findAllCount";
 	
 	@NotNull
 	private CharterStatus charterStatus;

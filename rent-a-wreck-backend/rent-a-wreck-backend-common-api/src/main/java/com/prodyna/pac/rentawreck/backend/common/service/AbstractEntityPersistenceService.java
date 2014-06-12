@@ -1,5 +1,7 @@
 package com.prodyna.pac.rentawreck.backend.common.service;
 
+import java.util.List;
+
 import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.Consumes;
@@ -44,8 +46,8 @@ public interface AbstractEntityPersistenceService<T extends AbstractEntity> {
 	@Path("/{uuid}")
 	@Produces(MediaType.APPLICATION_JSON)
 	@PermitAll
-	public T findById(@PathParam("uuid") String uuid);
-
+	public T read(@PathParam("uuid") String uuid);
+	
 	/**
 	 * Updates an existing entity.
 	 * @param entity The entity to update.
@@ -65,5 +67,24 @@ public interface AbstractEntityPersistenceService<T extends AbstractEntity> {
 	@Path("/{uuid}")
 	@RolesAllowed("admin")
 	public void delete(@PathParam("uuid") String uuid);
+	
+	/**
+	 * Gets the list of all entities of type <T>.
+	 * @return The list of all entities.
+	 */
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@PermitAll
+	public List<T> findAll();
+
+	/**
+	 * Gets the total number of entities of type <T>.
+	 * @return The number of entities.
+	 */
+	@GET
+	@Path("/count")
+	@Produces(MediaType.TEXT_PLAIN)
+	@PermitAll
+	public Integer findAllCount();
 
 }

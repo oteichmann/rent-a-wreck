@@ -31,15 +31,18 @@ public abstract class AbstractEntityCRUDTest<T extends AbstractEntity> {
 		
 		T entity = getCRUDEntity();
 		
-		Assert.assertNull(getService().findById(entity.getUuid()));
+		Assert.assertNull(getService().read(entity.getUuid()));
+		Assert.assertEquals(0, getService().findAllCount().intValue());
 		
 		T persitedEntity = getService().create(entity);
+		Assert.assertEquals(1, getService().findAllCount().intValue());
 		
 		T updatedEntity = getService().update(persitedEntity);
 		
 		getService().delete(updatedEntity.getUuid());
 		
-		Assert.assertNull(getService().findById(entity.getUuid()));
+		Assert.assertNull(getService().read(entity.getUuid()));
+		Assert.assertEquals(0, getService().findAllCount().intValue());
 		
 	}
 }
