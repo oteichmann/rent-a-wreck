@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.prodyna.pac.rentawreck.backend.rentable.model;
 
 /**

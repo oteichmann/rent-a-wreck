@@ -1,11 +1,9 @@
-/**
- * 
- */
 package com.prodyna.pac.rentawreck.backend.rentable.model;
 
 import javax.persistence.Entity;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -32,10 +30,28 @@ public class Charter extends AbstractEntity {
 	
 	@NotNull
 	private CharterStatus charterStatus;
-	@NotNull
-	private String aircraftUuid;
-	@NotNull
-	private String pilotUuid;
+
+	@OneToOne
+	private Aircraft aircraft;
+	
+	@OneToOne
+	private Pilot pilot;
+
+	public Aircraft getAircraft() {
+		return aircraft;
+	}
+
+	public void setAircraft(Aircraft aircraft) {
+		this.aircraft = aircraft;
+	}
+
+	public Pilot getPilot() {
+		return pilot;
+	}
+
+	public void setPilot(Pilot pilot) {
+		this.pilot = pilot;
+	}
 
 	public CharterStatus getCharterStatus() {
 		return charterStatus;
@@ -45,20 +61,4 @@ public class Charter extends AbstractEntity {
 		this.charterStatus = charterStatus;
 	}
 
-	public String getAircraftUuid() {
-		return aircraftUuid;
-	}
-
-	public void setAircraftUuid(String aircraftUuid) {
-		this.aircraftUuid = aircraftUuid;
-	}
-
-	public String getPilotUuid() {
-		return pilotUuid;
-	}
-
-	public void setPilotUuid(String pilotUuid) {
-		this.pilotUuid = pilotUuid;
-	}
-	
 }

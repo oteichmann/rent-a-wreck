@@ -50,11 +50,7 @@ public class RoleTest extends AbstractEntityCRUDTest<Role> {
 	public Role getCRUDEntity() {
 		Role role = new Role();
 		role.setUuid(UUID.randomUUID().toString());
-		role.setUsername("user");
-		role.setRoleGroup("Roles");
-		role.getRoles().add("role1");
-		role.getRoles().add("role2");
-		
+		role.setName("admin");
 		return role;
 	}
 
