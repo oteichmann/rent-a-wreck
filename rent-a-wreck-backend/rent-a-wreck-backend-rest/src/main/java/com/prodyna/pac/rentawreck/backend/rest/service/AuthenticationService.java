@@ -16,7 +16,12 @@ import com.prodyna.pac.rentawreck.backend.rest.service.request.LoginRequest;
 import com.prodyna.pac.rentawreck.backend.rest.service.request.LogoutRequest;
 import com.prodyna.pac.rentawreck.backend.rest.service.request.ValidateTokenRequest;
 
-
+/**
+ * AuthenticationService
+ *
+ * @author Oliver Teichmann
+ *
+ */
 @Path("/auth")
 @SecurityDomain("rent-a-wreck")
 public interface AuthenticationService {

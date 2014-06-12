@@ -23,9 +23,20 @@ import com.prodyna.pac.rentawreck.backend.common.model.AbstractEntity;
  *
  * @param <T> A {@link AbstractEntity} implementation.
  */
-//@SecurityDomain("rent-a-wreck")
 public interface AbstractEntityPersistenceService<T extends AbstractEntity> {
 
+	/**
+	 * Creates a new entity or updates an existing one.
+	 * @param entity The entity to update.
+	 * @return The updated version of the entity.
+	 */
+	@POST
+	@Path("/{uuid}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	@RolesAllowed({"admin"})
+	public T createOrUpdate(@PathParam("uuid") String uuid, T entity);
+	
 	/**
 	 * Persists a new entity.
 	 * @param entity The new entity.
