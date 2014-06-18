@@ -3,8 +3,8 @@ package com.prodyna.pac.rentawreck.backend.common.service.impl;
 import java.util.logging.Logger;
 
 import javax.ejb.Stateless;
-import javax.enterprise.inject.Model;
 import javax.inject.Inject;
+import javax.persistence.TypedQuery;
 
 import org.jboss.security.auth.spi.Util;
 
@@ -116,6 +116,16 @@ public class UserServiceBean extends AbstractEntityPersistenceServiceBean<User> 
 	@Override
 	protected String getFindAllCountNamedQuery() {
 		return User.NQ_FIND_ALL_COUNT;
+	}
+
+	/* (non-Javadoc)
+	 * @see com.prodyna.pac.rentawreck.backend.common.service.UserService#findByUsername(java.lang.String)
+	 */
+	@Override
+	public User findByUsername(String username) {
+		TypedQuery<User> query = em.createQuery("SELECT x FROM User x WHERE x.username = :username", User.class);
+		query.setParameter("username", username);
+		return query.getSingleResult();
 	}
 
 }

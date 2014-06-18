@@ -60,7 +60,7 @@ public class ResponseMessageBuilder {
     	this.response.cookie(cookie);
     	return this;
     }
-
+    
     public Response build() {
         return this.response.entity(this.messageData).build();
     }

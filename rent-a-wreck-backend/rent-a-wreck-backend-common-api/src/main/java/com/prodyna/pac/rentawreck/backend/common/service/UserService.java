@@ -32,4 +32,10 @@ public interface UserService extends AbstractEntityPersistenceService<User> {
 	@Produces(MediaType.APPLICATION_JSON)
 	@RolesAllowed("admin")
 	User updateUserPassword(@QueryParam("uuid") String uuid, @QueryParam("password") String password);
+	
+	/**
+	 * @param username
+	 * @return
+	 */
+	User findByUsername(String username);
 }
