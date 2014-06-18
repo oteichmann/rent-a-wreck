@@ -33,10 +33,13 @@
 		<div id="header" class="header" ng-controller="navigationCtrl">
 			<ul class="nav nav-pills pull-right">
 				<li ng-class="{'active': isActive('/')}"><a href="#">Home</a></li>
-				<li ng-class="{'active': isActive('/aircrafts')}"><a
+				<li ng-class="{'active': isActive('/aircrafts')}" ng-show="$root.loggedIn"><a
 					href="#/aircrafts">Aircrafts</a></li>
-				<li ng-class="{'hidden': loggedIn}"><a href="#/login">Login</a></li>
-				<li ng-class="{'hidden': !loggedIn}"><a ng-click="logout()">Logout</a></li>
+					
+				<li  ng-switch="$root.loggedIn">
+					<a ng-click="logout()" ng-switch-when="true">Logout</a>
+					<a href="#/login" ng-switch-default>Login</a>
+				</li>
 			</ul>
  			<h1 class="text-primary headline">Rent-A-Wreck</h1>
 		</div>

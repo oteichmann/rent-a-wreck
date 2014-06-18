@@ -1,6 +1,8 @@
 package com.prodyna.pac.rentawreck.backend.rentable.model;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -30,6 +32,7 @@ public class Aircraft extends AbstractEntity {
 	@NotNull
 	private String id;
 	@NotNull
+	@Enumerated(EnumType.STRING)
 	private AircraftType type;
 
 	public String getId() {

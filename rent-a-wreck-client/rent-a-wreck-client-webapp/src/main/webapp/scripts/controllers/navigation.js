@@ -2,12 +2,12 @@
 
 rawControllers.controller('navigationCtrl', function($rootScope, $scope, $cookies, $http, $location) {
 	
-	$scope.loggedIn = false;
+	$rootScope.loggedIn = false;
 	
 	/**
-	 * Validate authentication cookie on route change
+	 * Validate authentication cookie on load
 	 */
-	$rootScope.$on('$routeChangeSuccess', function ($angularEvent, $current, $previous) {
+//	$rootScope.$on('$routeChangeSuccess', function ($angularEvent, $current, $previous) {
 		var token = $cookies["XSRF-TOKEN"];
 		if (token) {
 			$http.post("/rent-a-wreck-rest/auth/validate", JSON.stringify({
@@ -15,17 +15,21 @@ rawControllers.controller('navigationCtrl', function($rootScope, $scope, $cookie
 			})).success(function(data, status, headers, config) {
 				// TODO: return already logged in message, get user data, ...
 				//return $http.get("/users/" + response.data.userId);
-				$scope.loggedIn = true;
+				$rootScope.loggedIn = true;
 			}).error(function(data, status, headers, config) {
 				// Invalidate all existing cookies if token was not valid
-				$scope.loggedIn = false;
-				$cookies["XSRF-TOKEN"] = undefined;
+				$rootScope.loggedIn = false;
+//				$cookies["XSRF-TOKEN"] = undefined;
 			});
 		} else {
 			$scope.loggedIn = false;
 		}
-    });
+//    });
 
+		$rootScope.$on('$routeChangeSuccess', function ($angularEvent, $current, $previous) {
+			// TODO: check if user is permissioned
+		});
+		
 	/**
 	 * Invalidate the token on the server.
 	 */
@@ -34,8 +38,8 @@ rawControllers.controller('navigationCtrl', function($rootScope, $scope, $cookie
 		$http.post("/rent-a-wreck-rest/auth/logout", JSON.stringify({
 			token : token
 		})).success(function() {
-			$scope.loggedIn = false;
-			$cookies["XSRF-TOKEN"] = undefined;
+			$rootScope.loggedIn = false;
+//			$cookies["XSRF-TOKEN"] = undefined;
 		});
 	};
 	

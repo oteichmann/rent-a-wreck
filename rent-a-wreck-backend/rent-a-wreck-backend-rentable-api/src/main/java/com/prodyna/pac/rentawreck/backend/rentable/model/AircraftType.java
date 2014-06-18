@@ -8,8 +8,10 @@ package com.prodyna.pac.rentawreck.backend.rentable.model;
  */
 public enum AircraftType {
 	
-	TYPE_X,
-	TYPE_Y,
-	TYPE_Z
-
+	BOEING,
+	AIRBUS,
+	CESSNA,
+	PIPER,
+	SPITFIRE
+	
 }

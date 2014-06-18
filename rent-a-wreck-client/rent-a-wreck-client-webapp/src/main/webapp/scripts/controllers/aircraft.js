@@ -2,13 +2,7 @@
 
 rawControllers.controller('aircraftCtrl', function($scope, aircraftService, utilService) {
 
-	$scope.aircraftTypes = [ {
-		"name" : "TYPE_X"
-	}, {
-		"name" : "TYPE_Y"
-	}, {
-		"name" : "TYPE_Z"
-	} ];
+	$scope.aircraftTypes = [{"name" : "BOEING"}, {"name" : "AIRBUS"}, {"name" : "CESSNA"}, {"name" : "PIPER"}, {"name" : "SPITFIRE"}];
 	
 	resetView();
 	

@@ -1,6 +1,6 @@
 'use strict';
 
-rawControllers.controller('loginCtrl', function($scope, $http, $cookies, $location) {
+rawControllers.controller('loginCtrl', function($rootScope, $scope, $http, $cookies, $location) {
 
 	/**
 	 * Login using the given credentials as (email,password). The server
@@ -11,8 +11,7 @@ rawControllers.controller('loginCtrl', function($scope, $http, $cookies, $locati
 			.success(
 				function(data, status, headers, config) {
 					// redirect to home page after successful login
-					var headerValues = headers();
-					$cookies["XSRF-TOKEN"] = headerValues["x-xsrf-token"];
+					$rootScope.loggedIn = true;
 					$location.path("/");
 				}
 			).error(
