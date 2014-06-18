@@ -10,10 +10,12 @@ import javax.persistence.FetchType;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import com.prodyna.pac.rentawreck.backend.common.model.AbstractEntity;
+import com.prodyna.pac.rentawreck.backend.common.model.User;
 
 /**
  * Pilot
@@ -35,19 +37,20 @@ public class Pilot extends AbstractEntity {
 	public static final String NQ_FIND_ALL_COUNT = "Pilot.findAllCount";
 
 	@NotNull
-	private String userUuid;
+	@OneToOne
+	private User user;
 	
     @OneToMany(cascade=CascadeType.ALL, fetch = FetchType.EAGER)
     @ElementCollection(targetClass=License.class)
     @Column(name = "LICENSE_UUID")
 	private Set<License> licenseSet;
 
-	public String getUserUuid() {
-		return userUuid;
+	public User getUser() {
+		return user;
 	}
 
-	public void setUserUuid(String userUuid) {
-		this.userUuid = userUuid;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	public Set<License> getLicenseSet() {

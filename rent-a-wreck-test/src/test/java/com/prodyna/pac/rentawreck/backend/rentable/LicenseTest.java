@@ -45,7 +45,7 @@ public class LicenseTest extends AbstractEntityCRUDTest<License> {
 	public License getCRUDEntity() {
 		License license = new License();
 		license.setUuid(UUID.randomUUID().toString());
-		license.setAircraftType(AircraftType.TYPE_X);
+		license.setAircraftType(AircraftType.AIRBUS);
 		license.setValidTill(new Date());
 		
 		return license;

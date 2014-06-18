@@ -15,7 +15,9 @@ import org.junit.runner.RunWith;
 
 import com.prodyna.pac.rentawreck.backend.common.AbstractEntityCRUDTest;
 import com.prodyna.pac.rentawreck.backend.common.TestDeploymentFactory;
+import com.prodyna.pac.rentawreck.backend.common.model.User;
 import com.prodyna.pac.rentawreck.backend.common.service.AbstractEntityPersistenceService;
+import com.prodyna.pac.rentawreck.backend.common.service.UserService;
 import com.prodyna.pac.rentawreck.backend.rentable.model.AircraftType;
 import com.prodyna.pac.rentawreck.backend.rentable.model.License;
 import com.prodyna.pac.rentawreck.backend.rentable.model.Pilot;
@@ -26,7 +28,10 @@ import com.prodyna.pac.rentawreck.backend.rentable.service.PilotService;
 public class PilotTest extends AbstractEntityCRUDTest<Pilot> {
 
 	@Inject
-	private PilotService service;
+	private PilotService pilotService;
+
+	@Inject
+	private UserService userService;
 	
 	@Deployment
 	public static WebArchive createDeployment() {
@@ -38,7 +43,7 @@ public class PilotTest extends AbstractEntityCRUDTest<Pilot> {
 	 */
 	@Override
 	protected AbstractEntityPersistenceService<Pilot> getService() {
-		return service;
+		return pilotService;
 	}
 
 	/* (non-Javadoc)
@@ -46,13 +51,24 @@ public class PilotTest extends AbstractEntityCRUDTest<Pilot> {
 	 */
 	@Override
 	public Pilot getCRUDEntity() {
+		
+		User user = new User();
+		user.setUuid(UUID.randomUUID().toString());
+		user.setUsername("test");
+		user.setPassword("test");
+		user.setFirstName("Test");
+		user.setLastName("User");
+		user.setEmail("test@rent-a-wreck.com");
+		
+		userService.create(user);
+		
 		Pilot pilot = new Pilot();
 		pilot.setUuid(UUID.randomUUID().toString());
-		pilot.setUserUuid(UUID.randomUUID().toString());
+		pilot.setUser(user);
 		
 		License license = new License();
 		license.setUuid(UUID.randomUUID().toString());
-		license.setAircraftType(AircraftType.TYPE_X);
+		license.setAircraftType(AircraftType.AIRBUS);
 		license.setValidTill(new Date());
 		
 		Set<License> licenseSet = new HashSet<License>();

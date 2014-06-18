@@ -28,7 +28,7 @@ import com.prodyna.pac.rentawreck.backend.rentable.service.AircraftService;
 public class AircraftTest extends AbstractEntityCRUDTest<Aircraft>{
 
 	@Inject
-	private AircraftService service;
+	private AircraftService aircraftService;
 	
 	@Deployment
 	public static WebArchive createDeployment() {
@@ -40,7 +40,7 @@ public class AircraftTest extends AbstractEntityCRUDTest<Aircraft>{
 	 */
 	@Override
 	protected AbstractEntityPersistenceService<Aircraft> getService() {
-		return service;
+		return aircraftService;
 	}
 
 	/* (non-Javadoc)
@@ -51,7 +51,7 @@ public class AircraftTest extends AbstractEntityCRUDTest<Aircraft>{
 		Aircraft aircraft = new Aircraft();
 		aircraft.setUuid(UUID.randomUUID().toString());
 		aircraft.setId("B52");
-		aircraft.setType(AircraftType.TYPE_X);
+		aircraft.setType(AircraftType.BOEING);
 		
 		return aircraft;
 	}
@@ -60,17 +60,17 @@ public class AircraftTest extends AbstractEntityCRUDTest<Aircraft>{
 	@InSequence(1)
 	@Transactional(TransactionMode.ROLLBACK)
 	public void simpleTest() {
-		service.findAll();
-		assertEquals(0, service.findAllCount().intValue());
+		aircraftService.findAll();
+		assertEquals(0, aircraftService.findAllCount().intValue());
 		Aircraft instance0 = new Aircraft();
 		instance0.setUuid(UUID.randomUUID().toString());
 		instance0.setId("B52");
-		instance0.setType(AircraftType.TYPE_X);
-		Aircraft instance1 = service.create(instance0);
+		instance0.setType(AircraftType.BOEING);
+		Aircraft instance1 = aircraftService.create(instance0);
 		Assert.assertNotNull(instance1.getUuid());
-		assertEquals(1, service.findAllCount().intValue());
-		service.delete(instance1.getUuid());
-		assertEquals(0, service.findAllCount().intValue());
+		assertEquals(1, aircraftService.findAllCount().intValue());
+		aircraftService.delete(instance1.getUuid());
+		assertEquals(0, aircraftService.findAllCount().intValue());
 	}
 
 }
