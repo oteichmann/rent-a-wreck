@@ -16,6 +16,9 @@ rawApp.config([ '$routeProvider', function($routeProvider) {
 	}).when('/aircrafts', {
 		templateUrl : 'views/aircrafts.html',
 		controller : 'aircraftCtrl'
+	}).when('/pilots', {
+		templateUrl : 'views/users.html',
+		controller : 'userCtrl'
 	}).otherwise({
 		redirectTo : '/'
 	});

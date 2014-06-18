@@ -25,6 +25,7 @@
 <script src="scripts/controllers/navigation.js"></script>
 <script src="scripts/controllers/login.js"></script>
 <script src="scripts/controllers/aircraft.js"></script>
+<script src="scripts/controllers/user.js"></script>
 <script src="scripts/services.js"></script>
 </head>
 
@@ -33,9 +34,12 @@
 		<div id="header" class="header" ng-controller="navigationCtrl">
 			<ul class="nav nav-pills pull-right">
 				<li ng-class="{'active': isActive('/')}"><a href="#">Home</a></li>
-				<li ng-class="{'active': isActive('/aircrafts')}" ng-show="$root.loggedIn"><a
-					href="#/aircrafts">Aircrafts</a></li>
-					
+				<li ng-class="{'active': isActive('/aircrafts')}" ng-show="$root.loggedIn">
+					<a href="#/aircrafts">Aircrafts</a>
+				</li>
+				<li ng-class="{'active': isActive('/pilots')}" ng-show="$root.loggedIn">
+					<a href="#/pilots">Pilots</a>
+				</li>
 				<li  ng-switch="$root.loggedIn">
 					<a ng-click="logout()" ng-switch-when="true">Logout</a>
 					<a href="#/login" ng-switch-default>Login</a>

@@ -5,9 +5,43 @@ var serviceBaseURL = '/rent-a-wreck-rest';
 var rawServices = angular.module('rawServices', ['ngResource']);
 
 rawServices.factory('aircraftService', [ '$resource', function($resource) {
-	return $resource(serviceBaseURL + '/aircrafts/:uuid', {uuid:'@uuid'}, {
+	return $resource(serviceBaseURL + '/aircraft/:uuid', {uuid:'@uuid'}, {
+		update : { method:'PUT' },
 		queryCount : {
-			url : serviceBaseURL + '/aircrafts/count',
+			url : serviceBaseURL + '/aircraft/count',
+			method : 'GET',
+			isArray : false
+		}
+	});
+} ]);
+
+rawServices.factory('pilotService', [ '$resource', function($resource) {
+	return $resource(serviceBaseURL + '/pilot/:uuid', {uuid:'@uuid'}, {
+		update : { method:'PUT' },
+		queryCount : {
+			url : serviceBaseURL + '/pilot/count',
+			method : 'GET',
+			isArray : false
+		}
+	});
+} ]);
+
+rawServices.factory('roleService', [ '$resource', function($resource) {
+	return $resource(serviceBaseURL + '/role/:uuid', {uuid:'@uuid'}, {
+		update : { method:'PUT' },
+		queryCount : {
+			url : serviceBaseURL + '/role/count',
+			method : 'GET',
+			isArray : false
+		}
+	});
+} ]);
+
+rawServices.factory('userService', [ '$resource', function($resource) {
+	return $resource(serviceBaseURL + '/user/:uuid', {uuid:'@uuid'}, {
+		update : { method:'PUT' },
+		queryCount : {
+			url : serviceBaseURL + '/user/count',
 			method : 'GET',
 			isArray : false
 		}

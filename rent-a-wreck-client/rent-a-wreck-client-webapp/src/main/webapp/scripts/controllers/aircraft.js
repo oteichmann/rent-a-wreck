@@ -12,7 +12,7 @@ rawControllers.controller('aircraftCtrl', function($scope, aircraftService, util
 	};
 	
 	function resetForm(){
-		$scope.editAircraft = false;
+		$scope.newAircraft = true;
 		$scope.aircraft = {};
 	};
 	
@@ -25,7 +25,7 @@ rawControllers.controller('aircraftCtrl', function($scope, aircraftService, util
 	};
 
 	$scope.editAircraft = function(aircraft) {
-		$scope.editAircraft = true;
+		$scope.newAircraft = false;
 		$scope.aircraft = aircraft;
 	};
 
@@ -34,17 +34,19 @@ rawControllers.controller('aircraftCtrl', function($scope, aircraftService, util
 	};
 	
 	$scope.aircraftFormSubmit = function() {
-		if($scope.editAircraft) {
-			updateAircraft();
-		} else {
+		if($scope.newAircraft) {
 			addAircraft();
+		} else {
+			updateAircraft();
 		} 
 			
 	};
 
 	function updateAircraft() {
-		$scope.aircraft.$save();
-		resetView();
+		$scope.aircraft.$update(function() {
+			updateAircraftList();
+		});
+		resetForm();
 	};
 
 	function addAircraft() {

@@ -38,6 +38,7 @@ rawControllers.controller('navigationCtrl', function($rootScope, $scope, $cookie
 		})).success(function() {
 			$rootScope.loggedIn = false;
 //			$cookies["XSRF-TOKEN"] = undefined;
+			$location.path("/");
 		});
 	};
 	

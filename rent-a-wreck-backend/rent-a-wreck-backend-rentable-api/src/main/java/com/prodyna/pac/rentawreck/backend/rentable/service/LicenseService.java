@@ -3,6 +3,8 @@
  */
 package com.prodyna.pac.rentawreck.backend.rentable.service;
 
+import javax.ws.rs.Path;
+
 import com.prodyna.pac.rentawreck.backend.common.service.AbstractEntityPersistenceService;
 import com.prodyna.pac.rentawreck.backend.rentable.model.License;
 
@@ -12,6 +14,7 @@ import com.prodyna.pac.rentawreck.backend.rentable.model.License;
  * @author Oliver Teichmann
  *
  */
+@Path("/license")
 public interface LicenseService extends AbstractEntityPersistenceService<License> {
 
 }

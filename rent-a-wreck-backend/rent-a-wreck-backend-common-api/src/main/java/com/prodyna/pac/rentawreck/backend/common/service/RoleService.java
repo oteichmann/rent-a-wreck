@@ -10,7 +10,7 @@ import com.prodyna.pac.rentawreck.backend.common.model.Role;
  * @author Oliver Teichmann
  *
  */
-@Path("/roles")
+@Path("/role")
 public interface RoleService extends AbstractEntityPersistenceService<Role>{
 
 }

@@ -40,22 +40,24 @@
 					<form name="aircraftForm" ng-submit="submitForm()" novalidate>
 	        			<div class="form-group" ng-class="{ 'has-error' : aircraft.id.$invalid && !aircraft.id.$pristine }">
 							<label for="aircraftId">ID</label>
-							<input type="text" class="form-control" id="aircraftId" ng-model="aircraft.id" placeholder="Enter name" required>
+							<input type="text" class="form-control" id="aircraftId" ng-model="aircraft.id" placeholder="ID" required>
 	            			<p ng-show="aircraft.id.$invalid && !aircraft.id.$pristine" class="help-block">ID is required.</p>
 						</div>
 						<div class="form-group" ng-class="{ 'has-error' : aircraft.type.$invalid && !aircraft.type.$pristine }">
+							<label for="aircraftType">Type</label>
 							<select data-placeholder="Choose a type..." id="aircraftType" class="form-control" ng-model="aircraft.type"
-							        ng-options="at.name as at.name for at in aircraftTypes">
-							     <option value="">Please select a type</option>
+							        ng-options="at.name as at.name for at in aircraftTypes" required>
+							     <option value="">--please select--</option>
 							</select>
+	            			<p ng-show="aircraft.type.$invalid && !aircraft.type.$pristine" class="help-block">Type is required.</p>
 						</div>
 						
 						<div class="pull-right">
-							<button type="submit" class="btn btn-default" ng-click="aircraftFormSubmit()" ng-disabled="addAircraftForm.$invalid" ng-switch="editAircraft">
-								<span ng-switch-when="true" ><i class="fa fa-save"></i> Save</span>
-								<span ng-switch-default><i class="fa fa-plus"></i> Add</span>
+							<button type="submit" class="btn btn-default" ng-click="aircraftFormSubmit()" ng-disabled="addAircraftForm.$invalid" ng-switch="newAircraft">
+								<span ng-switch-when="true" ><i class="fa fa-plus"></i> Add</span>
+								<span ng-switch-default><i class="fa fa-save"></i> Save</span>
 							</button>
-							<button class="btn btn-default" ng-click="editAircraftCancel()" ng-show="editAircraft == true"><i class="fa fa-ban"></i> Cancel</button>
+							<button class="btn btn-default" ng-click="editAircraftCancel()" ng-hide="newAircraft"><i class="fa fa-ban"></i> Cancel</button>
 						</div>
 					</form>
 				</div>

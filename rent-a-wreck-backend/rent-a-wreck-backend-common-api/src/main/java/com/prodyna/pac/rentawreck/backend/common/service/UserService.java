@@ -16,7 +16,7 @@ import com.prodyna.pac.rentawreck.backend.common.model.User;
  * @author Oliver Teichmann
  * 
  */
-@Path("/users")
+@Path("/user")
 public interface UserService extends AbstractEntityPersistenceService<User> {
 
 	/**

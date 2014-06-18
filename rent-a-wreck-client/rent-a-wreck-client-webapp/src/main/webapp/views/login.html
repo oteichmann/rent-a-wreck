@@ -5,12 +5,14 @@
 	    <form class=well form-inline" ng-submit="login()" role="form">
 	    	<h2 class="text-center">Sign In</h2>
 		    <div class="form-group">
-		        <label for="userId">User Name:</label>
-		        <input type="text" name="userId" id="username" ng-model="credentials.username" class="form-control" placeholder="Your User Name" required/>
+		        <label for="userId">Username:</label>
+		        <input type="text" name="userId" id="username" ng-model="credentials.username" class="form-control" placeholder="Your Username" required/>
+		        <p ng-show="credentials.username.$invalid && !credentials.username.$pristine" class="help-block">Username is required.</p>
 		    </div>
 		    <div class="form-group">
 		        <label for="password">Password:</label>
 		        <input type="password" name="password" id="password" ng-model="credentials.password" class="form-control" placeholder="Your Password" required/>
+		        <p ng-show="credentials.password.$invalid && !credentials.password.$pristine" class="help-block">Password is required.</p>
 		    </div>
 		    <input type="submit" id="login" value="Sign In" class="btn btn-default"/>
 		</form>

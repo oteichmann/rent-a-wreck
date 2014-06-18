@@ -11,7 +11,7 @@ import com.prodyna.pac.rentawreck.backend.rentable.model.Aircraft;
 /**
  * @author oteichmann
  */
-@Path("/aircrafts")
+@Path("/aircraft")
 public interface AircraftService extends AbstractEntityPersistenceService<Aircraft> {
 
 }
