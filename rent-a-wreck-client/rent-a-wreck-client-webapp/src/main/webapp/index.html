@@ -37,8 +37,8 @@
 				<li ng-class="{'active': isActive('/aircrafts')}" ng-show="$root.loggedIn">
 					<a href="#/aircrafts">Aircrafts</a>
 				</li>
-				<li ng-class="{'active': isActive('/pilots')}" ng-show="$root.loggedIn">
-					<a href="#/pilots">Pilots</a>
+				<li ng-class="{'active': isActive('/users')}" ng-show="$root.loggedIn">
+					<a href="#/users">Users</a>
 				</li>
 				<li  ng-switch="$root.loggedIn">
 					<a ng-click="logout()" ng-switch-when="true">Logout</a>

@@ -87,7 +87,7 @@ public interface AbstractEntityPersistenceService<T extends AbstractEntity> {
 	 */
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	@RolesAllowed({"admin"})
+	@PermitAll
 	public List<T> findAll();
 
 	/**

@@ -41,8 +41,10 @@ rawControllers.controller('userCtrl', function($scope, userService, utilService)
 	};
 
 	function updateUser() {
-		$scope.user.$update();
-		resetView();
+		$scope.user.$update(function() {
+			updateUserList();
+		});
+		resetForm();
 	};
 
 	function addUser() {

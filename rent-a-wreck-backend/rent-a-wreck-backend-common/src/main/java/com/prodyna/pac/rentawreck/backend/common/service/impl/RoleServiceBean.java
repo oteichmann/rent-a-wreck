@@ -4,6 +4,7 @@ import java.util.logging.Logger;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import javax.persistence.TypedQuery;
 
 import com.prodyna.pac.rentawreck.backend.common.model.Role;
 import com.prodyna.pac.rentawreck.backend.common.monitoring.Monitored;
@@ -52,6 +53,16 @@ public class RoleServiceBean extends AbstractEntityPersistenceServiceBean<Role> 
 	@Override
 	protected String getFindAllCountNamedQuery() {
 		return Role.NQ_FIND_ALL_COUNT;
+	}
+
+	/* (non-Javadoc)
+	 * @see com.prodyna.pac.rentawreck.backend.common.service.RoleService#findByName(java.lang.String)
+	 */
+	@Override
+	public Role findByName(String name) {
+		TypedQuery<Role> query = em.createQuery("SELECT x FROM Role x WHERE x.name = :name", Role.class);
+		query.setParameter("name", name);
+		return query.getSingleResult();
 	}
 
 }

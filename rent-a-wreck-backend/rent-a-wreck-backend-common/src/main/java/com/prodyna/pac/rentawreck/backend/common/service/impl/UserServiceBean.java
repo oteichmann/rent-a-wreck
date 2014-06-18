@@ -8,8 +8,10 @@ import javax.inject.Inject;
 
 import org.jboss.security.auth.spi.Util;
 
+import com.prodyna.pac.rentawreck.backend.common.model.Role;
 import com.prodyna.pac.rentawreck.backend.common.model.User;
 import com.prodyna.pac.rentawreck.backend.common.monitoring.Monitored;
+import com.prodyna.pac.rentawreck.backend.common.service.RoleService;
 import com.prodyna.pac.rentawreck.backend.common.service.UserService;
 
 /**
@@ -24,6 +26,9 @@ public class UserServiceBean extends AbstractEntityPersistenceServiceBean<User> 
 
 	@Inject
 	private Logger log;
+	
+	@Inject
+	private RoleService roleService;
 
 	/*
 	 * (non-Javadoc)
@@ -35,6 +40,9 @@ public class UserServiceBean extends AbstractEntityPersistenceServiceBean<User> 
 	public User create(User user) {
 		// Encrypt initial user password before persisting.
 		encryptUserPassword(user);
+		// User without role user does not work...
+		Role userRole = roleService.findByName("user");
+		user.getRoles().add(userRole);
 
 		return super.create(user);
 	}

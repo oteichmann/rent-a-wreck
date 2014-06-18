@@ -16,7 +16,7 @@ rawApp.config([ '$routeProvider', function($routeProvider) {
 	}).when('/aircrafts', {
 		templateUrl : 'views/aircrafts.html',
 		controller : 'aircraftCtrl'
-	}).when('/pilots', {
+	}).when('/users', {
 		templateUrl : 'views/users.html',
 		controller : 'userCtrl'
 	}).otherwise({
