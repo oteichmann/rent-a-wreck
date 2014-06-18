@@ -9,12 +9,12 @@ rawControllers.controller('aircraftCtrl', function($scope, aircraftService, util
 	function resetView() {
 		resetForm();
 		updateAircraftList();
-	}
+	};
 	
 	function resetForm(){
-		$scope.aircraft = {
-		};
-	}
+		$scope.editAircraft = false;
+		$scope.aircraft = {};
+	};
 	
 	function updateAircraftList() {
 		aircraftService.query(function(value, responseHeaders) {
@@ -22,22 +22,32 @@ rawControllers.controller('aircraftCtrl', function($scope, aircraftService, util
 		}, function(httpHeaders) {
 			alert("Failed to load aircraft list");
 		});
-	}
+	};
 
 	$scope.editAircraft = function(aircraft) {
+		$scope.editAircraft = true;
 		$scope.aircraft = aircraft;
 	};
 
 	$scope.editAircraftCancel = function() {
 		resetView();
 	};
+	
+	$scope.aircraftFormSubmit = function() {
+		if($scope.editAircraft) {
+			updateAircraft();
+		} else {
+			addAircraft();
+		} 
+			
+	};
 
-	$scope.editAircraftSave = function() {
+	function updateAircraft() {
 		$scope.aircraft.$save();
 		resetView();
 	};
 
-	$scope.addAircraft = function() {
+	function addAircraft() {
 		var newAircraft = $scope.aircraft;
 
 		utilService.generateUuid(function(f) {
@@ -45,7 +55,7 @@ rawControllers.controller('aircraftCtrl', function($scope, aircraftService, util
 			aircraftService.save(newAircraft, function() {
 				updateAircraftList();
 			});
-			resetForm()
+			resetForm();
 		});
 	};
 

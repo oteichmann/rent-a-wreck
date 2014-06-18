@@ -37,7 +37,7 @@
 				</div>
 
 				<div class="panel-body">
-					<form name="addAircraftForm" ng-submit="submitForm()" novalidate>
+					<form name="aircraftForm" ng-submit="submitForm()" novalidate>
 	        			<div class="form-group" ng-class="{ 'has-error' : aircraft.id.$invalid && !aircraft.id.$pristine }">
 							<label for="aircraftId">ID</label>
 							<input type="text" class="form-control" id="aircraftId" ng-model="aircraft.id" placeholder="Enter name" required>
@@ -50,12 +50,12 @@
 							</select>
 						</div>
 						
-						<div class="pull-right" ng-show="aircraft.uuid === undefined">
-							<button type="submit" class="btn btn-default" ng-click="addAircraft();" ng-disabled="addAircraftForm.$invalid"><i class="fa fa-plus"></i> Add</button>
-						</div>
-						<div class="pull-right" ng-show="aircraft.uuid">
-							<button type="submit" class="btn btn-default" ng-click="editAircraftSave();" ng-disabled="editAircraftForm.$invalid"><i class="fa fa-save"></i> Save</button>
-							<button class="btn btn-default" ng-click="editAircraftCancel();"><i class="fa fa-ban"></i> Cancel</button>
+						<div class="pull-right">
+							<button type="submit" class="btn btn-default" ng-click="aircraftFormSubmit()" ng-disabled="addAircraftForm.$invalid" ng-switch="editAircraft">
+								<span ng-switch-when="true" ><i class="fa fa-save"></i> Save</span>
+								<span ng-switch-default><i class="fa fa-plus"></i> Add</span>
+							</button>
+							<button class="btn btn-default" ng-click="editAircraftCancel()" ng-show="editAircraft == true"><i class="fa fa-ban"></i> Cancel</button>
 						</div>
 					</form>
 				</div>
