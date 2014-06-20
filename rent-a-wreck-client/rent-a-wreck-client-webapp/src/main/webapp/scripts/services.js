@@ -48,6 +48,14 @@ rawServices.factory('userService', [ '$resource', function($resource) {
 	});
 } ]);
 
+rawServices.factory('UserSession', [ function() {
+	var session = {
+		loggedIn: false,
+		user: null
+	};
+	return session;
+}]);
+
 rawServices.factory('utilService', [ '$resource', function($resource) {
 	return $resource(serviceBaseURL + '/util', {}, {
 		generateUuid : {

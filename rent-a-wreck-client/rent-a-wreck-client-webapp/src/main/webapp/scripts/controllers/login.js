@@ -1,6 +1,6 @@
 'use strict';
 
-rawControllers.controller('loginCtrl', function($rootScope, $scope, $http, $cookies, $location) {
+rawControllers.controller('loginCtrl', function($rootScope, $scope, $http, $cookies, $location, UserSession) {
 
 	/**
 	 * Login using the given credentials as (email,password). The server
@@ -10,13 +10,20 @@ rawControllers.controller('loginCtrl', function($rootScope, $scope, $http, $cook
 		$http.post("/rent-a-wreck-rest/auth/login", $scope.credentials)
 			.success(
 				function(data, status, headers, config) {
-					// redirect to home page after successful login
 					$rootScope.loggedIn = true;
+					
+					UserSession.loggedIn = true;
+					UserSession.user = data;
+					
+					// redirect to home page after successful login
 					$location.path("/");
 				}
 			).error(
 				function(data, status, headers, config) {
 					$scope.error = data.err;
+					
+					UserSession.loggedIn = false;
+					UserSession.username = null;
 				}
 			);
 	};

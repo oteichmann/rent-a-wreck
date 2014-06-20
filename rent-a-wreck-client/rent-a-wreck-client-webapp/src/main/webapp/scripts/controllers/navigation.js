@@ -1,24 +1,26 @@
 'use strict';
 
-rawControllers.controller('navigationCtrl', function($rootScope, $scope, $cookies, $http, $location) {
+rawControllers.controller('navigationCtrl', function($rootScope, $scope, $cookies, $http, $location, UserSession) {
 	
-	$rootScope.loggedIn = false;
+	$scope.isLoggedIn = function () {
+		return UserSession.loggedIn;
+	};
 	
 	/**
-	 * Validate authentication cookie on load
+	 * Validate authentication cookie on load - (Cookie Auto-Login ;-)
 	 */
 	var token = $cookies["XSRF-TOKEN"];
 	if (token) {
 		$http.post("/rent-a-wreck-rest/auth/validate", JSON.stringify({
 			token : token
 		})).success(function(data, status, headers, config) {
-			// TODO: return already logged in message, get user data, ...
-			//return $http.get("/users/" + response.data.userId);
-			$rootScope.loggedIn = true;
+			UserSession.loggedIn = true;
+			UserSession.user = data;
 		}).error(function(data, status, headers, config) {
-			// Invalidate all existing cookies if token was not valid
-			$rootScope.loggedIn = false;
-			// $cookies["XSRF-TOKEN"] = undefined;
+			// Invalidate session and cookies if token was not valid
+			UserSession.loggedIn = false;
+			UserSession.user = {};
+			$cookies["XSRF-TOKEN"] = undefined;
 		});
 	} else {
 		$scope.loggedIn = false;
@@ -36,8 +38,9 @@ rawControllers.controller('navigationCtrl', function($rootScope, $scope, $cookie
 		$http.post("/rent-a-wreck-rest/auth/logout", JSON.stringify({
 			token : token
 		})).success(function() {
-			$rootScope.loggedIn = false;
-//			$cookies["XSRF-TOKEN"] = undefined;
+			UserSession.loggedIn = false;
+			UserSession.user = {};
+			$cookies["XSRF-TOKEN"] = undefined;
 			$location.path("/");
 		});
 	};
