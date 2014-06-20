@@ -14,6 +14,8 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import org.jboss.resteasy.annotations.cache.NoCache;
+
 import com.prodyna.pac.rentawreck.backend.common.model.AbstractEntity;
 
 /**
@@ -25,18 +27,6 @@ import com.prodyna.pac.rentawreck.backend.common.model.AbstractEntity;
  */
 public interface AbstractEntityPersistenceService<T extends AbstractEntity> {
 
-//	/**
-//	 * Creates a new entity or updates an existing one.
-//	 * @param entity The entity to update.
-//	 * @return The updated version of the entity.
-//	 */
-//	@POST
-//	@Path("/{uuid}")
-//	@Consumes(MediaType.APPLICATION_JSON)
-//	@Produces(MediaType.APPLICATION_JSON)
-//	@RolesAllowed({"admin"})
-//	public T createOrUpdate(@PathParam("uuid") String uuid, T entity);
-	
 	/**
 	 * Persists a new entity.
 	 * @param entity The new entity.
@@ -55,6 +45,7 @@ public interface AbstractEntityPersistenceService<T extends AbstractEntity> {
 	 * @return The entity identified by the given identifier.
 	 */
 	@GET
+	@NoCache
 	@Path("/{uuid}")
 	@Produces(MediaType.APPLICATION_JSON)
 	@PermitAll
@@ -86,6 +77,7 @@ public interface AbstractEntityPersistenceService<T extends AbstractEntity> {
 	 * @return The list of all entities.
 	 */
 	@GET
+	@NoCache
 	@Produces(MediaType.APPLICATION_JSON)
 	@PermitAll
 	public List<T> findAll();
@@ -95,6 +87,7 @@ public interface AbstractEntityPersistenceService<T extends AbstractEntity> {
 	 * @return The number of entities.
 	 */
 	@GET
+	@NoCache
 	@Path("/count")
 	@Produces(MediaType.TEXT_PLAIN)
 	@PermitAll
