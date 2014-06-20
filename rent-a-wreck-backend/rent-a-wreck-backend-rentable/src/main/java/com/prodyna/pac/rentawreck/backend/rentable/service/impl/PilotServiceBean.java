@@ -4,7 +4,9 @@ import java.util.logging.Logger;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import javax.persistence.TypedQuery;
 
+import com.prodyna.pac.rentawreck.backend.common.model.User;
 import com.prodyna.pac.rentawreck.backend.common.monitoring.Monitored;
 import com.prodyna.pac.rentawreck.backend.common.service.impl.AbstractEntityPersistenceServiceBean;
 import com.prodyna.pac.rentawreck.backend.rentable.model.Pilot;
@@ -54,5 +56,17 @@ public class PilotServiceBean extends AbstractEntityPersistenceServiceBean<Pilot
 	protected String getFindAllCountNamedQuery() {
 		return Pilot.NQ_FIND_ALL_COUNT;
 	}
+
+	/* (non-Javadoc)
+	 * @see com.prodyna.pac.rentawreck.backend.rentable.service.PilotService#readPilotForUser(java.lang.String)
+	 */
+	@Override
+	public Pilot readPilotForUser(String userUuid) {
+		TypedQuery<Pilot> query = em.createQuery("SELECT p FROM Pilot p JOIN p.user u WHERE u.uuid = :userUuid", Pilot.class);
+		query.setParameter("userUuid", userUuid);
+		return query.getSingleResult();
+	}
+	
+	
 
 }

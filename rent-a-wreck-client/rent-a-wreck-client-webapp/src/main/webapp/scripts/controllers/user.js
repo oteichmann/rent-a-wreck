@@ -1,6 +1,6 @@
 'use strict';
 
-rawControllers.controller('userCtrl', function($scope, userService, utilService) {
+rawControllers.controller('userCtrl', function($scope, pilotService, userService, utilService) {
 	
 	resetView();
 	
@@ -10,21 +10,29 @@ rawControllers.controller('userCtrl', function($scope, userService, utilService)
 	};
 	
 	function resetForm(){
-		$scope.newUser = true;
+		$scope.isNewUser = true;
+		$scope.showEditForm = false;
 		$scope.user = {};
+		$scope.pilot = {};
 	};
 	
 	function updateUserList() {
 		userService.query(function(value, responseHeaders) {
 			$scope.users = value;
 		}, function(httpHeaders) {
-			alert("Failed to load user list");
+			alert("Failed to load user list!");
 		});
+	};
+	
+	$scope.createNewUser = function() {
+		$scope.showEditForm = true;
 	};
 
 	$scope.editUser = function(user) {
-		$scope.newUser = false;
+		$scope.isNewUser = false;
 		$scope.user = user;
+		$scope.pilot = pilotService.getByUserUuid({ "user_uuid" : user.uuid});
+		$scope.showEditForm = true;
 	};
 
 	$scope.editUserCancel = function() {
@@ -32,12 +40,11 @@ rawControllers.controller('userCtrl', function($scope, userService, utilService)
 	};
 	
 	$scope.userFormSubmit = function() {
-		if($scope.newUser) {
+		if($scope.isNewUser) {
 			addUser();
 		} else {
 			updateUser();
 		} 
-			
 	};
 
 	function updateUser() {
@@ -63,7 +70,27 @@ rawControllers.controller('userCtrl', function($scope, userService, utilService)
 		user.$delete({}, function(value, responseHeaders) {
 			updateUserList();
 		}, function(httpResponse) {
-			alert("Could not delete user, because it is still in use.");
+			alert("Could not delete user!");
+		});
+	};
+	
+	$scope.createPilot = function() {
+		var newPilot = {};
+		
+		utilService.generateUuid(function(f) {
+			newPilot.uuid = f.value;
+			newPilot.user = $scope.user;
+			pilotService.save(newPilot, function(value, responseHeaders) {
+				$scope.pilot = value;
+			});
+		});
+	};
+	
+	$scope.deletePilot = function() {
+		$scope.pilot.$delete({}, function(value, responseHeaders) {
+			$scope.pilot = {};
+		}, function(httpResponse) {
+			alert("Could not delete pilot!");
 		});
 	};
 });

@@ -1,12 +1,12 @@
 package com.prodyna.pac.rentawreck.backend.rentable.model;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -38,12 +38,12 @@ public class Pilot extends AbstractEntity {
 
 	@NotNull
 	@OneToOne
+	@JoinColumn(name="user_uuid")
 	private User user;
 	
     @OneToMany(cascade=CascadeType.ALL, fetch = FetchType.EAGER)
-    @ElementCollection(targetClass=License.class)
-    @Column(name = "LICENSE_UUID")
-	private Set<License> licenseSet;
+	@JoinColumn(name="pilot_uuid")
+	private Set<License> licenses = new HashSet<License>();
 
 	public User getUser() {
 		return user;
@@ -53,12 +53,12 @@ public class Pilot extends AbstractEntity {
 		this.user = user;
 	}
 
-	public Set<License> getLicenseSet() {
-		return licenseSet;
+	public Set<License> getLicenses() {
+		return licenses;
 	}
 
-	public void setLicenseSet(Set<License> licenseSet) {
-		this.licenseSet = licenseSet;
+	public void setLicenses(Set<License> licenses) {
+		this.licenses = licenses;
 	}
 
 }

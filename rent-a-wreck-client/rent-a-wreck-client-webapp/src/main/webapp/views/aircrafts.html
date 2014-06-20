@@ -1,6 +1,6 @@
 <div class="container-fluid">
 	<div class="row">
-		<div class="col-md-6">
+		<div class="col-md-12">
 		
 			<div class="panel panel-primary">
 				<div class="panel-heading">
@@ -20,8 +20,8 @@
 							<td>{{a.id}}</td>
 							<td>{{a.type}}</td>
 							<td>
-								<button class="btn btn-xs btn-default" ng-click="editAircraft(a);"><i class="fa fa-edit"></i> Edit</button>
-								<button class="btn btn-xs btn-default" ng-click="deleteAircraft(a);"><i class="fa fa-trash-o"></i> Delete</button>
+								<button class="btn btn-xs btn-primary" ng-click="editAircraft(a);"><i class="fa fa-edit"></i> Edit</button>
+								<button class="btn btn-xs btn-danger" ng-click="deleteAircraft(a);"><i class="fa fa-trash-o"></i> Delete</button>
 							</td>
 						</tr>
 					</tbody>
@@ -29,6 +29,8 @@
 			</div>
 			
 		</div>
+	</div>	
+	<div class="row">
 		<div class="col-md-6">
 			
 			<div class="panel panel-primary">
@@ -53,11 +55,11 @@
 						</div>
 						
 						<div class="pull-right">
-							<button type="submit" class="btn btn-default" ng-click="aircraftFormSubmit()" ng-disabled="addAircraftForm.$invalid" ng-switch="newAircraft">
+							<button type="submit" class="btn btn-primary ng-click="aircraftFormSubmit()" ng-disabled="addAircraftForm.$invalid" ng-switch="newAircraft">
 								<span ng-switch-when="true" ><i class="fa fa-plus"></i> Add</span>
 								<span ng-switch-default><i class="fa fa-save"></i> Save</span>
 							</button>
-							<button class="btn btn-default" ng-click="editAircraftCancel()" ng-hide="newAircraft"><i class="fa fa-ban"></i> Cancel</button>
+							<button class="btn btn-info" ng-click="editAircraftCancel()" ng-hide="newAircraft"><i class="fa fa-ban"></i> Cancel</button>
 						</div>
 					</form>
 				</div>

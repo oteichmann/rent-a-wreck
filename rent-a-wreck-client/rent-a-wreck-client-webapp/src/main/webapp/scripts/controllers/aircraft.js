@@ -20,7 +20,7 @@ rawControllers.controller('aircraftCtrl', function($scope, aircraftService, util
 		aircraftService.query(function(value, responseHeaders) {
 			$scope.aircrafts = value;
 		}, function(httpHeaders) {
-			alert("Failed to load aircraft list");
+			alert("Failed to load aircraft list!");
 		});
 	};
 
@@ -65,7 +65,7 @@ rawControllers.controller('aircraftCtrl', function($scope, aircraftService, util
 		aircraft.$delete({}, function(value, responseHeaders) {
 			updateAircraftList();
 		}, function(httpResponse) {
-			alert("Could not delete aircraft, because it is still in use.");
+			alert("Could not delete aircraft!");
 		});
 	};
 });

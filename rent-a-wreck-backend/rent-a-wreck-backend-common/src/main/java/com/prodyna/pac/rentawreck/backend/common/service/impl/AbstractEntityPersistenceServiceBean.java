@@ -17,12 +17,6 @@ public abstract class AbstractEntityPersistenceServiceBean<T extends AbstractEnt
 	@Inject
 	protected EntityManager em;
 	
-//	@Override
-//	public T createOrUpdate(String uuid, T entity) {
-//		entity = getEntityManager().merge(entity);
-//		return entity;
-//	}
-
 	@Override
 	public T create(T entity) {
 		if (getLooger().isLoggable(Level.FINE)) {

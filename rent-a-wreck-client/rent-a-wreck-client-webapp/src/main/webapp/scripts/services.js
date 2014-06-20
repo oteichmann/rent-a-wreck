@@ -22,6 +22,11 @@ rawServices.factory('pilotService', [ '$resource', function($resource) {
 			url : serviceBaseURL + '/pilot/count',
 			method : 'GET',
 			isArray : false
+		},
+		getByUserUuid : {
+			url : serviceBaseURL + "/pilot/user/:user_uuid",
+			params : {user_uuid:'@user_uuid'},
+			method : 'GET'
 		}
 	});
 } ]);
