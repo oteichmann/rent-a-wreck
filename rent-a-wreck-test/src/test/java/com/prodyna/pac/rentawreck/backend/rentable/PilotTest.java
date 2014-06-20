@@ -74,7 +74,7 @@ public class PilotTest extends AbstractEntityCRUDTest<Pilot> {
 		Set<License> licenseSet = new HashSet<License>();
 		licenseSet.add(license);
 		
-		pilot.setLicenseSet(licenseSet);
+		pilot.setLicenses(licenseSet);
 		
 		return pilot;
 	}
