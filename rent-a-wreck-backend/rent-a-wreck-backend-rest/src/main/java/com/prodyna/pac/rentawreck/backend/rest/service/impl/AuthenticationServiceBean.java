@@ -1,6 +1,7 @@
 package com.prodyna.pac.rentawreck.backend.rest.service.impl;
 
-import java.util.Date;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -12,7 +13,6 @@ import javax.security.auth.Subject;
 import javax.security.auth.login.LoginException;
 import javax.ws.rs.core.NewCookie;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.core.Response.ResponseBuilder;
 
 import org.picketbox.util.StringUtil;
 
@@ -62,7 +62,7 @@ public class AuthenticationServiceBean implements AuthenticationService {
 			tokenSubjectCache.put(token, new TokenSubject(username, roles));
 		}
 		
-		NewCookie cookie = new NewCookie(AuthenticationServiceConstants.XSRF_TOKEN, token, "/" , "localhost", 1, "no comment", Integer.MAX_VALUE / 2, new Date(Long.MAX_VALUE), true, false);
+		NewCookie cookie = createTokenCookie(token);
 		
 		User user = userService.findByUsername(username);
 		
@@ -78,6 +78,14 @@ public class AuthenticationServiceBean implements AuthenticationService {
 		
 		return response;
 	}
+
+	private NewCookie createTokenCookie(String token) {
+		Calendar cookieExpiryDate = new GregorianCalendar();
+		cookieExpiryDate.add(Calendar.MINUTE, 30);
+		NewCookie cookie = new NewCookie(AuthenticationServiceConstants.XSRF_TOKEN, token, "/" , "localhost", 1, 
+				"RAW Session Token", 1800, cookieExpiryDate.getTime(), true, false);
+		return cookie;
+	}
 	
 	@Override
 	public TokenSubject getTokenSubject(String token) {
@@ -87,8 +95,15 @@ public class AuthenticationServiceBean implements AuthenticationService {
 	@Override
 	public Response validateToken(ValidateTokenRequest validateTokenRequest) {
 		
-		if(tokenSubjectCache.containsKey(validateTokenRequest.getToken())) {
-			return ResponseMessageBuilder.ok().message("Token is valid").build();
+		String token = validateTokenRequest.getToken();
+		if(tokenSubjectCache.containsKey(token)) {
+
+			String username = tokenSubjectCache.get(token).getUsername();
+			NewCookie cookie = createTokenCookie(token);
+			User user = userService.findByUsername(username);
+			
+			Response response = Response.ok().cookie().entity(user).build();
+			return response;
 		}
 		return ResponseMessageBuilder.authenticationRequired().message("Token is not valid.").build();
 	}
