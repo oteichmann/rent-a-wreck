@@ -37,7 +37,7 @@ public interface AuthenticationService {
 	@Path("/validate")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	@RolesAllowed({"admin","user"})
+	@PermitAll
 	public Response validateToken(ValidateTokenRequest validateTokenRequest);
 	
 	@POST
