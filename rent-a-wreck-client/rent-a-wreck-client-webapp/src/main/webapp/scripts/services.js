@@ -15,6 +15,29 @@ rawServices.factory('aircraftService', [ '$resource', function($resource) {
 	});
 } ]);
 
+rawServices.factory('aircraftTypeService', [function() {
+	var aircraftTypes = [{"name" : "BOEING"}, {"name" : "AIRBUS"}, {"name" : "CESSNA"}, {"name" : "PIPER"}, {"name" : "SPITFIRE"}];
+	
+	var methods = {
+		query: function () {
+			return aircraftTypes;
+		}
+	};
+	
+	return methods;
+} ]);
+
+rawServices.factory('licenseService', [ '$resource', function($resource) {
+	return $resource(serviceBaseURL + '/license/:uuid', {uuid:'@uuid'}, {
+		update : { method:'PUT' },
+		queryCount : {
+			url : serviceBaseURL + '/license/count',
+			method : 'GET',
+			isArray : false
+		}
+	});
+} ]);
+
 rawServices.factory('pilotService', [ '$resource', function($resource) {
 	return $resource(serviceBaseURL + '/pilot/:uuid', {uuid:'@uuid'}, {
 		update : { method:'PUT' },

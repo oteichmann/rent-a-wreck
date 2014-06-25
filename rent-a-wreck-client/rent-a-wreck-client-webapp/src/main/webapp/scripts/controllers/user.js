@@ -1,6 +1,6 @@
 'use strict';
 
-rawControllers.controller('userCtrl', function($scope, pilotService, userService, utilService) {
+rawControllers.controller('userCtrl', function($scope, $modal, $log, aircraftTypeService, licenseService, pilotService, userService, utilService) {
 	
 	resetView();
 	
@@ -93,4 +93,117 @@ rawControllers.controller('userCtrl', function($scope, pilotService, userService
 			alert("Could not delete pilot!");
 		});
 	};
-});
+
+	$scope.addLicense = function() {
+		var license = {};
+		openModalLicenseEditor(license, function(license) {
+			$scope.pilot.licenses.push(license);
+			$scope.pilot.$update();
+		});
+	};
+
+	$scope.editLicense = function(license) {
+		licenseService.get({uuid:license.uuid}, function(licenseResource) {
+	    	openModalLicenseEditor(licenseResource, function(license) {
+	    		pilotService.get({uuid:$scope.pilot.uuid}, function(pilot) {
+		    		$scope.pilot = pilot;
+				});
+	    	});
+		});
+	};
+
+	$scope.deleteLicense = function(license) {
+		licenseService.delete({ uuid : license.uuid}, function() {
+			pilotService.get({uuid:$scope.pilot.uuid}, function(pilot) {
+	    		$scope.pilot = pilot;
+			});
+		});
+	};
+
+	function openModalLicenseEditor(licenseParam,callback) {
+ 		var modalInstance = $modal.open({
+			templateUrl: 'modalLicenseEditor.html',
+			controller: ModalLicenseEditorCtrl,
+			resolve: {
+		        license: function () {
+		          return licenseParam;
+		        }
+      		}
+    	});
+		
+		modalInstance.result.then(function (returnValue) {
+			if(callback) {
+				callback(returnValue);
+			}
+		});
+	};
+
+	var ModalLicenseEditorCtrl = function($scope, $modalInstance, license) {
+
+		$scope.license = license;
+		$scope.aircraftTypes = aircraftTypeService.query();
+
+		$scope.licenseFormSubmit = function() {
+
+			if($scope.license.uuid) {
+				updateLicense();
+			} else {
+				createLicense();
+			} 
+		};
+
+		function updateLicense() {
+			$scope.license.$update();
+			$modalInstance.close();
+		};
+
+		function createLicense() {
+			utilService.generateUuid(function(f) {
+				license.uuid = f.value;
+				licenseService.save($scope.license, function(value, responseHeaders) {
+					$modalInstance.close(value);
+				}, function(httpResponse) {
+					alert("Could not save license!");
+					$modalInstance.close();
+				});
+			});
+		};
+
+		$scope.editLicenseCancel = function() {
+			$modalInstance.dismiss('cancel');
+		};
+
+		$scope.today = function() {
+			$scope.dt = new Date();
+		};
+		$scope.today();
+
+		$scope.clear = function() {
+			$scope.dt = null;
+		};
+
+		// Disable weekend selection
+		$scope.disabled = function(date, mode) {
+			return (mode === 'day' && (date.getDay() === 0 || date.getDay() === 6));
+		};
+
+		$scope.minDate = new Date();
+
+		$scope.open = function($event) {
+			$event.preventDefault();
+			$event.stopPropagation();
+
+			$scope.opened = true;
+		};
+
+		$scope.dateOptions = {
+			formatYear : 'yy',
+			startingDay : 1,
+			'show-button-bar' : false
+		};
+
+		$scope.initDate = new Date();
+		$scope.format = 'mediumDate';
+	};
+
+});	

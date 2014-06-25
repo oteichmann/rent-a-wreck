@@ -5,7 +5,7 @@ var rawControllers = angular.module('rawControllers', []);
 
 
 /* App Module definition */
-var rawApp = angular.module('rawApp', [ 'ngRoute', 'ngCookies', 'rawControllers', 'rawServices' ]);
+var rawApp = angular.module('rawApp', [ 'ngRoute', 'ngCookies', 'ui.bootstrap', 'rawControllers', 'rawServices' ]);
 
 rawApp.config([ '$routeProvider', function($routeProvider) {
 	$routeProvider.when('/', {

@@ -1,8 +1,8 @@
 'use strict';
 
-rawControllers.controller('aircraftCtrl', function($scope, aircraftService, utilService) {
+rawControllers.controller('aircraftCtrl', function($scope, aircraftService, aircraftTypeService, utilService) {
 
-	$scope.aircraftTypes = [{"name" : "BOEING"}, {"name" : "AIRBUS"}, {"name" : "CESSNA"}, {"name" : "PIPER"}, {"name" : "SPITFIRE"}];
+	$scope.aircraftTypes = aircraftTypeService.query();
 	
 	resetView();
 	

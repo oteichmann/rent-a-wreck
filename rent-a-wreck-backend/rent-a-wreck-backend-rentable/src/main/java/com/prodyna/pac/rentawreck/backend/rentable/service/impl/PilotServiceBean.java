@@ -4,6 +4,7 @@ import java.util.logging.Logger;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
 
 import com.prodyna.pac.rentawreck.backend.common.model.User;
@@ -64,7 +65,12 @@ public class PilotServiceBean extends AbstractEntityPersistenceServiceBean<Pilot
 	public Pilot readPilotForUser(String userUuid) {
 		TypedQuery<Pilot> query = em.createQuery("SELECT p FROM Pilot p JOIN p.user u WHERE u.uuid = :userUuid", Pilot.class);
 		query.setParameter("userUuid", userUuid);
-		return query.getSingleResult();
+		try {
+			Pilot pilot = query.getSingleResult();
+			return pilot;
+		} catch (NoResultException e) {
+			return null;
+		}
 	}
 	
 	

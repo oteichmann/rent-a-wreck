@@ -38,7 +38,7 @@ public class Pilot extends AbstractEntity {
 
 	@NotNull
 	@OneToOne
-	@JoinColumn(name="user_uuid")
+	@JoinColumn(name="user_uuid", unique=true)
 	private User user;
 	
     @OneToMany(cascade=CascadeType.ALL, fetch = FetchType.EAGER)

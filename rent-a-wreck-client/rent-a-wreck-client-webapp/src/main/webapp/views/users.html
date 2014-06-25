@@ -90,7 +90,7 @@
 
 		<div class="col-md-6" ng-show="showEditForm">
 
-			<div class="panel panel-primary">
+			<div class="panel panel-primary" ng-show="user.uuid">
 				<div class="panel-heading">
 					<span>Pilot Status</span>
 				</div>
@@ -100,32 +100,109 @@
 						<div ng-switch-when="true" class="alert alert-danger">
 							<h4 style="line-height: 2; vertical-align: middle; margin-bottom: 0">
 								Not an active pilot, yet.
-								<button type="button" class="btn btn-success pull-right" ng-click="createPilot()">Promote as pilot!</button>
+								<button type="button" class="btn btn-success pull-right" ng-click="createPilot()">
+									<i class="fa fa-plane"></i> Promote as Pilot
+								</button>
 							</h4>
 						</div>
 						<div ng-switch-default class="alert alert-success">
 							<h4 style="line-height: 2; vertical-align: middle; margin-bottom: 0">
 								This user is an active pilot.
-								<button type="button" class="btn btn-danger pull-right" ng-click="deletePilot()">Revoke pilot status!</button>
+								<button type="button" class="btn btn-danger pull-right" ng-click="deletePilot()">
+									<i class="fa fa-plane fa-rotate-90"></i> Revoke Pilot Status
+								</button>
 							</h4>
 						</div>
-
-
 					</div>
 
+					<div class="panel panel-primary" ng-show="pilot.uuid">
+						<div class="panel-heading">
+							<span>Licenses</span>
+						</div>
 
+						<div class="panel-body">
+							<button type="button" class="btn btn-primary pull-right" ng-click="addLicense()">
+								<i class="fa fa-plus"></i> Add License
+							</button>
+						</div>
+
+						<table class="table">
+							<thead>
+								<tr>
+									<th>Aircraft Type</th>
+									<th>Valid Till</th>
+									<th>Actions</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-repeat="l in pilot.licenses" re>
+									<td>{{ l.aircraftType }}</td>
+									<td>{{ l.validTill | date:'mediumDate'}}</td>
+									<td>
+										<button class="btn btn-xs btn-primary" ng-click="editLicense(l)">
+											<i class="fa fa-edit"></i> Edit
+										</button>
+										<button class="btn btn-xs btn-danger" ng-click="deleteLicense(l)">
+											<i class="fa fa-trash-o"></i> Delete
+										</button>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+
+					</div>
 				</div>
 			</div>
 		</div>
-		
+
 		<div class="col-md-12" ng-show="showEditForm == false">
 			<div class="alert alert-info">
-				Please select a user to edit or create one. 
+				Please select a user to edit or create one.
 				<button type="submit" class="btn btn-sm btn-primary" ng-click="createNewUser()">
-					<span ><i class="fa fa-plus"></i> Create User</span>
+					<span><i class="fa fa-plus"></i> Create User</span>
 				</button>
 			</div>
 		</div>
-
 	</div>
 </div>
+
+
+<script type="text/ng-template" id="modalLicenseEditor.html">
+<div class="modal-header">
+	<h3 class="modal-title">License</h3>
+</div>
+<div class="modal-body">
+
+	<form name="licenseForm" novalidate>
+		<div class="form-group" ng-class="{ 'has-error' : license.aircraftType$invalid && !license.aircraftType.$pristine }">
+			<label for="licenseAircraftType">Aircraft Type</label>
+			<select	id="licenseAircraftType" class="form-control" ng-model="license.aircraftType"
+				ng-options="at.name as at.name for at in aircraftTypes" required>
+				<option value="">--please select--</option>
+			</select>
+			<p ng-show="license.aircraftType.$invalid && !license.aircraftType.$pristine" class="help-block">Aircraft Type is
+				required.</p>
+		</div>
+		<div class="form-group">
+			<label for="licenseValidTill">Valid Till</label>
+			<div class="input-group">
+				<input id="licenseValidTill" type="text" class="form-control" datepicker-popup="{{format}}" ng-model="license.validTill" is-open="opened" min-date="minDate"
+					init-data="initDate" date-disabled="disabled(date, mode)" datepicker-options="dateOptions" starting-day="1" ng-required="true"/>
+				<span class="input-group-btn">
+					<button type="button" class="btn btn-default" ng-click="open($event)">
+						<i class="fa fa-calendar"></i>
+					</button>
+				</span>
+			</div>
+		</div>
+	</form>
+</div>
+<div class="modal-footer">
+	<button type="submit" class="btn btn-primary" ng-click="licenseFormSubmit()" ng-disabled="userForm.$invalid">
+		<i class="fa fa-save"></i> Save</span>
+	</button>
+	<button class="btn btn-info" ng-click="editLicenseCancel()">
+		<i class="fa fa-ban"></i> Cancel
+	</button>
+</div>
+</script>
