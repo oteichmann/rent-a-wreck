@@ -3,6 +3,22 @@
 rawControllers.controller('userCtrl', function($scope, $modal, $log, aircraftTypeService, licenseService, pilotService, userService, utilService) {
 	
 	resetView();
+
+	var userTemplate = {
+		uuid : '',
+		username : '',
+		firstName : '',
+		lastName : '',
+		email : '',
+		password : ''
+	}
+
+	var pilotTemplate = {
+		uuid : '',
+		user : angular.copy(userTemplate),
+		licenses : []
+	}
+
 	
 	function resetView() {
 		resetForm();
@@ -12,8 +28,11 @@ rawControllers.controller('userCtrl', function($scope, $modal, $log, aircraftTyp
 	function resetForm(){
 		$scope.isNewUser = true;
 		$scope.showEditForm = false;
-		$scope.user = {};
-		$scope.pilot = {};
+		$scope.user = angular.copy(userTemplate);
+		$scope.pilot = angular.copy(pilotTemplate);
+		if($scope.userForm) {
+			$scope.userForm.$setPristine();	
+		}
 	};
 	
 	function updateUserList() {

@@ -24,29 +24,14 @@
 <script src="scripts/app.js"></script>
 <script src="scripts/controllers/navigation.js"></script>
 <script src="scripts/controllers/login.js"></script>
-<script src="scripts/controllers/aircraft.js"></script>
-<script src="scripts/controllers/user.js"></script>
+<script src="scripts/controllers/aircrafts.js"></script>
+<script src="scripts/controllers/users.js"></script>
 <script src="scripts/services.js"></script>
 </head>
 
 <body>
 	<div id="container" class="container">
-		<div id="header" class="header" ng-controller="navigationCtrl">
-			<ul class="nav nav-pills pull-right">
-				<li ng-class="{'active': isActive('/')}"><a href="#">Home</a></li>
-				<li ng-class="{'active': isActive('/aircrafts')}" ng-show="isLoggedIn()">
-					<a href="#/aircrafts">Aircrafts</a>
-				</li>
-				<li ng-class="{'active': isActive('/users')}" ng-show="isLoggedIn()">
-					<a href="#/users">Users</a>
-				</li>
-				<li  ng-switch="isLoggedIn()">
-					<a ng-click="logout()" ng-switch-when="true">Logout</a>
-					<a href="#/login" ng-switch-default>Login</a>
-				</li>
-			</ul>
- 			<h1 class="text-primary headline">Rent-A-Wreck</h1>
-		</div>
+		<div ng-include="'views/navigation.html'"></div>
 
 		<div ng-view></div>
 

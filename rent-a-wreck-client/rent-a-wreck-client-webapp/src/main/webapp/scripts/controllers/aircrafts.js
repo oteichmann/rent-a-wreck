@@ -1,8 +1,16 @@
 'use strict';
 
-rawControllers.controller('aircraftCtrl', function($scope, aircraftService, aircraftTypeService, utilService) {
+rawControllers.controller('aircraftCtrl', function($scope, $timeout, aircraftService, aircraftTypeService, utilService) {
 
 	$scope.aircraftTypes = aircraftTypeService.query();
+
+	var aircraftTemplate = {
+		uuid : '',
+		id : '',
+		type : ''
+	}
+
+	//$scope.aircraft = angular.copy(aircraftTemplate);
 	
 	resetView();
 	
@@ -13,7 +21,10 @@ rawControllers.controller('aircraftCtrl', function($scope, aircraftService, airc
 	
 	function resetForm(){
 		$scope.newAircraft = true;
-		$scope.aircraft = {};
+		$scope.aircraft = angular.copy(aircraftTemplate);
+		if($scope.aircraftForm) {
+			$scope.aircraftForm.$setPristine();
+		}
 	};
 	
 	function updateAircraftList() {

@@ -7,3 +7,5 @@ wiki/
 /wiki
 .idea
 *.iml
+*.sublime-project
+*.sublime-workspace

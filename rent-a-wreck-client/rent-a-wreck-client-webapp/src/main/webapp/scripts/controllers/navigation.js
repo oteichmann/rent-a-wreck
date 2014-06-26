@@ -37,12 +37,12 @@ rawControllers.controller('navigationCtrl', function($rootScope, $scope, $cookie
 		var token = $cookies["XSRF-TOKEN"];
 		$http.post("/rent-a-wreck-rest/auth/logout", JSON.stringify({
 			token : token
-		})).success(function() {
-			UserSession.loggedIn = false;
-			UserSession.user = {};
-			$cookies["XSRF-TOKEN"] = undefined;
-			$location.path("/");
-		});
+		}));
+			
+		UserSession.loggedIn = false;
+		UserSession.user = {};
+		$cookies["XSRF-TOKEN"] = undefined;
+		$location.path("/");
 	};
 	
     $scope.isActive = function(route) {

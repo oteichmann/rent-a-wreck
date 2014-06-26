@@ -1,4 +1,4 @@
-'use strict';
+
 
 /* Controller Module definition */
 var rawControllers = angular.module('rawControllers', []);
@@ -60,6 +60,6 @@ rawApp.factory('interceptor', ["$rootScope", "$q", "$timeout", function($rootSco
 //}]);
 
 rawApp.config(["$httpProvider", function($httpProvider) {
-//	$httpProvider.responseInterceptors.push(interceptor);
+//  $httpProvider.responseInterceptors.push(interceptor);
 //	$httpProvider.interceptors.push('sessionInjector');
 }]);
