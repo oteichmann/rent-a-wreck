@@ -10,15 +10,22 @@
 	<dependencies>
 		<dependency>
 			<groupId>com.prodyna.pac.rentawreck</groupId>
+			<artifactId>rent-a-wreck-backend-common</artifactId>
+			<type>ejb</type>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.prodyna.pac.rentawreck</groupId>
 			<artifactId>rent-a-wreck-backend-rentable</artifactId>
 			<type>ejb</type>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.prodyna.pac.rentawreck</groupId>
-			<artifactId>rent-a-wreck-backend-common</artifactId>
-			<type>ejb</type>
-			<scope>provided</scope>
+			<artifactId>rent-a-wreck-backend-rest</artifactId>
+			<classifier>classes</classifier>
+			<version>${project.version}</version>
+			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
@@ -44,6 +51,29 @@
 			<version>1.0.0.Alpha7</version>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.jboss.arquillian.extension</groupId>
+			<artifactId>arquillian-rest-client-api</artifactId>
+			<version>1.0.0.Alpha2</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.arquillian.extension</groupId>
+			<artifactId>arquillian-rest-client-impl-3x</artifactId>
+			<version>1.0.0.Alpha2</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.resteasy</groupId>
+			<artifactId>resteasy-jaxrs</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.resteasy</groupId>
+			<artifactId>resteasy-jackson-provider</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
 	</dependencies>
 
 	<profiles>

@@ -1,3 +1,4 @@
+package util;
 import java.util.UUID;
 
 import org.jboss.security.auth.spi.Util;
