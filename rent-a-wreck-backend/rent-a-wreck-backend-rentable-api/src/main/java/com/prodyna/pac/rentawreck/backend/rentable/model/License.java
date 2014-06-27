@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
 import com.prodyna.pac.rentawreck.backend.common.model.AbstractEntity;
@@ -31,7 +33,9 @@ public class License extends AbstractEntity {
 
 	@NotNull
 	private AircraftType aircraftType;
+	
 	@NotNull
+	@Temporal(TemporalType.DATE)
 	private Date validTill;
 
 	public AircraftType getAircraftType() {

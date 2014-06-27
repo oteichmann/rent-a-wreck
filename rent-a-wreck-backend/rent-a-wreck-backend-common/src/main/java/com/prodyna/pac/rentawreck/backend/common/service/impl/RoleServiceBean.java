@@ -4,6 +4,7 @@ import java.util.logging.Logger;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
 
 import com.prodyna.pac.rentawreck.backend.common.model.Role;
@@ -62,7 +63,12 @@ public class RoleServiceBean extends AbstractEntityPersistenceServiceBean<Role> 
 	public Role findByName(String name) {
 		TypedQuery<Role> query = em.createQuery("SELECT x FROM Role x WHERE x.name = :name", Role.class);
 		query.setParameter("name", name);
-		return query.getSingleResult();
+		
+		try {
+			return query.getSingleResult();
+		} catch (NoResultException e) {
+			return null;
+		}
 	}
 
 }

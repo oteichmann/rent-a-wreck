@@ -1,10 +1,14 @@
 package com.prodyna.pac.rentawreck.backend.rentable.model;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
 import com.prodyna.pac.rentawreck.backend.common.model.AbstractEntity;
@@ -30,11 +34,19 @@ public class Charter extends AbstractEntity {
 	
 	@NotNull
 	private CharterStatus charterStatus;
+	
+	@NotNull
+	@Temporal(TemporalType.DATE)
+	private Date charterStart;
 
-	@OneToOne
+	@NotNull
+	@Temporal(TemporalType.DATE)
+	private Date charterEnd;
+
+	@OneToOne(optional = false)
 	private Aircraft aircraft;
 	
-	@OneToOne
+	@OneToOne(optional = false)
 	private Pilot pilot;
 
 	public Aircraft getAircraft() {
@@ -60,5 +72,23 @@ public class Charter extends AbstractEntity {
 	public void setCharterStatus(CharterStatus charterStatus) {
 		this.charterStatus = charterStatus;
 	}
+
+	public Date getCharterStart() {
+		return charterStart;
+	}
+
+	public void setCharterStart(Date charterStart) {
+		this.charterStart = charterStart;
+	}
+
+	public Date getCharterEnd() {
+		return charterEnd;
+	}
+
+	public void setCharterEnd(Date charterEnd) {
+		this.charterEnd = charterEnd;
+	}
+	
+	
 
 }

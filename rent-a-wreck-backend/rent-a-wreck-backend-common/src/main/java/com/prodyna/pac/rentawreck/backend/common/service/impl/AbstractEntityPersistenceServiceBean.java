@@ -23,7 +23,7 @@ public abstract class AbstractEntityPersistenceServiceBean<T extends AbstractEnt
 			getLooger().fine("Creating a new " + entity.getClass().getName());
 		}
 		em.persist(entity);
-//		em.flush();
+		em.flush();
 		return entity;
 	}
 	
@@ -35,14 +35,16 @@ public abstract class AbstractEntityPersistenceServiceBean<T extends AbstractEnt
 
 	@Override
 	public T update(T entity) {
-		entity = getEntityManager().merge(entity);
+		entity = em.merge(entity);
+		em.flush();
 		return entity;
 	}
 
 	@Override
 	public void delete(String uuid) {
 		T entity = read(uuid);
-		getEntityManager().remove(entity);
+		em.remove(entity);
+		em.flush();
 	}
 	
 	@Override
