@@ -1,16 +1,22 @@
 <div id="header" class="header" ng-controller="navigationCtrl">
 	<ul class="nav nav-pills pull-right">
 		<li ng-class="{'active': isActive('/')}"><a href="#">Home</a></li>
-		<li ng-class="{'active': isActive('/aircrafts')}" ng-show="isLoggedIn()">
-			<a href="#/aircrafts">Aircrafts</a>
-		</li>
-		<li ng-class="{'active': isActive('/users')}" ng-show="isLoggedIn()">
-			<a href="#/users">Users</a>
+		<li ng-class="{'active': isActive('/bookings')}"><a href="#/bookings">Bookings</a></li>
+		<li class="dropdown" ng-class="{'active': isActive('/aircrafts') || isActive('/users')}" ng-show="isLoggedIn()">
+		<a class="dropdown-toggle" data-toggle="dropdown" href="#">	Administration <span class="caret"></span></a>
+		<ul class="dropdown-menu" role="menu">
+			<li >
+				<a href="#/aircrafts">Aircrafts</a>
+			</li>
+			<li>
+				<a href="#/users">Users</a>
+			</li>
+		</ul>
 		</li>
 		<li  ng-switch="isLoggedIn()">
 			<a ng-click="logout()" ng-switch-when="true">Logout</a>
 			<a href="#/login" ng-switch-default>Login</a>
 		</li>
 	</ul>
-		<h1 class="text-primary headline">Rent-A-Wreck</h1>
+	<h1 class="text-primary headline">Rent-A-Wreck</h1>
 </div>

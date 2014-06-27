@@ -13,10 +13,13 @@ rawApp.config([ '$routeProvider', function($routeProvider) {
 	}).when('/login', {
 		templateUrl : 'views/login.html',
 		controller : 'loginCtrl'
-	}).when('/aircrafts', {
-		templateUrl : 'views/aircrafts.html',
-		controller : 'aircraftCtrl'
-	}).when('/users', {
+	}).when('/bookings', {
+    templateUrl : 'views/bookings.html',
+    controller : 'bookingsCtrl'
+  }).when('/aircrafts', {
+    templateUrl : 'views/aircrafts.html',
+    controller : 'aircraftCtrl'
+  }).when('/users', {
 		templateUrl : 'views/users.html',
 		controller : 'userCtrl'
 	}).otherwise({

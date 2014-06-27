@@ -16,11 +16,18 @@ rawControllers.controller('loginCtrl', function($rootScope, $scope, $http, $cook
 					UserSession.user = data;
 					
 					// redirect to home page after successful login
-					$location.path("/");
+					if (window.location.protocol == "http:") {
+						var restOfUrl = window.location.href.substr(5);
+						restOfUrl = restOfUrl.substring(0, restOfUrl.indexOf('login'));
+						window.location = "https:" + restOfUrl;
+					} else {
+						$location.path("/");
+					}
 				}
 			).error(
 				function(data, status, headers, config) {
 					$scope.error = data.err;
+					alert(status);
 					
 					UserSession.loggedIn = false;
 					UserSession.username = null;

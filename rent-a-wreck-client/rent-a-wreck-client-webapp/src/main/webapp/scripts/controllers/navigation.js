@@ -22,10 +22,8 @@ rawControllers.controller('navigationCtrl', function($rootScope, $scope, $cookie
 			UserSession.user = {};
 			$cookies["XSRF-TOKEN"] = undefined;
 		});
-	} else {
-		$scope.loggedIn = false;
 	}
-
+	
 	$rootScope.$on('$routeChangeSuccess', function ($angularEvent, $current, $previous) {
 		// TODO: check if user is permissioned
 	});
