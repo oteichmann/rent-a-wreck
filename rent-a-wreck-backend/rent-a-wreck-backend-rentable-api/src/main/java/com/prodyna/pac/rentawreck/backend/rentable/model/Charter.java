@@ -3,9 +3,11 @@ package com.prodyna.pac.rentawreck.backend.rentable.model;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -33,20 +35,21 @@ public class Charter extends AbstractEntity {
 	public static final String NQ_FIND_ALL_COUNT = "Charter.findAllCount";
 	
 	@NotNull
+	@Enumerated(EnumType.STRING)
 	private CharterStatus charterStatus;
 	
 	@NotNull
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date charterStart;
 
 	@NotNull
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date charterEnd;
 
-	@OneToOne(optional = false)
+	@ManyToOne(optional = false)
 	private Aircraft aircraft;
 	
-	@OneToOne(optional = false)
+	@ManyToOne(optional = false)
 	private Pilot pilot;
 
 	public Aircraft getAircraft() {

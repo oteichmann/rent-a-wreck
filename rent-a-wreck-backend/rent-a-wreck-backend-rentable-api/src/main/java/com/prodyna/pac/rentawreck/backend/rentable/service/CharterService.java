@@ -38,6 +38,20 @@ public interface CharterService extends AbstractEntityPersistenceService<Charter
 	@Path("/pilot/{pilot_uuid}")
 	@Produces(MediaType.APPLICATION_JSON)
 	@PermitAll
-	List<Charter> getPiltoCharters(@PathParam("pilot_uuid") String pilotUuid);
-	
+	List<Charter> getPilotCharters(@PathParam("pilot_uuid") String pilotUuid);
+
+	@GET
+	@NoCache
+	@Path("/aircraft/active/{aircraft_uuid}")
+	@Produces(MediaType.APPLICATION_JSON)
+	@PermitAll
+	Charter getActiveAircraftCharter(@PathParam("aircraft_uuid") String aircraftUuid);
+
+	@GET
+	@NoCache
+	@Path("/overdue")
+	@Produces(MediaType.APPLICATION_JSON)
+	@PermitAll
+	List<Charter> getOverdueCharters();
+
 }

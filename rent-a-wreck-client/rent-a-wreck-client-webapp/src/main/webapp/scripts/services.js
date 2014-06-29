@@ -11,6 +11,11 @@ rawServices.factory('aircraftService', [ '$resource', function($resource) {
 			url : serviceBaseURL + '/aircraft/count',
 			method : 'GET',
 			isArray : false
+		},
+		getAircraftStatusList : {
+			url : serviceBaseURL + '/aircraft/status-list',
+			method : 'GET',
+			isArray : true
 		}
 	});
 } ]);
@@ -51,6 +56,12 @@ rawServices.factory('pilotService', [ '$resource', function($resource) {
 			params : {user_uuid:'@user_uuid'},
 			method : 'GET'
 		}
+	});
+} ]);
+
+rawServices.factory('reservationService', [ '$resource', function($resource) {
+	return $resource(serviceBaseURL + '/reservation', {}, {
+
 	});
 } ]);
 

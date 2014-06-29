@@ -1,16 +1,20 @@
 package com.prodyna.pac.rentawreck.backend.rentable.service.impl;
 
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import javax.persistence.NoResultException;
+import javax.persistence.TemporalType;
 import javax.persistence.TypedQuery;
 
 import com.prodyna.pac.rentawreck.backend.common.monitoring.Monitored;
 import com.prodyna.pac.rentawreck.backend.common.service.impl.AbstractEntityPersistenceServiceBean;
 import com.prodyna.pac.rentawreck.backend.rentable.model.Charter;
+import com.prodyna.pac.rentawreck.backend.rentable.model.CharterStatus;
 import com.prodyna.pac.rentawreck.backend.rentable.service.CharterService;
 
 /**
@@ -74,12 +78,45 @@ public class CharterServiceBean extends AbstractEntityPersistenceServiceBean<Cha
 	 * @see com.prodyna.pac.rentawreck.backend.rentable.service.CharterService#getPiltoCharters(java.lang.String)
 	 */
 	@Override
-	public List<Charter> getPiltoCharters(String pilotUuid) {
-		TypedQuery<Charter> query = em.createQuery("SELECT x FROM Charter x JOIN x.pilot p WHERE p.uuid = :pilotUuid", getEntityClass());
+	public List<Charter> getPilotCharters(String pilotUuid) {
+		TypedQuery<Charter> query = em.createQuery("SELECT c FROM Charter c JOIN c.pilot p WHERE p.uuid = :pilotUuid", getEntityClass());
 		query.setParameter("pilotUuid", pilotUuid);
 		List<Charter> results = query.getResultList();
-
+		
 		return Collections.unmodifiableList(results);
 	}
+	
+	/* (non-Javadoc)
+	 * @see com.prodyna.pac.rentawreck.backend.rentable.service.CharterService#getAircraftCharters(java.lang.String)
+	 */
+	@Override
+	public Charter getActiveAircraftCharter(String aircraftUuid) {
+		Date now = new Date();
+		TypedQuery<Charter> query = em.createQuery("SELECT c FROM Charter c JOIN c.aircraft a WHERE c.charterStart <= :today AND c.charterEnd >= :today AND a.uuid = :aircraftUuid", getEntityClass());
+		query.setParameter("today", now, TemporalType.TIMESTAMP);
+		query.setParameter("aircraftUuid", aircraftUuid);
+		
+		try {
+			Charter charter = query.getSingleResult();
+			return charter;
+		} catch (NoResultException e) {
+			return null;
+		}
+	}
 
+
+	/* (non-Javadoc)
+	 * @see com.prodyna.pac.rentawreck.backend.rentable.service.CharterService#getOverdueCharters()
+	 */
+	@Override
+	public List<Charter> getOverdueCharters() {
+		Date now = new Date();
+		TypedQuery<Charter> query = em.createQuery("SELECT c FROM Charter c WHERE c.charterEnd < :today AND c.charterStatus = :status", getEntityClass());
+		query.setParameter("today", now, TemporalType.TIMESTAMP);
+		query.setParameter("status", CharterStatus.LENT);
+				
+		return query.getResultList();
+	}
+
+	
 }
