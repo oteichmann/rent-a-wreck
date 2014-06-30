@@ -28,10 +28,11 @@ public class CharterScheduler {
   
     @Schedule( minute="*/5", persistent=false)
     public void doWork(){
-        log.severe( "Hi from charter scheduler!" );
+        log.finest("Hi from charter scheduler!");
         
         List<Charter> overdueCharters = charterService.getOverdueCharters();
         for (Charter charter : overdueCharters) {
+        	log.fine("Auto-Returning charter: " + charter.getUuid()); 
         	charter.setCharterStatus(CharterStatus.RETURNED);
         	charterService.update(charter);
 		}
