@@ -1,0 +1,75 @@
+<div class="container-fluid">
+	<h2 class="text-primary headline">Bookings</h2>
+	<div class="row">
+		<div class="col-md-12">
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+					<span>Aircraft Status</span>
+				</div>
+				
+				<table class="table">
+					<thead>
+						<tr>
+							<th>ID</th>
+							<th>Type</th>
+							<th>Available</th>
+							<th>Current Charter Status</th>
+							<th>Chartered by Pilot</th>
+							<th>Charter Start</th>
+							<th>Charter End</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="acs in model.aircraftStatusList">
+							<td>{{acs.aircraft.id}}</td>
+							<td>{{acs.aircraft.type}}</td>
+							<td>{{acs.available}}</td>
+							<td>{{acs.charter.charterStatus}}</td>
+							<td>{{acs.charter.pilot.user.firstName}} {{acs.charter.pilot.user.lastName}}</td>
+							<td>{{acs.charter.charterStart | date:'short' }}</td>
+							<td>{{acs.charter.charterEnd | date:'short' }}</td>
+							<td>
+								<button class="btn btn-xs btn-primary" ng-click="showAircraftCharters(acs);"><i class="fa fa-edit"></i> Show Charters</button>
+								<button class="btn btn-xs btn-danger" ng-click="createAircraftCharter(acs);"><i class="fa fa-tracsh-o"></i> New Charter</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+		<div>{{ model.aircarftCharters }}</div>
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+					<span>Aircraft Charters</span>
+				</div>
+				
+				<table class="table">
+					<thead>
+						<tr>
+							<th>Current Charter Status</th>
+							<th>Chartered by Pilot</th>
+							<th>Charter Start</th>
+							<th>Charter End</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="charter in model.aircarftCharters">
+							<td>{{charter.charterStatus}}</td>
+							<td>{{charter.pilot.user.firstName}} {{charter.pilot.user.lastName}}</td>
+							<td>{{charter.charterStart | date:'short' }}</td>
+							<td>{{charter.charterEnd | date:'short' }}</td>
+							<td>
+								<button class="btn btn-xs btn-primary" ng-click="showAircraftCharters(acs);"><i class="fa fa-edit"></i> Show Charters</button>
+								<button class="btn btn-xs btn-danger" ng-click="createAircraftCharter(acs);"><i class="fa fa-tracsh-o"></i> New Charter</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	</div>

@@ -37,14 +37,14 @@ public class UserServiceBean extends AbstractEntityPersistenceServiceBean<User> 
 	 * #create(com.prodyna.pac.rentawreck.backend.common.model.AbstractEntity)
 	 */
 	@Override
-	public User create(User user) {
+	public User create(String uuid, User user) {
 		// Encrypt initial user password before persisting.
 		encryptUserPassword(user);
 		// User without role user does not work...
 		Role userRole = roleService.findByName("user");
 		user.getRoles().add(userRole);
 
-		return super.create(user);
+		return super.create(uuid, user);
 	}
 
 	/*
@@ -54,12 +54,12 @@ public class UserServiceBean extends AbstractEntityPersistenceServiceBean<User> 
 	 * #update(com.prodyna.pac.rentawreck.backend.common.model.AbstractEntity)
 	 */
 	@Override
-	public User update(User user) {
+	public User update(String uuid, User user) {
 		// Assure that update does not change the password. Special method must
 		// be used.
 		User originalUser = em.find(User.class, user.getUuid());
 		user.setPassword(originalUser.getPassword());
-		return super.update(user);
+		return super.update(uuid, user);
 	}
 
 	/* (non-Javadoc)
@@ -71,7 +71,7 @@ public class UserServiceBean extends AbstractEntityPersistenceServiceBean<User> 
 		user.setPassword(password);
 		encryptUserPassword(user);
 
-		return super.update(user);
+		return super.update(uuid, user);
 	}
 
 	private void encryptUserPassword(User user) {

@@ -4,8 +4,8 @@ rawControllers.controller('welcomeCtrl',
 	[ '$scope', '$log', '$location',
 	function($scope, $log, $location) {
 
-		$scope.gotoBookings = function() {
-			$location.path('/bookings');
+		$scope.gotoCharters = function() {
+			$location.path('/charters');
 		}
 	} 
 ]);

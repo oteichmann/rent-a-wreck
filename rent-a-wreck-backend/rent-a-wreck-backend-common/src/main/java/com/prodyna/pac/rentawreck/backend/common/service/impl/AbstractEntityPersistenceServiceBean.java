@@ -2,7 +2,6 @@ package com.prodyna.pac.rentawreck.backend.common.service.impl;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.inject.Inject;
@@ -18,10 +17,13 @@ public abstract class AbstractEntityPersistenceServiceBean<T extends AbstractEnt
 	protected EntityManager em;
 	
 	@Override
+	public T create(String uuid, T entity) {
+		validateUuid(uuid, entity);
+		return create(entity);
+	}
+	
+	@Override
 	public T create(T entity) {
-		if (getLooger().isLoggable(Level.FINE)) {
-			getLooger().fine("Creating a new " + entity.getClass().getName());
-		}
 		em.persist(entity);
 		em.flush();
 		return entity;
@@ -33,6 +35,12 @@ public abstract class AbstractEntityPersistenceServiceBean<T extends AbstractEnt
 		return entity;
 	}
 
+	@Override
+	public T update(String uuid, T entity) {
+		validateUuid(uuid, entity);
+		return update(entity);
+	}
+	
 	@Override
 	public T update(T entity) {
 		entity = em.merge(entity);
@@ -72,4 +80,16 @@ public abstract class AbstractEntityPersistenceServiceBean<T extends AbstractEnt
 	protected abstract String getFindAllNamedQuery();
 
 	protected abstract String getFindAllCountNamedQuery();
+	
+	private void validateUuid(String uuid, T entity) {
+		if(uuid != null && entity.getUuid() != null) {
+			if(!uuid.equalsIgnoreCase(entity.getUuid())) {
+				getLooger().severe("UUID's must match!");	
+				// TODO : Throw an exceptions.	
+			}
+		} else {
+			getLooger().severe("UUID must be set!");
+			// TODO : Throw an exceptions.	
+		}
+	}
 }

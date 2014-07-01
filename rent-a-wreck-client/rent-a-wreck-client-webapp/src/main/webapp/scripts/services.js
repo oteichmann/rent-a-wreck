@@ -23,13 +23,30 @@ rawServices.factory('aircraftService', [ '$resource', function($resource) {
 rawServices.factory('aircraftTypeService', [function() {
 	var aircraftTypes = [{"name" : "BOEING"}, {"name" : "AIRBUS"}, {"name" : "CESSNA"}, {"name" : "PIPER"}, {"name" : "SPITFIRE"}];
 	
-	var methods = {
+	var aircraftTypeService = {
 		query: function () {
 			return aircraftTypes;
 		}
 	};
 	
-	return methods;
+	return aircraftTypeService;
+} ]);
+
+rawServices.factory('charterService', [ '$resource', function($resource) {
+	return $resource(serviceBaseURL + '/charter/:uuid', {uuid:'@uuid'}, {
+		update : { method:'PUT' },
+		queryCount : {
+			url : serviceBaseURL + '/charter/count',
+			method : 'GET',
+			isArray : false
+		},
+		getAircraftCharters : {
+			params : {aircraft_uuid:'@aircraft_uuid'},
+			url : serviceBaseURL + '/charter/aircraft/:aircraft_uuid',
+			method : 'GET',
+			isArray : true
+		}
+	});
 } ]);
 
 rawServices.factory('licenseService', [ '$resource', function($resource) {

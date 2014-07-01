@@ -1,0 +1,26 @@
+<div class="modal-header">
+	<h3 class="modal-title">Charters</h3>
+</div>
+<div class="modal-body">
+
+	<form name="charterForm" novalidate>
+		<div class="form-group" ng-class="{ 'has-error' : charterForm.startDate.$invalid && !charterForm.startDate.$pristine }">
+			<label for="startDate">Start Date</label>
+			<div data-raw-date-picker="" data-model="model.charter.startDate" inputid="startDate" required ></div>
+			<p ng-show="charterForm.startDate.$invalid && !charterForm.startDate.$pristine" class="help-block">Start Date is required.</p>
+		</div>
+		<div class="form-group" ng-class="{ 'has-error' : charterForm.endDate.$invalid && !charterForm.endDate.$pristine }">
+			<label for="endDate">End Date</label>
+			<div data-raw-date-picker="" data-model="model.charter.endDate" inputid="endDate" required ></div>
+			<p ng-show="charterForm.endDate.$invalid && !charterForm.endDate.$pristine" class="help-block">End Date is required.</p>
+		</div>
+	</form>
+</div>
+<div class="modal-footer">
+	<button type="submit" class="btn btn-primary" ng-click="charterFormSubmit()" ng-disabled="charterForm.$invalid">
+		<i class="fa fa-save"></i> Save</span>
+	</button>
+	<button class="btn btn-info" ng-click="editCharterCancel()">
+		<i class="fa fa-ban"></i> Cancel
+	</button>
+</div>

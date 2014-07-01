@@ -37,6 +37,13 @@ public interface AbstractEntityPersistenceService<T extends AbstractEntity> {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	@RolesAllowed("admin")
+	public T create(@PathParam("uuid") String uuid, T entity);
+	
+	/**
+	 * Persists a new entity.
+	 * @param entity The new entity.
+	 * @return The persisted version of the entity.
+	 */
 	public T create(T entity);
 
 	/**
@@ -61,8 +68,15 @@ public interface AbstractEntityPersistenceService<T extends AbstractEntity> {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	@RolesAllowed({"admin"})
-	public T update(T entity);
+	public T update(@PathParam("uuid") String uuid, T entity);
 
+	/**
+	 * Updates an existing entity.
+	 * @param entity The entity to update.
+	 * @return The updated version of the entity.
+	 */
+	public T update(T entity);
+	
 	/**
 	 * Deletes the entity identified by the given identifier.
 	 * @param uuid he identifier of the entity to delete.

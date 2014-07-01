@@ -153,7 +153,7 @@ public class CharterTest extends AbstractEntityCRUDTest<Charter> {
 		List<Charter> aircraftCharters = charterService.getAircraftCharters(aircraft.getUuid());
 		assertEquals(1, aircraftCharters.size());
 		
-		List<Charter> pilotCharters = charterService.getPiltoCharters(pilot.getUuid());
+		List<Charter> pilotCharters = charterService.getPilotCharters(pilot.getUuid());
 		assertEquals(1, pilotCharters.size());
 	}
 

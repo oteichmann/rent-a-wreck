@@ -1,0 +1,38 @@
+<div class="modal-header">
+	<h3 class="modal-title">License</h3>
+</div>
+<div class="modal-body">
+
+	<form name="licenseForm" novalidate>
+		<div class="form-group" ng-class="{ 'has-error' : licenseForm.type.$invalid && !licenseForm.type.$pristine }">
+			<label for="type">Aircraft Type</label>
+			<select	id="type" name="type" class="form-control" ng-model="license.aircraftType"
+				ng-options="at.name as at.name for at in aircraftTypes" required>
+				<option value="">--please select--</option>
+			</select>
+			<p ng-show="licenseForm.type.$invalid && !licenseForm.type.$pristine" class="help-block">Type is required.</p>
+		</div>
+		<!-- <raw-date-picker data-model="license.validTill" input-id="validTill" input-label="Valid Till" required></raw-date-picker> -->
+		<div class="form-group" ng-class="{ 'has-error' : licenseForm.validTill.$invalid && !licenseForm.validTill.$pristine }">
+			<label for="validTill">Valid Till</label>
+			<div class="input-group">
+				<input id="validTill" name="validTill" type="text" class="form-control" datepicker-popup="mediumDate" ng-model="license.validTill" is-open="opened" min-date="minDate"
+					init-data="initDate" date-disabled="disabled(date, mode)" datepicker-options="dateOptions" starting-day="1" ng-required="true"/>
+				<span class="input-group-btn">
+					<button type="button" class="btn btn-default" ng-click="open($event)">
+						<i class="fa fa-calendar"></i>
+					</button>
+				</span>
+			</div>
+ 			<p ng-show="licenseForm.validTill.$invalid && !licenseForm.validTill.$pristine" class="help-block">Valid till date is required.</p>
+		</div>
+	</form>
+</div>
+<div class="modal-footer">
+	<button type="submit" class="btn btn-primary" ng-click="licenseFormSubmit()" ng-disabled="userForm.$invalid">
+		<i class="fa fa-save"></i> Save</span>
+	</button>
+	<button class="btn btn-info" ng-click="editLicenseCancel()">
+		<i class="fa fa-ban"></i> Cancel
+	</button>
+</div>

@@ -5,6 +5,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
 
+import javax.annotation.Resource;
+import javax.ejb.EJBContext;
+import javax.ejb.SessionContext;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.NoResultException;
@@ -26,7 +29,13 @@ import com.prodyna.pac.rentawreck.backend.rentable.service.CharterService;
 @Stateless
 @Monitored
 public class CharterServiceBean extends AbstractEntityPersistenceServiceBean<Charter> implements CharterService {
-
+	
+	@Resource
+	private SessionContext sessionContext;
+	
+	@Resource
+	private EJBContext ctx;
+	
 	@Inject
 	private Logger log;
 	
@@ -70,7 +79,12 @@ public class CharterServiceBean extends AbstractEntityPersistenceServiceBean<Cha
 		TypedQuery<Charter> query = em.createQuery("SELECT x FROM Charter x JOIN x.aircraft a WHERE a.uuid = :aircraftUuid", getEntityClass());
 		query.setParameter("aircraftUuid", aircraftUuid);
 		List<Charter> results = query.getResultList();
+		
+		log.info("EJBContext: " + ctx.toString());
+		log.info("SessionContext: " + sessionContext.toString());
 
+		log.info("SessionContext: " + sessionContext.getCallerPrincipal().getName());
+		
 		return Collections.unmodifiableList(results);
 	}
 
@@ -116,6 +130,24 @@ public class CharterServiceBean extends AbstractEntityPersistenceServiceBean<Cha
 		query.setParameter("status", CharterStatus.LENT);
 				
 		return query.getResultList();
+	}
+
+	/* (non-Javadoc)
+	 * @see com.prodyna.pac.rentawreck.backend.rentable.service.CharterService#createCharterForPilot(java.lang.String, com.prodyna.pac.rentawreck.backend.rentable.model.Charter)
+	 */
+	@Override
+	public Charter createCharterForPilot(String uuid, Charter charter) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/* (non-Javadoc)
+	 * @see com.prodyna.pac.rentawreck.backend.rentable.service.CharterService#updatePilotCharterDates(java.lang.String, com.prodyna.pac.rentawreck.backend.rentable.model.Charter)
+	 */
+	@Override
+	public Charter updatePilotCharterDates(String uuid, Charter charter) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	

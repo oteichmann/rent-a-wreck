@@ -19,16 +19,16 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr ng-repeat="p in users">
-							<td>{{p.username}}</td>
-							<td>{{p.firstName}}</td>
-							<td>{{p.lastName}}</td>
-							<td>{{p.email}}</td>
+						<tr ng-repeat="u in model.users">
+							<td>{{u.username}}</td>
+							<td>{{u.firstName}}</td>
+							<td>{{u.lastName}}</td>
+							<td>{{u.email}}</td>
 							<td>
-								<button class="btn btn-xs btn-primary" ng-click="editUser(p)">
+								<button class="btn btn-xs btn-primary" ng-click="editUser(u)">
 									<i class="fa fa-edit"></i> Edit
 								</button>
-								<button class="btn btn-xs btn-danger" ng-click="deleteUser(p)">
+								<button class="btn btn-xs btn-danger" ng-click="deleteUser(u)">
 									<i class="fa fa-trash-o"></i> Delete
 								</button>
 							</td>
@@ -40,7 +40,7 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-md-6" ng-show="showEditForm">
+		<div class="col-md-6" ng-show="model.showEditForm">
 
 			<div class="panel panel-primary">
 				<div class="panel-heading">
@@ -51,28 +51,28 @@
 					<form name="userForm" ng-submit="submitForm()" novalidate>
 						<div class="form-group" ng-class="{ 'has-error' : userForm.username.$invalid && !userForm.username.$pristine }">
 							<label for="username">Username</label>
-							<input type="text" id="username" name="username" class="form-control" ng-model="user.username" placeholder="Username" required>
+							<input type="text" id="username" name="username" class="form-control" ng-model="model.user.username" placeholder="Username" required>
 							<p ng-show="userForm.username.$invalid && !userForm.username.$pristine" class="help-block">Username is required.</p>
 						</div>
 
 						<div class="form-group">
 							<label for="firstName">FirstName</label>
-							<input type="text" id="firstName" name="firstName" class="form-control" ng-model="user.firstName" placeholder="FirstName">
+							<input type="text" id="firstName" name="firstName" class="form-control" ng-model="model.user.firstName" placeholder="FirstName">
 						</div>
 
 						<div class="form-group">
 							<label for="lastName">LastName</label>
-							<input type="text" id="lastName" name="lastName" class="form-control" ng-model="user.lastName" placeholder="LastName">
+							<input type="text" id="lastName" name="lastName" class="form-control" ng-model="model.user.lastName" placeholder="LastName">
 						</div>
 
 						<div class="form-group">
 							<label for="email">Email</label>
-							<input type="text" id="email" name="email" class="form-control" ng-model="user.email" placeholder="Email">
+							<input type="text" id="email" name="email" class="form-control" ng-model="model.user.email" placeholder="Email">
 						</div>
 
 						<div class="form-group" ng-class="{ 'has-error' : userForm.password.$invalid && !userForm.password.$pristine }">
 							<label for="password">Password</label>
-							<input type="password" id="password" name="password" class="form-control" ng-model="user.password" placeholder="Password" required>
+							<input type="password" id="password" name="password" class="form-control" ng-model="model.user.password" placeholder="Password" required>
 							<p ng-show="userForm.password.$invalid && !userForm.password.$pristine" class="help-block">Password is required.</p>
 						</div>
 
@@ -89,15 +89,15 @@
 			</div>
 		</div>
 
-		<div class="col-md-6" ng-show="showEditForm">
+		<div class="col-md-6" ng-show="model.showEditForm">
 
-			<div class="panel panel-primary" ng-show="user.uuid">
+			<div class="panel panel-primary" ng-show="model.user.uuid">
 				<div class="panel-heading">
 					<span>Pilot Status</span>
 				</div>
 
 				<div class="panel-body">
-					<div ng-switch="pilot.uuid === undefined">
+					<div ng-switch="model.pilot.uuid === undefined">
 						<div ng-switch-when="true" class="alert alert-danger">
 							<h4 style="line-height: 2; vertical-align: middle; margin-bottom: 0">
 								Not an active pilot, yet.
@@ -108,7 +108,7 @@
 						</div>
 						<div ng-switch-default class="alert alert-success">
 							<h4 style="line-height: 2; vertical-align: middle; margin-bottom: 0">
-								This user is an active pilot.
+								This user is an active model.pilot.
 								<button type="button" class="btn btn-danger pull-right" ng-click="deletePilot()">
 									<i class="fa fa-plane fa-rotate-90"></i> Revoke Pilot Status
 								</button>
@@ -116,7 +116,7 @@
 						</div>
 					</div>
 
-					<div class="panel panel-primary" ng-show="pilot.uuid">
+					<div class="panel panel-primary" ng-show="model.pilot.uuid">
 						<div class="panel-heading">
 							<span>Licenses</span>
 						</div>
@@ -136,7 +136,7 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr ng-repeat="l in pilot.licenses" re>
+								<tr ng-repeat="l in model.pilot.licenses" re>
 									<td>{{ l.aircraftType }}</td>
 									<td>{{ l.validTill | date:'mediumDate'}}</td>
 									<td>
@@ -156,7 +156,7 @@
 			</div>
 		</div>
 
-		<div class="col-md-12" ng-show="showEditForm == false">
+		<div class="col-md-12" ng-show="model.showEditForm == false">
 			<div class="alert alert-info">
 				Please select a user to edit or create one.
 				<button type="submit" class="btn btn-sm btn-primary" ng-click="createNewUser()">
@@ -167,7 +167,7 @@
 	</div>
 </div>
 
-
+<!-- 
 <script type="text/ng-template" id="modalLicenseEditor.html">
 <div class="modal-header">
 	<h3 class="modal-title">License</h3>
@@ -207,3 +207,4 @@
 	</button>
 </div>
 </script>
+ -->

@@ -102,7 +102,7 @@ public class AuthenticationServiceBean implements AuthenticationService {
 			NewCookie cookie = createTokenCookie(token);
 			User user = userService.findByUsername(username);
 			
-			Response response = Response.ok().cookie().entity(user).build();
+			Response response = Response.ok().cookie(cookie).entity(user).build();
 			return response;
 		}
 		return ResponseMessageBuilder.authenticationRequired().message("Token is not valid.").build();

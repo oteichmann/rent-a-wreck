@@ -2,8 +2,6 @@
 
 rawControllers.controller('userCtrl', function($scope, $modal, $log, aircraftTypeService, licenseService, pilotService, userService, utilService) {
 	
-	resetView();
-
 	var userTemplate = {
 		uuid : '',
 		username : '',
@@ -19,6 +17,15 @@ rawControllers.controller('userCtrl', function($scope, $modal, $log, aircraftTyp
 		licenses : []
 	}
 
+	$scope.model = {
+		users : [],
+		isNewUser : true,
+		showEditForm : false,
+		user : {},
+		pilot : {}
+	}
+
+	resetView();
 	
 	function resetView() {
 		resetForm();
@@ -26,40 +33,40 @@ rawControllers.controller('userCtrl', function($scope, $modal, $log, aircraftTyp
 	};
 	
 	function resetForm(){
-		$scope.isNewUser = true;
-		$scope.showEditForm = false;
-		$scope.user = angular.copy(userTemplate);
-		$scope.pilot = angular.copy(pilotTemplate);
-		if($scope.userForm) {
-			$scope.userForm.$setPristine();	
+		$scope.model.isNewUser = true;
+		$scope.model.showEditForm = false;
+		$scope.model.user = angular.copy(userTemplate);
+		$scope.model.pilot = angular.copy(pilotTemplate);
+		if($scope.model.userForm) {
+			$scope.model.userForm.$setPristine();	
 		}
 	};
 	
 	function updateUserList() {
 		userService.query(function(value, responseHeaders) {
-			$scope.users = value;
+			$scope.model.users = value;
 		}, function(httpHeaders) {
 			alert("Failed to load user list!");
 		});
 	};
 	
 	$scope.createNewUser = function() {
-		$scope.showEditForm = true;
+		$scope.model.showEditForm = true;
 	};
 
 	$scope.editUser = function(user) {
-		$scope.isNewUser = false;
-		$scope.user = user;
-		$scope.pilot = pilotService.getByUserUuid({ "user_uuid" : user.uuid});
-		$scope.showEditForm = true;
+		$scope.model.isNewUser = false;
+		$scope.model.user = user;
+		$scope.model.pilot = pilotService.getByUserUuid({ "user_uuid" : user.uuid});
+		$scope.model.showEditForm = true;
 	};
 
 	$scope.editUserCancel = function() {
 		resetView();
 	};
 	
-	$scope.userFormSubmit = function() {
-		if($scope.isNewUser) {
+	$scope.model.userFormSubmit = function() {
+		if($scope.model.isNewUser) {
 			addUser();
 		} else {
 			updateUser();
@@ -67,14 +74,14 @@ rawControllers.controller('userCtrl', function($scope, $modal, $log, aircraftTyp
 	};
 
 	function updateUser() {
-		$scope.user.$update(function() {
+		$scope.model.user.$update(function() {
 			updateUserList();
 		});
 		resetForm();
 	};
 
 	function addUser() {
-		var newUser = $scope.user;
+		var newUser = $scope.model.user;
 
 		utilService.generateUuid(function(f) {
 			newUser.uuid = f.value;
@@ -98,16 +105,16 @@ rawControllers.controller('userCtrl', function($scope, $modal, $log, aircraftTyp
 		
 		utilService.generateUuid(function(f) {
 			newPilot.uuid = f.value;
-			newPilot.user = $scope.user;
+			newPilot.user = $scope.model.user;
 			pilotService.save(newPilot, function(value, responseHeaders) {
-				$scope.pilot = value;
+				$scope.model.pilot = value;
 			});
 		});
 	};
 	
 	$scope.deletePilot = function() {
-		$scope.pilot.$delete({}, function(value, responseHeaders) {
-			$scope.pilot = {};
+		$scope.model.pilot.$delete({}, function(value, responseHeaders) {
+			$scope.model.pilot = {};
 		}, function(httpResponse) {
 			alert("Could not delete pilot!");
 		});
@@ -116,16 +123,16 @@ rawControllers.controller('userCtrl', function($scope, $modal, $log, aircraftTyp
 	$scope.addLicense = function() {
 		var license = {};
 		openModalLicenseEditor(license, function(license) {
-			$scope.pilot.licenses.push(license);
-			$scope.pilot.$update();
+			$scope.model.pilot.licenses.push(license);
+			$scope.model.pilot.$update();
 		});
 	};
 
 	$scope.editLicense = function(license) {
 		licenseService.get({uuid:license.uuid}, function(licenseResource) {
 	    	openModalLicenseEditor(licenseResource, function(license) {
-	    		pilotService.get({uuid:$scope.pilot.uuid}, function(pilot) {
-		    		$scope.pilot = pilot;
+	    		pilotService.get({uuid:$scope.model.pilot.uuid}, function(pilot) {
+		    		$scope.model.pilot = pilot;
 				});
 	    	});
 		});
@@ -133,15 +140,15 @@ rawControllers.controller('userCtrl', function($scope, $modal, $log, aircraftTyp
 
 	$scope.deleteLicense = function(license) {
 		licenseService.delete({ uuid : license.uuid}, function() {
-			pilotService.get({uuid:$scope.pilot.uuid}, function(pilot) {
-	    		$scope.pilot = pilot;
+			pilotService.get({uuid:$scope.model.pilot.uuid}, function(pilot) {
+	    		$scope.model.pilot = pilot;
 			});
 		});
 	};
 
 	function openModalLicenseEditor(licenseParam,callback) {
  		var modalInstance = $modal.open({
-			templateUrl: 'modalLicenseEditor.html',
+			templateUrl: 'views/modal/pilotLicenseEditor.html',
 			controller: ModalLicenseEditorCtrl,
 			resolve: {
 		        license: function () {
@@ -172,8 +179,9 @@ rawControllers.controller('userCtrl', function($scope, $modal, $log, aircraftTyp
 		};
 
 		function updateLicense() {
-			$scope.license.$update();
-			$modalInstance.close();
+			$scope.license.$update(function() {
+				$modalInstance.close();
+			});
 		};
 
 		function createLicense() {
