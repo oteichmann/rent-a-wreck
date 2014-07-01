@@ -31,6 +31,7 @@ rawControllers.controller('loginCtrl', function($rootScope, $scope, $http, $cook
 					
 					UserSession.loggedIn = false;
 					UserSession.username = null;
+					// delete $cookies['XSRF-TOKEN'];
 				}
 			);
 	};

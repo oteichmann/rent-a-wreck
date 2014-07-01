@@ -20,7 +20,7 @@ rawControllers.controller('navigationCtrl', function($rootScope, $scope, $cookie
 			// Invalidate session and cookies if token was not valid
 			UserSession.loggedIn = false;
 			UserSession.user = {};
-			$cookies['XSRF-TOKEN'] = undefined;
+			// $cookies['XSRF-TOKEN'] = undefined;
 		});
 	}
 	
@@ -39,7 +39,7 @@ rawControllers.controller('navigationCtrl', function($rootScope, $scope, $cookie
 			
 		UserSession.loggedIn = false;
 		UserSession.user = {};
-		$cookies['XSRF-TOKEN'] = undefined;
+		// $cookies['XSRF-TOKEN'] = undefined;
 		$location.path('/');
 	};
 	

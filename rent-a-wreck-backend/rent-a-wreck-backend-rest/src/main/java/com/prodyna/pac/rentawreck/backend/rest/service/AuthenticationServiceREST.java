@@ -11,10 +11,8 @@ import javax.ws.rs.core.Response;
 
 import org.jboss.ejb3.annotation.SecurityDomain;
 
-import com.prodyna.pac.rentawreck.backend.rest.model.TokenSubject;
 import com.prodyna.pac.rentawreck.backend.rest.service.request.LoginRequest;
-import com.prodyna.pac.rentawreck.backend.rest.service.request.LogoutRequest;
-import com.prodyna.pac.rentawreck.backend.rest.service.request.ValidateTokenRequest;
+import com.prodyna.pac.rentawreck.backend.rest.service.request.TokenRequest;
 
 /**
  * AuthenticationService
@@ -24,7 +22,7 @@ import com.prodyna.pac.rentawreck.backend.rest.service.request.ValidateTokenRequ
  */
 @Path("/auth")
 @SecurityDomain("rent-a-wreck")
-public interface AuthenticationService {
+public interface AuthenticationServiceREST {
 	
 	@POST
 	@Path("/login")
@@ -38,15 +36,12 @@ public interface AuthenticationService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	@PermitAll
-	public Response validateToken(ValidateTokenRequest validateTokenRequest);
+	public Response validateToken(TokenRequest tokenRequest);
 	
 	@POST
 	@Path("/logout")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	@RolesAllowed({"admin","user"})
-	public Response logout(LogoutRequest logoutRequest);
-
-	public TokenSubject getTokenSubject(String token);
-
+	public Response logout(TokenRequest tokenRequest);
 }

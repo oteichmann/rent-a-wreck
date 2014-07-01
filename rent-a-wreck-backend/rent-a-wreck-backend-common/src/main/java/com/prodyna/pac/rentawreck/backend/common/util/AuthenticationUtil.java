@@ -1,4 +1,4 @@
-package com.prodyna.pac.rentawreck.backend.rest.util;
+package com.prodyna.pac.rentawreck.backend.common.util;
 
 import java.security.Principal;
 import java.security.acl.Group;

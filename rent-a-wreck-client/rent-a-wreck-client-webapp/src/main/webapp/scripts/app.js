@@ -41,7 +41,7 @@ rawApp.factory('httpInterceptor', ['$rootScope', '$q', '$cookies', '$location', 
 
             UserSession.loggedIn = false;
             UserSession.user = {};
-            $cookies['XSRF-TOKEN'] = undefined;
+//            $cookies['XSRF-TOKEN'] = undefined;
             $location.path('/login');
 
           } else if (response.status == 403) {
