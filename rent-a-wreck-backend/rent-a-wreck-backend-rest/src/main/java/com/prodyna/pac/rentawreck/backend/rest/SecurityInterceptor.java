@@ -28,6 +28,7 @@ import org.picketbox.util.StringUtil;
 import com.prodyna.pac.rentawreck.backend.common.model.TokenSubject;
 import com.prodyna.pac.rentawreck.backend.common.service.AuthenticationService;
 import com.prodyna.pac.rentawreck.backend.rest.service.AuthenticationServiceConstants;
+import com.prodyna.pac.rentawreck.backend.rest.util.AuthenticationCookieUtil;
 import com.prodyna.pac.rentawreck.backend.rest.util.ResponseMessageBuilder;
 
 /**
@@ -48,17 +49,6 @@ public class SecurityInterceptor implements javax.ws.rs.container.ContainerReque
     @Override
     public void filter(ContainerRequestContext requestContext) {
     	
-    	TokenSubject tokenSubject;
-		try {
-			tokenSubject = authenticate(requestContext);
-		} catch (LoginException e) {
-			NewCookie cookie = new NewCookie(AuthenticationServiceConstants.XSRF_TOKEN, "INVALID", "/" , "localhost", 1, 
-					"RAW Session Token", 0, new Date(), true, false);
-			
-			requestContext.abortWith(ResponseMessageBuilder.authenticationRequired().cookie(cookie).message("Authentication failed.").build());
-		    return;
-		}
-    	
         ResourceMethodInvoker methodInvoker = (ResourceMethodInvoker) requestContext.getProperty("org.jboss.resteasy.core.ResourceMethodInvoker");
         Method method = methodInvoker.getMethod();
         //Access allowed for all
@@ -76,6 +66,15 @@ public class SecurityInterceptor implements javax.ws.rs.container.ContainerReque
             {
                 RolesAllowed rolesAnnotation = method.getAnnotation(RolesAllowed.class);
                 Set<String> annotatedRoles = new HashSet<String>(Arrays.asList(rolesAnnotation.value()));
+                
+            	TokenSubject tokenSubject;
+        		try {
+        			tokenSubject = authenticate(requestContext);
+        		} catch (LoginException e) {
+        			NewCookie cookie = AuthenticationCookieUtil.createInvalidCookie();
+        			requestContext.abortWith(ResponseMessageBuilder.authenticationRequired().cookie(cookie).message("Authentication failed.").build());
+        		    return;
+        		}
                  
                 //Is user allowed?
                 if(tokenSubject != null) {
