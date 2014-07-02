@@ -8,13 +8,13 @@ rawServices.factory('aircraftService', [ '$resource', function($resource) {
 	return $resource(serviceBaseURL + '/aircraft/:uuid', {uuid:'@uuid'}, {
 		update : { method:'PUT' },
 		queryCount : {
-			url : serviceBaseURL + '/aircraft/count',
 			method : 'GET',
+			url : serviceBaseURL + '/aircraft/count',
 			isArray : false
 		},
 		getAircraftStatusList : {
-			url : serviceBaseURL + '/aircraft/status-list',
 			method : 'GET',
+			url : serviceBaseURL + '/aircraft/status-list',
 			isArray : true
 		}
 	});
@@ -36,15 +36,27 @@ rawServices.factory('charterService', [ '$resource', function($resource) {
 	return $resource(serviceBaseURL + '/charter/:uuid', {uuid:'@uuid'}, {
 		update : { method:'PUT' },
 		queryCount : {
-			url : serviceBaseURL + '/charter/count',
 			method : 'GET',
+			url : serviceBaseURL + '/charter/count',
 			isArray : false
 		},
 		getAircraftCharters : {
-			params : {aircraft_uuid:'@aircraft_uuid'},
-			url : serviceBaseURL + '/charter/aircraft/:aircraft_uuid',
 			method : 'GET',
+			url : serviceBaseURL + '/charter/aircraft/:aircraft_uuid',
+			params : {aircraft_uuid:'@aircraft_uuid'},
 			isArray : true
+		},
+		updatePilotCharterStatus : {
+			method : 'PUT',
+			url : serviceBaseURL + '/charter/:uuid/state?newCharterStatus=:newStatus',
+			params : { uuid:'@uuid', newStatus:'@newStatus' },
+			isArray : false
+		},
+		createCharter : {
+			method : 'POST',
+			url : serviceBaseURL + '/charter/create/:uuid',
+			params : {uuid:'@uuid'},
+			isArray : false
 		}
 	});
 } ]);
@@ -53,8 +65,8 @@ rawServices.factory('licenseService', [ '$resource', function($resource) {
 	return $resource(serviceBaseURL + '/license/:uuid', {uuid:'@uuid'}, {
 		update : { method:'PUT' },
 		queryCount : {
-			url : serviceBaseURL + '/license/count',
 			method : 'GET',
+			url : serviceBaseURL + '/license/count',
 			isArray : false
 		}
 	});
@@ -64,14 +76,14 @@ rawServices.factory('pilotService', [ '$resource', function($resource) {
 	return $resource(serviceBaseURL + '/pilot/:uuid', {uuid:'@uuid'}, {
 		update : { method:'PUT' },
 		queryCount : {
-			url : serviceBaseURL + '/pilot/count',
 			method : 'GET',
+			url : serviceBaseURL + '/pilot/count',
 			isArray : false
 		},
 		getByUserUuid : {
+			method : 'GET',
 			url : serviceBaseURL + "/pilot/user/:user_uuid",
-			params : {user_uuid:'@user_uuid'},
-			method : 'GET'
+			params : {user_uuid:'@user_uuid'}
 		}
 	});
 } ]);
@@ -86,8 +98,8 @@ rawServices.factory('roleService', [ '$resource', function($resource) {
 	return $resource(serviceBaseURL + '/role/:uuid', {uuid:'@uuid'}, {
 		update : { method:'PUT' },
 		queryCount : {
-			url : serviceBaseURL + '/role/count',
 			method : 'GET',
+			url : serviceBaseURL + '/role/count',
 			isArray : false
 		}
 	});
@@ -97,8 +109,8 @@ rawServices.factory('userService', [ '$resource', function($resource) {
 	return $resource(serviceBaseURL + '/user/:uuid', {uuid:'@uuid'}, {
 		update : { method:'PUT' },
 		queryCount : {
-			url : serviceBaseURL + '/user/count',
 			method : 'GET',
+			url : serviceBaseURL + '/user/count',
 			isArray : false
 		}
 	});
@@ -115,8 +127,8 @@ rawServices.factory('UserSession', [ function() {
 rawServices.factory('utilService', [ '$resource', function($resource) {
 	return $resource(serviceBaseURL + '/util', {}, {
 		generateUuid : {
-			url : serviceBaseURL + '/util/generate-uuid',
 			method : 'POST',
+			url : serviceBaseURL + '/util/generate-uuid',
 			isArray : false
 		}
 	});

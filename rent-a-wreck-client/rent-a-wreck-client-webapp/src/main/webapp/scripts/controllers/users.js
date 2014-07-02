@@ -224,13 +224,13 @@ rawControllers.controller('userCtrl', function($scope, $modal, $log, aircraftTyp
 		};
 
 		$scope.dateOptions = {
-			formatYear : 'yy',
+			formatYear : 'yyyy',
 			startingDay : 1,
 			'show-button-bar' : false
 		};
 
 		$scope.initDate = new Date();
-		$scope.format = 'mediumDate';
+		$scope.format = 'yyyy-MM-dd';
 	};
 
 });	

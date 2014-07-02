@@ -138,7 +138,7 @@
 							<tbody>
 								<tr ng-repeat="l in model.pilot.licenses" re>
 									<td>{{ l.aircraftType }}</td>
-									<td>{{ l.validTill | date:'mediumDate'}}</td>
+									<td>{{ l.validTill | date:'yyyy-MM-dd'}}</td>
 									<td>
 										<button class="btn btn-xs btn-primary" ng-click="editLicense(l)">
 											<i class="fa fa-edit"></i> Edit

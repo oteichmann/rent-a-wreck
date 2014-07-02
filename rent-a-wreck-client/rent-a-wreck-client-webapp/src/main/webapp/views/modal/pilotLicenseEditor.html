@@ -16,7 +16,7 @@
 		<div class="form-group" ng-class="{ 'has-error' : licenseForm.validTill.$invalid && !licenseForm.validTill.$pristine }">
 			<label for="validTill">Valid Till</label>
 			<div class="input-group">
-				<input id="validTill" name="validTill" type="text" class="form-control" datepicker-popup="mediumDate" ng-model="license.validTill" is-open="opened" min-date="minDate"
+				<input id="validTill" name="validTill" type="text" class="form-control" datepicker-popup="yyyy-MM-dd" ng-model="license.validTill" is-open="opened" min-date="minDate"
 					init-data="initDate" date-disabled="disabled(date, mode)" datepicker-options="dateOptions" starting-day="1" ng-required="true"/>
 				<span class="input-group-btn">
 					<button type="button" class="btn btn-default" ng-click="open($event)">

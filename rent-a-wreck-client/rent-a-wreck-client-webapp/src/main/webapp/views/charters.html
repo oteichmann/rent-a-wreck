@@ -13,10 +13,11 @@
 							<th>ID</th>
 							<th>Type</th>
 							<th>Available</th>
-							<th>Current Charter Status</th>
-							<th>Chartered by Pilot</th>
+							<th>Active Charter Status</th>
+							<th>Pilot</th>
 							<th>Charter Start</th>
 							<th>Charter End</th>
+							<th>Actions</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -26,11 +27,11 @@
 							<td>{{acs.available}}</td>
 							<td>{{acs.charter.charterStatus}}</td>
 							<td>{{acs.charter.pilot.user.firstName}} {{acs.charter.pilot.user.lastName}}</td>
-							<td>{{acs.charter.charterStart | date:'short' }}</td>
-							<td>{{acs.charter.charterEnd | date:'short' }}</td>
+							<td>{{acs.charter.charterStart | date:'yyyy-MM-dd' }}</td>
+							<td>{{acs.charter.charterEnd | date:'yyyy-MM-dd' }}</td>
 							<td>
-								<button class="btn btn-xs btn-primary" ng-click="showAircraftCharters(acs);"><i class="fa fa-edit"></i> Show Charters</button>
-								<button class="btn btn-xs btn-danger" ng-click="createAircraftCharter(acs);"><i class="fa fa-tracsh-o"></i> New Charter</button>
+								<button class="btn btn-xs btn-primary" ng-click="showAircraftCharters(acs);"><i class="fa fa-search"></i> Show Charters</button>
+								<button class="btn btn-xs btn-danger" ng-click="createAircraftCharter(acs);" ng-disabled="user.loggedIn == false"><i class="fa fa-plus"></i> New Charter</button>
 							</td>
 						</tr>
 					</tbody>
@@ -41,7 +42,6 @@
 	</div>
 	<div class="row">
 		<div class="col-md-12">
-		<div>{{ model.aircarftCharters }}</div>
 			<div class="panel panel-primary">
 				<div class="panel-heading">
 					<span>Aircraft Charters</span>
@@ -50,21 +50,32 @@
 				<table class="table">
 					<thead>
 						<tr>
-							<th>Current Charter Status</th>
-							<th>Chartered by Pilot</th>
+							<th>Charter Status</th>
+							<th>Pilot</th>
 							<th>Charter Start</th>
 							<th>Charter End</th>
+							<th>Actions</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr ng-repeat="charter in model.aircarftCharters">
 							<td>{{charter.charterStatus}}</td>
 							<td>{{charter.pilot.user.firstName}} {{charter.pilot.user.lastName}}</td>
-							<td>{{charter.charterStart | date:'short' }}</td>
-							<td>{{charter.charterEnd | date:'short' }}</td>
+							<td>{{charter.charterStart | date:'yyyy-MM-dd' }}</td>
+							<td>{{charter.charterEnd | date:'yyyy-MM-dd' }}</td>
 							<td>
-								<button class="btn btn-xs btn-primary" ng-click="showAircraftCharters(acs);"><i class="fa fa-edit"></i> Show Charters</button>
-								<button class="btn btn-xs btn-danger" ng-click="createAircraftCharter(acs);"><i class="fa fa-tracsh-o"></i> New Charter</button>
+								<div class="btn-group">
+								  <button type="button" class="btn btn-xs btn-primary dropdown-toggle" data-toggle="dropdown">
+								    Actions <span class="caret"></span>
+								  </button>
+								  <ul class="dropdown-menu" role="menu">
+								    <li ng-class="{ 'disabled' : charter.charterStatus !== 'RESERVED' }"><a ng-click="updateCharterStatus(charter, 'LENT');">Lend Aircraft</a></li>
+								    <li ng-class="{ 'disabled' : charter.charterStatus !== 'LENT' }"><a ng-click="updateCharterStatus(charter, 'RETURNED');">Return Aircraft</a></li>
+								    <li ng-class="{ 'disabled' : charter.charterStatus !== 'RESERVED' }"><a ng-click="updateCharterStatus(charter, 'CANCELED');">Cancel Charter</a></li>
+								    <li class="divider"></li>
+								    <li ng-class="{ 'disabled' : charter.charterStatus !== 'RESERVED' }"><a ng-click="updateCharterDates(charter);">Update Charter Dates</a></li>
+								  </ul>
+								</div>
 							</td>
 						</tr>
 					</tbody>
