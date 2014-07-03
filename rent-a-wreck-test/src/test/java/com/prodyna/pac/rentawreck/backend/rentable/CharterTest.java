@@ -3,6 +3,7 @@ package com.prodyna.pac.rentawreck.backend.rentable;
 import static org.junit.Assert.assertEquals;
 
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.UUID;
 
@@ -28,6 +29,7 @@ import com.prodyna.pac.rentawreck.backend.rentable.model.Aircraft;
 import com.prodyna.pac.rentawreck.backend.rentable.model.AircraftType;
 import com.prodyna.pac.rentawreck.backend.rentable.model.Charter;
 import com.prodyna.pac.rentawreck.backend.rentable.model.CharterStatus;
+import com.prodyna.pac.rentawreck.backend.rentable.model.License;
 import com.prodyna.pac.rentawreck.backend.rentable.model.Pilot;
 import com.prodyna.pac.rentawreck.backend.rentable.service.AircraftService;
 import com.prodyna.pac.rentawreck.backend.rentable.service.CharterService;
@@ -45,6 +47,9 @@ public class CharterTest extends AbstractEntityCRUDTest<Charter> {
 
 	@Inject
 	private PilotService pilotService;
+
+	@Inject
+	private License licenseService;
 
 	@Inject
 	private UserService userService;
@@ -101,9 +106,11 @@ public class CharterTest extends AbstractEntityCRUDTest<Charter> {
 		
 		Charter charter = new Charter();
 		charter.setUuid(UUID.randomUUID().toString());
+		charter.setCharterStatus(CharterStatus.RESERVED);
+		charter.setCharterStart(new GregorianCalendar(2014, 1, 1).getTime());
+		charter.setCharterEnd(new GregorianCalendar(2014, 1, 31).getTime());
 		charter.setAircraft(aircraft);
 		charter.setPilot(pilot);
-		charter.setCharterStatus(CharterStatus.RESERVED);
 		return charter;
 	}
 	
