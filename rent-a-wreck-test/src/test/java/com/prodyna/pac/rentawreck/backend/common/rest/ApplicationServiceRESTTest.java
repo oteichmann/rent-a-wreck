@@ -21,7 +21,7 @@ public class ApplicationServiceRESTTest extends AbstractRESTTest {
         // this part is without dynamic proxy
         WebTarget target = createWebTarget();
         Response resp = target.path("/util/generate-uuid").request(MediaType.APPLICATION_JSON_TYPE).get();
-        Assert.assertEquals( 204, resp.getStatus() );
+        Assert.assertEquals( 200, resp.getStatus() );
     }
 
 //    @Test

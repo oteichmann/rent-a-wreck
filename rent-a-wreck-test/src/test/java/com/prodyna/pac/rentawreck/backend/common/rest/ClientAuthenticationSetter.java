@@ -5,12 +5,18 @@ import java.io.IOException;
 import javax.ws.rs.client.ClientRequestContext;
 import javax.ws.rs.client.ClientRequestFilter;
 
+import org.jboss.security.Base64Encoder;
+
 public class ClientAuthenticationSetter implements ClientRequestFilter {
 
     private String auth;
 
     public ClientAuthenticationSetter(String username, String password) {
-//        auth = "Basic " + new Base64Codec().encode(String.format("%s:%s", username, password).getBytes());
+        try {
+			auth = "Basic " + Base64Encoder.encode(String.format("%s:%s", username, password).getBytes());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
     }
 
     @Override

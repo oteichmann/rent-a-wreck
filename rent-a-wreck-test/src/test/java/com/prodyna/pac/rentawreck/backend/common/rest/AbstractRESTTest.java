@@ -9,11 +9,11 @@ import org.jboss.arquillian.test.api.ArquillianResource;
 
 public class AbstractRESTTest {
 
-    public static final String USERNAME = "dkrizic";
-    public static final String PASSWORD = "abc123";
+    public static final String USERNAME = "admin";
+    public static final String PASSWORD = "admin";
 
-    @ArquillianResource
-    protected java.net.URL url;
+//    @ArquillianResource
+//	private java.net.URL url;
 
     protected Client createClient() {
         final Client client = ClientBuilder.newClient();
@@ -24,7 +24,8 @@ public class AbstractRESTTest {
     }
 
     protected WebTarget createWebTarget() {
-        WebTarget target = createClient().target(url.toString() + "rest");
+//        WebTarget target = createClient().target(url.toString() + "rest");
+        WebTarget target = createClient().target("http://localhost:8080/rent-a-wreck-rest");
         return target;
     }
 
