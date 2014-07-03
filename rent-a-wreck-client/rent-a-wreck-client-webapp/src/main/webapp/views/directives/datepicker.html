@@ -1,7 +1,7 @@
 <ng-form name="datePickerForm" class="form-group" ng-class="{ 'has-error' : datePickerForm.input.$invalid && !datePickerForm.input.$pristine }">
 	<label for="{{ inputId }}">{{ inputLabel }}</label>
 	<div class="input-group">
-		<input type="text" id="{{ inputId }}" name="input" class="form-control" datepicker-popup="{{format}}"
+		<input type="text" id="{{ inputId }}" name="input" class="form-control" datepicker-popup="{{ format }}"
 			ng-model="model" is-open="opened" min-date="minDate"
 			datepicker-options="dateOptions" ng-required="true" />
 		<span class="input-group-btn">

@@ -65,7 +65,7 @@
 							<td>{{charter.charterEnd | date:'yyyy-MM-dd' }}</td>
 							<td>
 								<div class="btn-group">
-								  <button type="button" class="btn btn-xs btn-primary dropdown-toggle" data-toggle="dropdown">
+								  <button type="button" class="btn btn-xs btn-primary dropdown-toggle" data-toggle="dropdown" ng-disabled="!hasPermissionToChangeCharter(charter)">
 								    Actions <span class="caret"></span>
 								  </button>
 								  <ul class="dropdown-menu" role="menu">

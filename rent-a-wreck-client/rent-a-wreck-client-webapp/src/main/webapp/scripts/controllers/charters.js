@@ -1,8 +1,8 @@
 'use strict';
 
 rawControllers.controller('chartersCtrl', 
-	[ '$scope', '$log', '$modal', '$timeout', 'aircraftService', 'charterService', 'pilotService', 'utilService', 'UserSession',
-	function($scope, $log, $modal, $timeout, aircraftService, charterService, pilotService, utilService, UserSession) {
+	[ '$scope', '$log', '$modal', '$timeout', '$filter', 'aircraftService', 'charterService', 'pilotService', 'utilService', 'UserSession',
+	function($scope, $log, $modal, $timeout, $filter, aircraftService, charterService, pilotService, utilService, UserSession) {
 
 		$scope.user = UserSession;
 		$scope.model = {};
@@ -55,6 +55,13 @@ rawControllers.controller('chartersCtrl',
 			});
 		};
 
+		$scope.hasPermissionToChangeCharter = function(charter) {
+			if(UserSession.loggedIn) {
+				return charter.pilot.user.uuid == UserSession.user.uuid;
+			}
+			return false;
+		}
+
 		// $scope.$on('$viewContentLoaded', function () {
   //           $timeout(function () { // You might need this timeout to be sure its run after DOM render.
   //              $('li.disabled > a').click(function() { return false; });
@@ -70,7 +77,7 @@ rawControllers.controller('chartersCtrl',
 	
 				$log.debug('Set new status for charter ' + charter.uuid + ' to ' + newStatus);
 
-				charterService.updatePilotCharterStatus({uuid:charter.uuid, newStatus:newStatus}, function() {
+				charterService.updateCharterStatus({uuid:charter.uuid, newStatus:newStatus}, function() {
 					aircraftService.getAircraftStatusList(function(data, httpResponse) {
 						$scope.model.aircraftStatusList = data;
 					});
@@ -163,10 +170,16 @@ rawControllers.controller('chartersCtrl',
 
 			$scope.model = {};
 			$scope.model.charter = charter;
+			$scope.model.charter.charterStart = new Date($scope.model.charter.charterStart); 
+			$scope.model.charter.charterEnd = new Date($scope.model.charter.charterEnd); 
+
 
 			$scope.charterFormSubmit = function() {
 
-				$scope.model.charter.$update(function(data, httpResponse) {
+				var charterStart = $filter('date')($scope.model.charter.charterStart, 'yyyy-MM-dd');
+				var charterEnd = $filter('date')($scope.model.charter.charterEnd, 'yyyy-MM-dd');
+
+				charterService.updateCharterDates({uuid: $scope.model.charter.uuid, charterStart: charterStart, charterEnd: charterEnd}, function(data, httpResponse) {
 					$modalInstance.close(data);
 				}, function(httpResponse) {
 					alert("Could not update charter! " + httpResponse.data);

@@ -46,16 +46,22 @@ rawServices.factory('charterService', [ '$resource', function($resource) {
 			params : {aircraft_uuid:'@aircraft_uuid'},
 			isArray : true
 		},
-		updatePilotCharterStatus : {
+		createCharter : {
+			method : 'POST',
+			url : serviceBaseURL + '/charter/create/:uuid',
+			params : {uuid:'@uuid'},
+			isArray : false
+		},
+		updateCharterStatus : {
 			method : 'PUT',
 			url : serviceBaseURL + '/charter/:uuid/state?newCharterStatus=:newStatus',
 			params : { uuid:'@uuid', newStatus:'@newStatus' },
 			isArray : false
 		},
-		createCharter : {
-			method : 'POST',
-			url : serviceBaseURL + '/charter/create/:uuid',
-			params : {uuid:'@uuid'},
+		updateCharterDates : {
+			method : 'PUT',
+			url : serviceBaseURL + '/charter/:uuid/dates?charterStart=:charterStart&charterEnd=:charterEnd',
+			params : { uuid:'@uuid', charterStart:'@charterStart', charterEnd:'@charterEnd' },
 			isArray : false
 		}
 	});

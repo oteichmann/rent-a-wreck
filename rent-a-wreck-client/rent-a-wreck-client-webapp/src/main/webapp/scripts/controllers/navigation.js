@@ -6,6 +6,20 @@ rawControllers.controller('navigationCtrl', function($rootScope, $scope, $cookie
 		return UserSession.loggedIn;
 	};
 	
+	$scope.isAdmin = function () {
+		if(UserSession.loggedIn) {
+			var roles = UserSession.user.roles;
+
+			for (var i = 0; i < roles.length; i++) {
+				var role = roles[i]
+				if (role.name == 'admin') {
+					return true;
+				};
+			};
+		}
+		return false;
+	};
+
 	/**
 	 * Validate authentication cookie on load - (Cookie Auto-Login ;-)
 	 */

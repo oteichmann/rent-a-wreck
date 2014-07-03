@@ -2,7 +2,7 @@
 	<ul class="nav nav-pills pull-right">
 		<li ng-class="{'active': isActive('/')}"><a href="#">Home</a></li>
 		<li ng-class="{'active': isActive('/charters')}"><a href="#/charters">Charters</a></li>
-		<li class="dropdown" ng-class="{'active': isActive('/aircrafts') || isActive('/users')}" ng-show="isLoggedIn()">
+		<li class="dropdown" ng-class="{'active': isActive('/aircrafts') || isActive('/users')}" ng-show="isAdmin()">
 		<a class="dropdown-toggle" data-toggle="dropdown" href="#">	Administration <span class="caret"></span></a>
 		<ul class="dropdown-menu" role="menu">
 			<li >

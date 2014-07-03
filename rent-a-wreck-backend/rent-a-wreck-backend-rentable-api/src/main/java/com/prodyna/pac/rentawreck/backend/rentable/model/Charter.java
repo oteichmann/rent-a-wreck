@@ -14,7 +14,6 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
 import com.prodyna.pac.rentawreck.backend.common.model.AbstractEntity;
-import com.prodyna.pac.rentawreck.backend.common.service.rest.DateFormat;
 
 /**
  * Charter
@@ -41,12 +40,10 @@ public class Charter extends AbstractEntity {
 	
 	@NotNull
 	@Temporal(TemporalType.DATE)
-	@DateFormat("yyyy-MM-dd")
 	private Date charterStart;
 
 	@NotNull
 	@Temporal(TemporalType.DATE)
-	@DateFormat("yyyy-MM-dd")
 	private Date charterEnd;
 
 	@ManyToOne(optional = false)
