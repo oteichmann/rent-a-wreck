@@ -175,6 +175,11 @@ public class MonitoringServiceMXBeanImpl implements MonitoringServiceMXBean {
 		return diagnosticsStringBuilder.toString();
 	}
 
+	/**
+	 * Creates a String representation of a monitoring record for printing.
+	 * @param monitoringRecord The record to print.
+	 * @return The diagnostics string.
+	 */
 	private String createMethodDiagnostic(final MonitoringRecord monitoringRecord) {
 		String methodDiagnostic = String.format("%s: invocations=%s, total=%sms, average=%sms, min=%sms, max=%sms",
 				monitoringRecord.getKey(), monitoringRecord.getInvocationCount(), 
@@ -205,6 +210,12 @@ public class MonitoringServiceMXBeanImpl implements MonitoringServiceMXBean {
 		this.methodExecutionDurationMap.clear();
 	}
 	
+	/**
+	 * Create key for monitoring records.
+	 * @param className The name of the service class.
+	 * @param methodName The name of the service method.
+	 * @return The key of the monitoring record.
+	 */
 	private String createKey(final String className, final String methodName) {
 		return className + "#" + methodName;
 	}

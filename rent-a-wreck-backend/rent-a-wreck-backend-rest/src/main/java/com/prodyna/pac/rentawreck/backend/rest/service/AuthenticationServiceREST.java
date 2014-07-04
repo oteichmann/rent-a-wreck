@@ -11,11 +11,12 @@ import javax.ws.rs.core.Response;
 
 import org.jboss.ejb3.annotation.SecurityDomain;
 
+import com.prodyna.pac.rentawreck.backend.common.service.AuthenticationService;
 import com.prodyna.pac.rentawreck.backend.rest.service.request.LoginRequest;
 import com.prodyna.pac.rentawreck.backend.rest.service.request.TokenRequest;
 
 /**
- * AuthenticationService
+ * REST facade of {@link AuthenticationService}.
  *
  * @author Oliver Teichmann
  *

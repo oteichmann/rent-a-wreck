@@ -9,7 +9,7 @@ import javax.ws.rs.core.NewCookie;
 import com.prodyna.pac.rentawreck.backend.rest.service.AuthenticationServiceConstants;
 
 /**
- * AuthenticationCookieUtil
+ * Util to create authentication cookies.
  *
  * @author Oliver Teichmann
  *

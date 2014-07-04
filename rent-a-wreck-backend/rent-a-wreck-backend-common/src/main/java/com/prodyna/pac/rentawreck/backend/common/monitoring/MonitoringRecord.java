@@ -19,6 +19,7 @@ public class MonitoringRecord {
 	private long minDuration = 0;
 
 	/**
+	 * Creates a new {@link MonitoringRecord} instance.
 	 * @param key
 	 */
 	public MonitoringRecord(String key) {
@@ -26,7 +27,8 @@ public class MonitoringRecord {
 	}
 
 	/**
-	 * @param duration
+	 * Update the values of a {@link MonitoringRecord}.
+	 * @param duration The duration of the latest service method invocation.
 	 */
 	public void update(final long duration) {
 		this.invocationCount++;

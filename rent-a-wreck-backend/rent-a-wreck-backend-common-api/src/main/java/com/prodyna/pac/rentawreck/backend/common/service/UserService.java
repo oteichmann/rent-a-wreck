@@ -34,8 +34,9 @@ public interface UserService extends AbstractEntityPersistenceService<User> {
 	User updateUserPassword(@QueryParam("uuid") String uuid, @QueryParam("password") String password);
 	
 	/**
-	 * @param username
-	 * @return
+	 * Find a user by username.
+	 * @param name Username of the user.
+	 * @return The corresponding user object.
 	 */
 	User findByUsername(String username);
 }

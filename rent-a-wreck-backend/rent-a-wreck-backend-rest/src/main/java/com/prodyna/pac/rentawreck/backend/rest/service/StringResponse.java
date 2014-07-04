@@ -3,7 +3,7 @@ package com.prodyna.pac.rentawreck.backend.rest.service;
 import java.io.Serializable;
 
 /**
- * StringResponse
+ * Response object to wrap simple String objects.
  *
  * @author Oliver Teichmann, PRODYNA AG
  *

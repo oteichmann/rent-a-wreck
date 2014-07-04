@@ -1,7 +1,8 @@
 package com.prodyna.pac.rentawreck.backend.rentable.model;
 
 /**
- * AircraftCharterStatus
+ * Wrapper object to display the status of an aircrafts. It contains the aircraft the currently active charter and 
+ * boolean if the aircraft is currently available or not.
  *
  * @author Oliver Teichmann
  *

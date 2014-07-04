@@ -16,15 +16,23 @@ import org.jboss.security.SecurityContextAssociation;
 import org.jboss.security.SecurityContextFactory;
 import org.jboss.security.SimplePrincipal;
 import org.jboss.security.auth.callback.JBossCallbackHandler;
-import org.jboss.security.auth.callback.UsernamePasswordHandler;
 import org.picketbox.util.StringUtil;
 
 import com.prodyna.pac.rentawreck.backend.common.model.TokenSubject;
 import com.prodyna.pac.rentawreck.backend.common.model.User;
+import com.prodyna.pac.rentawreck.backend.common.monitoring.Monitored;
 import com.prodyna.pac.rentawreck.backend.common.service.AuthenticationService;
 import com.prodyna.pac.rentawreck.backend.common.service.UserService;
 
+/**
+ * This class handles the authentication. Users authenticated by username an password are stored in a token cache.
+ * After initial login these users can be automatically authenticated by their token.
+ *
+ * @author Oliver Teichmann
+ *
+ */
 @ApplicationScoped
+@Monitored
 public class AuthenticationServiceBean implements AuthenticationService {
 	
 	private static final String SECURITY_DOMAIN = "rent-a-wreck";
@@ -32,8 +40,12 @@ public class AuthenticationServiceBean implements AuthenticationService {
 	@Inject
 	private UserService userService;
 	
+	// TODO: Clear the cached subjects
 	private Map<String, TokenSubject> tokenSubjectCache = new HashMap<String, TokenSubject>();
 
+	/* (non-Javadoc)
+	 * @see com.prodyna.pac.rentawreck.backend.common.service.AuthenticationService#login(java.lang.String, java.lang.String)
+	 */
 	@Override
 	public TokenSubject login(String username, String password) throws LoginException {
 		
@@ -58,6 +70,9 @@ public class AuthenticationServiceBean implements AuthenticationService {
         }
 	}
 
+	/* (non-Javadoc)
+	 * @see com.prodyna.pac.rentawreck.backend.common.service.AuthenticationService#login(java.lang.String)
+	 */
 	@Override
 	public TokenSubject login(String token) throws LoginException {
 		
@@ -74,6 +89,9 @@ public class AuthenticationServiceBean implements AuthenticationService {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see com.prodyna.pac.rentawreck.backend.common.service.AuthenticationService#logout(java.lang.String)
+	 */
 	@Override
 	public boolean logout(String token) {
 
@@ -84,6 +102,13 @@ public class AuthenticationServiceBean implements AuthenticationService {
 		return false;
 	}
 	
+	/**
+	 * Authenticate a user against the application security domain and bind to security context.
+	 * @param username
+	 * @param password
+	 * @return The authenticated subject.
+	 * @throws LoginException
+	 */
 	private Subject authenticateUser(String username, Object password) throws LoginException {
 		
         JBossCallbackHandler handler = new JBossCallbackHandler();
@@ -96,7 +121,6 @@ public class AuthenticationServiceBean implements AuthenticationService {
 		Subject subject = lc.getSubject();
 		
 		
-//        SecurityContext originalSecurityContext = SecurityContextAssociation.getSecurityContext();  
         try {  
             // Bind principal/subject to the current thread  
             SecurityContext sc = SecurityContextFactory.createSecurityContext(SECURITY_DOMAIN);  
@@ -104,17 +128,11 @@ public class AuthenticationServiceBean implements AuthenticationService {
             SecurityContextAssociation.setSecurityContext(sc);  
   
         } catch (Exception e) {  
-            throw new RuntimeException(e);  
-        } finally {  
-//            SecurityContextAssociation.setSecurityContext(originalSecurityContext);  
+            throw new LoginException(e.getMessage());  
         }  
 		
 		return subject;
 	}
 	
-//	@Override
-//	public TokenSubject getTokenSubject(String token) {
-//		return tokenSubjectCache.get(token);
-//	}
 }
 	

@@ -15,6 +15,12 @@ import com.prodyna.pac.rentawreck.backend.rentable.model.Charter;
 import com.prodyna.pac.rentawreck.backend.rentable.service.AircraftService;
 import com.prodyna.pac.rentawreck.backend.rentable.service.CharterService;
 
+/**
+ * Implementation of the {@link AircraftService} interface.
+ *
+ * @author Oliver Teichmann
+ *
+ */
 @Stateless
 @Monitored
 public class AircraftServiceBean extends AbstractEntityPersistenceServiceBean<Aircraft> implements AircraftService {

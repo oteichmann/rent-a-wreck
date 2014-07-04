@@ -15,6 +15,11 @@ import javax.ws.rs.core.MediaType;
 @Path("/util")
 public interface UtilService {
 
+	/**
+	 * Generates a UUID.
+	 * @return
+	 * 
+	 */
 	@POST
 	@Path("/generate-uuid")
 	@Produces(MediaType.APPLICATION_JSON)

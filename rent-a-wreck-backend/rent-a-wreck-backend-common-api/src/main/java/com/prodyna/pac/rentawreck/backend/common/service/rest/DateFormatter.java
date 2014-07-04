@@ -8,6 +8,12 @@ import java.util.Date;
 import org.jboss.resteasy.spi.StringParameterUnmarshaller;
 import org.jboss.resteasy.util.FindAnnotation;
 
+/**
+ * Implementation class to unmarshall RESTeasy request parameters to Date objects.
+ *
+ * @author Oliver Teichmann
+ *
+ */
 public class DateFormatter implements StringParameterUnmarshaller<Date> {
 	private SimpleDateFormat formatter;
 

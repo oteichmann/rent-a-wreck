@@ -18,11 +18,18 @@ import com.prodyna.pac.rentawreck.backend.rentable.model.Aircraft;
 import com.prodyna.pac.rentawreck.backend.rentable.model.AircraftCharterStatus;
 
 /**
- * @author oteichmann
+ * Service interface for the {@link Aircraft} entity.
+ *
+ * @author Oliver Teichmann
+ *
  */
 @Path("/aircraft")
 public interface AircraftService extends AbstractEntityPersistenceService<Aircraft> {
 	
+	/**
+	 * Reads all aircrafts and returns them as a list of {@link AircraftCharterStatus} objects.
+	 * @return
+	 */
 	@GET
 	@NoCache
 	@Path("/status-list")

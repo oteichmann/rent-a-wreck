@@ -10,6 +10,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Builer class to create response messages. 
+ *
+ * @author Oliver Teichmann
+ *
+ */
 public class ResponseMessageBuilder {
 
     public static final String MESSAGE_PARAMETER = "message";

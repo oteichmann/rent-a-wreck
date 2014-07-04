@@ -11,7 +11,7 @@ import com.prodyna.pac.rentawreck.backend.rentable.model.License;
 import com.prodyna.pac.rentawreck.backend.rentable.service.LicenseService;
 
 /**
- * LicenseServiceBean
+ * Implementation of the {@link LicenseService} interface.
  *
  * @author Oliver Teichmann
  *

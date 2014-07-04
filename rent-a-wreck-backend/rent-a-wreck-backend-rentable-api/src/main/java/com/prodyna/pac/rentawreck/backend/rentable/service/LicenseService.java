@@ -9,7 +9,7 @@ import com.prodyna.pac.rentawreck.backend.common.service.AbstractEntityPersisten
 import com.prodyna.pac.rentawreck.backend.rentable.model.License;
 
 /**
- * LicenseService
+ * Service interface for the {@link License} entity.
  *
  * @author Oliver Teichmann
  *

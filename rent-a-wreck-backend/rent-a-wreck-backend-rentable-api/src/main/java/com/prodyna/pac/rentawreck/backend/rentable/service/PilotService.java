@@ -16,7 +16,7 @@ import com.prodyna.pac.rentawreck.backend.common.service.AbstractEntityPersisten
 import com.prodyna.pac.rentawreck.backend.rentable.model.Pilot;
 
 /**
- * PilotService
+ *  Service interface for the {@link Pilot} entity.
  *
  * @author Oliver Teichmann
  *

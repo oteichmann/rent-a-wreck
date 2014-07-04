@@ -55,8 +55,7 @@ public class UserServiceBean extends AbstractEntityPersistenceServiceBean<User> 
 	 */
 	@Override
 	public User update(String uuid, User user) {
-		// Assure that update does not change the password. Special method must
-		// be used.
+		// Assure that update does not change the password. Special method must be used.
 		User originalUser = em.find(User.class, user.getUuid());
 		user.setPassword(originalUser.getPassword());
 		return super.update(uuid, user);

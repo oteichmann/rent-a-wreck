@@ -7,14 +7,13 @@ import javax.inject.Inject;
 import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
 
-import com.prodyna.pac.rentawreck.backend.common.model.User;
 import com.prodyna.pac.rentawreck.backend.common.monitoring.Monitored;
 import com.prodyna.pac.rentawreck.backend.common.service.impl.AbstractEntityPersistenceServiceBean;
 import com.prodyna.pac.rentawreck.backend.rentable.model.Pilot;
 import com.prodyna.pac.rentawreck.backend.rentable.service.PilotService;
 
 /**
- * PilotServiceBean
+ * Implementation of the {@link PilotService} interface.
  *
  * @author Oliver Teichmann
  *

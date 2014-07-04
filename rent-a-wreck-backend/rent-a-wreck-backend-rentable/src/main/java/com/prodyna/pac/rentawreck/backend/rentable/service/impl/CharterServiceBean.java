@@ -26,7 +26,7 @@ import com.prodyna.pac.rentawreck.backend.rentable.service.CharterService;
 import com.prodyna.pac.rentawreck.backend.rentable.service.PilotService;
 
 /**
- * CharterServiceBean
+ * Implementation of the {@link CharterService} interface.
  *
  * @author Oliver Teichmann
  *

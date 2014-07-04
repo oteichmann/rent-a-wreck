@@ -14,8 +14,9 @@ import com.prodyna.pac.rentawreck.backend.common.model.Role;
 public interface RoleService extends AbstractEntityPersistenceService<Role>{
 
 	/**
-	 * @param name
-	 * @return
+	 * Find a role by name.
+	 * @param name Name of the role.
+	 * @return The corresponding role object.
 	 */
 	Role findByName(String name);
 

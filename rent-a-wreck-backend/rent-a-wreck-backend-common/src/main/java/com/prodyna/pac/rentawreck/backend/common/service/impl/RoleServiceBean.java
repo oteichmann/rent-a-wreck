@@ -12,7 +12,7 @@ import com.prodyna.pac.rentawreck.backend.common.monitoring.Monitored;
 import com.prodyna.pac.rentawreck.backend.common.service.RoleService;
 
 /**
- *  Implementation of the {@link RoleService} interface.
+ * Implementation of the {@link RoleService} interface.
  * 
  * @author Oliver Teichmann
  * 

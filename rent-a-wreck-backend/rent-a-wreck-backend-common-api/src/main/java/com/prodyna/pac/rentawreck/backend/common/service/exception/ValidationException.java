@@ -7,7 +7,7 @@ import javax.ejb.ApplicationException;
 
 
 /**
- * PersistenceException
+ * Application runtime exception thrown on persistence validation errors.
  *
  * @author Oliver Teichmann, PRODYNA AG
  *
