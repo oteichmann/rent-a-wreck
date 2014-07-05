@@ -42,6 +42,7 @@
 		<module>rent-a-wreck-backend</module>
 		<module>rent-a-wreck-client</module>
 		<module>rent-a-wreck-test</module>
+		<module>rent-a-wreck-dist</module>
 	</modules>
 	<dependencyManagement>
 		<dependencies>
