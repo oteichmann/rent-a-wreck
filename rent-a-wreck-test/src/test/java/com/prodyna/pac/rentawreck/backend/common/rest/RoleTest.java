@@ -9,12 +9,6 @@ import static org.junit.Assert.assertNull;
 import java.net.URL;
 import java.util.UUID;
 
-import javax.ws.rs.client.Entity;
-import javax.ws.rs.client.Invocation;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-
-import org.apache.http.HttpStatus;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.extension.rest.client.ArquillianResteasyResource;
 import org.jboss.arquillian.junit.Arquillian;
@@ -22,7 +16,6 @@ import org.jboss.arquillian.junit.InSequence;
 import org.jboss.arquillian.test.api.ArquillianResource;
 import org.jboss.arquillian.transaction.api.annotation.TransactionMode;
 import org.jboss.arquillian.transaction.api.annotation.Transactional;
-import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -39,13 +32,13 @@ import com.prodyna.pac.rentawreck.backend.rest.JaxRsActivator;
  * 
  */
 @RunWith(Arquillian.class)
-@Transactional
+//@Transactional
 public class RoleTest {
-
-//	@ArquillianResource
-//	private URL deploymentURL;
 	
-	@Deployment
+	@ArquillianResource
+	private URL deploymentURL;
+
+	@Deployment(testable = false)
 	public static WebArchive createDeployment() {
 		WebArchive webArchive = TestDeploymentFactory.getInstance().getBackendCommonDeployment();
 		webArchive.addPackages(true, "com.prodyna.pac.rentawreck.backend.rest");
@@ -56,7 +49,7 @@ public class RoleTest {
 
 	@Test
 	@InSequence(0)
-	@Transactional(TransactionMode.ROLLBACK)
+//	@Transactional(TransactionMode.ROLLBACK)
 	public void testCRUDOperations(@ArquillianResteasyResource RoleService roleService){
 		
 		Role role = new Role();
