@@ -6,7 +6,6 @@ import javax.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
-import org.jboss.arquillian.transaction.api.annotation.Transactional;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.runner.RunWith;
 
@@ -15,7 +14,7 @@ import com.prodyna.pac.rentawreck.backend.common.service.AbstractEntityPersisten
 import com.prodyna.pac.rentawreck.backend.common.service.UserService;
 
 @RunWith(Arquillian.class)
-@Transactional
+//@Transactional
 public class UserTest extends AbstractEntityCRUDTest<User> {
 
 	@Inject
@@ -38,7 +37,7 @@ public class UserTest extends AbstractEntityCRUDTest<User> {
 	 * @see com.prodyna.pac.rentawreck.backend.common.AbstractEntityCRUDTest#getCRUDEntity()
 	 */
 	@Override
-	public User getCRUDEntity() {
+	public User createCRUDEntity() {
 		User user = new User();
 		user.setUuid(UUID.randomUUID().toString());
 		user.setUsername("admin");
@@ -47,6 +46,15 @@ public class UserTest extends AbstractEntityCRUDTest<User> {
 		user.setLastName("Administrator");
 		user.setEmail("admin@rent-a-wreck.com");
 		
+		return user;
+	}
+
+	/* (non-Javadoc)
+	 * @see com.prodyna.pac.rentawreck.backend.common.AbstractEntityCRUDTest#updateCRUDEntity(com.prodyna.pac.rentawreck.backend.common.model.AbstractEntity)
+	 */
+	@Override
+	protected User updateCRUDEntity(User user) {
+		user.setFirstName("Test");
 		return user;
 	}
 	

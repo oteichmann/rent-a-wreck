@@ -3,20 +3,23 @@
  */
 package com.prodyna.pac.rentawreck.backend.common.rest;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
+import static org.junit.Assert.*;
 
-import java.net.URL;
+import java.util.Arrays;
 import java.util.UUID;
 
+import javax.ws.rs.NotAuthorizedException;
+
 import org.jboss.arquillian.container.test.api.Deployment;
+import org.jboss.arquillian.container.test.api.RunAsClient;
 import org.jboss.arquillian.extension.rest.client.ArquillianResteasyResource;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.junit.InSequence;
-import org.jboss.arquillian.test.api.ArquillianResource;
 import org.jboss.arquillian.transaction.api.annotation.TransactionMode;
 import org.jboss.arquillian.transaction.api.annotation.Transactional;
+import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -24,6 +27,9 @@ import com.prodyna.pac.rentawreck.backend.common.TestDeploymentFactory;
 import com.prodyna.pac.rentawreck.backend.common.model.Role;
 import com.prodyna.pac.rentawreck.backend.common.service.RoleService;
 import com.prodyna.pac.rentawreck.backend.rest.JaxRsActivator;
+import com.prodyna.pac.rentawreck.dbutil.DatabaseUtilScript;
+import com.prodyna.pac.rentawreck.dbutil.DatabaseUtilServiceREST;
+import com.prodyna.pac.rentawreck.dbutil.scripts.InitDatabase;
 
 /**
  * RoleTest
@@ -33,68 +39,90 @@ import com.prodyna.pac.rentawreck.backend.rest.JaxRsActivator;
  */
 @RunWith(Arquillian.class)
 //@Transactional
-public class RoleTest {
+public class RoleTest extends AbstractArquillianResteasyTest {
 	
-	@ArquillianResource
-	private URL deploymentURL;
-
-	@Deployment(testable = false)
+	@Deployment(testable=false)
 	public static WebArchive createDeployment() {
-		WebArchive webArchive = TestDeploymentFactory.getInstance().getBackendCommonDeployment();
-		webArchive.addPackages(true, "com.prodyna.pac.rentawreck.backend.rest");
-		webArchive.deleteClass(JaxRsActivator.class);
-		webArchive.addClass(TestJaxRsActivator.class);
-		return webArchive;
+		WebArchive wa = TestDeploymentFactory.getInstance().getBackendCommonDeployment();
+		wa.addPackages(true, "com.prodyna.pac.rentawreck.backend.rest");
+		wa.addPackages(true, "com.prodyna.pac.rentawreck.dbutil");
+		wa.deleteClass(JaxRsActivator.class);
+		wa.addClass(TestJaxRsActivator.class);
+		
+		System.out.println(wa.toString(true));
+		return wa;
+	}
+	
+	@Before
+	public void initDatabase() {
+		DatabaseUtilServiceREST databaseUtilService = createResteasyWebTarget().proxy(DatabaseUtilServiceREST.class);
+		DatabaseUtilScript databaseUtilScript = new DatabaseUtilScript();
+		databaseUtilScript.setSqlStatements(Arrays.asList(InitDatabase.INIT_DATABASE));
+		try {
+			databaseUtilService.executeDatabaseUtilScript(databaseUtilScript);
+		} catch (Throwable t) {
+			System.err.println(t.getMessage());
+		}
 	}
 
-	@Test
-	@InSequence(0)
-//	@Transactional(TransactionMode.ROLLBACK)
-	public void testCRUDOperations(@ArquillianResteasyResource RoleService roleService){
-		
+    @Test
+    @RunAsClient
+    @InSequence(0)
+    public void testCRUDOperationsWithWebTargetProxy() {
+    	
+    	RoleService roleService = createResteasyWebTarget().proxy(RoleService.class);
+
+		assertEquals(2, roleService.findAllCount().intValue());
+
 		Role role = new Role();
 		role.setUuid(UUID.randomUUID().toString());
-		role.setName("user");
+		role.setName("test");
 		
 		assertNull(roleService.read(role.getUuid()));
-		assertEquals(0, roleService.findAllCount().intValue());
 		
 		Role persistedRole = roleService.create(role);
-		assertEquals(1, roleService.findAllCount().intValue());
+		assertEquals(3, roleService.findAllCount().intValue());
 		
-		persistedRole.setName("admin");
-		Role updatedRole = roleService.update(role);
+		persistedRole.setName("test1");
+		
+		Role updatedRole = roleService.update(persistedRole);
+		assertEquals("test1", updatedRole.getName());
 		
 		roleService.delete(updatedRole.getUuid());
 		
 		assertNull(roleService.read(updatedRole.getUuid()));
-		assertEquals(0, roleService.findAllCount().intValue());
+		assertEquals(2, roleService.findAllCount().intValue());
+    }
+    
+	@Test
+	@InSequence(1)
+	public void testCRUDOperationsWithArquillianResteasyResource(@ArquillianResteasyResource RoleService roleService){
 		
+		assertEquals(2, roleService.findAllCount().intValue());
+
+		Role role = new Role();
+		role.setUuid(UUID.randomUUID().toString());
+		role.setName("test");
+		
+		assertNull(roleService.read(role.getUuid()));
+		
+		try {
+			Role persistedRole = roleService.create(role);
+			fail("Should fail because of missing authentication");
+		} catch (NotAuthorizedException e) {
+			assertEquals(401, e.getResponse().getStatus());
+		}
+//		assertEquals(3, roleService.findAllCount().intValue());
+//		
+//		persistedRole.setName("test1");
+//		
+//		Role updatedRole = roleService.update(persistedRole);
+//		assertEquals("test1", updatedRole.getName());
+//		
+//		roleService.delete(updatedRole.getUuid());
+//		
+//		assertNull(roleService.read(updatedRole.getUuid()));
+//		assertEquals(2, roleService.findAllCount().intValue());
 	}
-	
-//	/**
-//	 * We can inject either proxy or a ResteasyWebTarget for low level manipulations and assertions.
-//	 *
-//	 * @param webTarget configured resource ready for use, injected by Arquillian
-//	 */
-//	@Test
-//	@InSequence(1)
-//	public void createPackageBareRsource(@ArquillianResteasyResource("rest/role") ResteasyWebTarget webTarget)
-//	{
-//	    //        Given
-//	    final Invocation.Builder invocationBuilder = webTarget.request();
-//	    invocationBuilder.acceptEncoding("UTF-8");
-//	    invocationBuilder.accept(MediaType.APPLICATION_ATOM_XML_TYPE);
-//	    invocationBuilder.header("Authorization","Basic sialala");
-//	    final Invocation invocation = invocationBuilder.buildPost(Entity.entity("{\"biskupa\":\"?upa\"}", MediaType.APPLICATION_JSON_TYPE));
-//	 
-//	    //        When
-//	    final Response response = invocation.invoke();
-//	 
-//	    //        Then
-//	    assertEquals(deploymentURL + "rest/customer", webTarget.getUri().toASCIIString());
-//	    assertEquals(MediaType.APPLICATION_JSON, response.getMediaType().toString());
-//	    assertEquals(HttpStatus.SC_OK, response.getStatus());
-//	}
 
 }

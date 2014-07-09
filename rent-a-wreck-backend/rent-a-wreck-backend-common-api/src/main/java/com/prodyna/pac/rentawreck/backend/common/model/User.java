@@ -42,7 +42,9 @@ public class User extends AbstractEntity {
  	private String password;
  	// TODO: add email validation pattern
  	private String email;
+ 	@Column(name="first_name")
  	private String firstName;
+ 	@Column(name="last_name")
  	private String lastName;
  	
 	@NotNull

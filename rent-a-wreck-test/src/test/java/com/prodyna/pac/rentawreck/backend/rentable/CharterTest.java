@@ -12,8 +12,6 @@ import javax.inject.Inject;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.junit.InSequence;
-import org.jboss.arquillian.transaction.api.annotation.TransactionMode;
-import org.jboss.arquillian.transaction.api.annotation.Transactional;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -36,7 +34,7 @@ import com.prodyna.pac.rentawreck.backend.rentable.service.CharterService;
 import com.prodyna.pac.rentawreck.backend.rentable.service.PilotService;
 
 @RunWith(Arquillian.class)
-@Transactional
+//@Transactional
 public class CharterTest extends AbstractEntityCRUDTest<Charter> {
 
 	@Inject
@@ -75,7 +73,7 @@ public class CharterTest extends AbstractEntityCRUDTest<Charter> {
 	 * @see com.prodyna.pac.rentawreck.backend.common.AbstractEntityCRUDTest#getCRUDEntity()
 	 */
 	@Override
-	public Charter getCRUDEntity() {
+	public Charter createCRUDEntity() {
 		Aircraft aircraft = new Aircraft();
 		aircraft.setUuid(UUID.randomUUID().toString());
 		aircraft.setId("B52");
@@ -113,11 +111,20 @@ public class CharterTest extends AbstractEntityCRUDTest<Charter> {
 		charter.setPilot(pilot);
 		return charter;
 	}
-	
 
+	/* (non-Javadoc)
+	 * @see com.prodyna.pac.rentawreck.backend.common.AbstractEntityCRUDTest#updateCRUDEntity(com.prodyna.pac.rentawreck.backend.common.model.AbstractEntity)
+	 */
+	@Override
+	protected Charter updateCRUDEntity(Charter charter) {
+		charter.setCharterEnd(new GregorianCalendar(2014, 2, 30).getTime());
+		
+		return charter;
+	}
+	
 	@Test
 	@InSequence(1)
-	@Transactional(TransactionMode.ROLLBACK)
+//	@Transactional(TransactionMode.ROLLBACK)
 	public void testFinderServiceOperations() {
 		Aircraft aircraft = new Aircraft();
 		aircraft.setUuid(UUID.randomUUID().toString());
@@ -163,5 +170,6 @@ public class CharterTest extends AbstractEntityCRUDTest<Charter> {
 		List<Charter> pilotCharters = charterService.getPilotCharters(pilot.getUuid());
 		assertEquals(1, pilotCharters.size());
 	}
+
 
 }

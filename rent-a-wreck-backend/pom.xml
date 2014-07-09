@@ -10,9 +10,11 @@
 	<packaging>pom</packaging>
 	<modules>
 		<module>rent-a-wreck-backend-common</module>
+		<module>rent-a-wreck-backend-common-api</module>
+		<module>rent-a-wreck-backend-auth</module>
+		<module>rent-a-wreck-backend-auth-api</module>
 		<module>rent-a-wreck-backend-rentable</module>
 		<module>rent-a-wreck-backend-rentable-api</module>
-		<module>rent-a-wreck-backend-common-api</module>
 		<module>rent-a-wreck-backend-rest</module>
 	</modules>
 </project>

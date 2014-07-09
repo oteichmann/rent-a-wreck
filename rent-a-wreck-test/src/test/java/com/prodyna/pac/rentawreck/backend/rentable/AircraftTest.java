@@ -9,8 +9,6 @@ import javax.inject.Inject;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.junit.InSequence;
-import org.jboss.arquillian.transaction.api.annotation.TransactionMode;
-import org.jboss.arquillian.transaction.api.annotation.Transactional;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.Assert;
 import org.junit.Test;
@@ -24,7 +22,7 @@ import com.prodyna.pac.rentawreck.backend.rentable.model.AircraftType;
 import com.prodyna.pac.rentawreck.backend.rentable.service.AircraftService;
 
 @RunWith(Arquillian.class)
-@Transactional
+//@Transactional
 public class AircraftTest extends AbstractEntityCRUDTest<Aircraft>{
 
 	@Inject
@@ -47,7 +45,7 @@ public class AircraftTest extends AbstractEntityCRUDTest<Aircraft>{
 	 * @see com.prodyna.pac.rentawreck.backend.common.AbstractEntityCRUDTest#getCRUDEntity()
 	 */
 	@Override
-	public Aircraft getCRUDEntity() {
+	public Aircraft createCRUDEntity() {
 		Aircraft aircraft = new Aircraft();
 		aircraft.setUuid(UUID.randomUUID().toString());
 		aircraft.setId("B52");
@@ -56,9 +54,18 @@ public class AircraftTest extends AbstractEntityCRUDTest<Aircraft>{
 		return aircraft;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.prodyna.pac.rentawreck.backend.common.AbstractEntityCRUDTest#updateCRUDEntity(com.prodyna.pac.rentawreck.backend.common.model.AbstractEntity)
+	 */
+	@Override
+	protected Aircraft updateCRUDEntity(Aircraft aircraft) {
+		aircraft.setId("B52");
+		return aircraft;
+	}
+
 	@Test
 	@InSequence(1)
-	@Transactional(TransactionMode.ROLLBACK)
+//	@Transactional(TransactionMode.ROLLBACK)
 	public void simpleTest() {
 		aircraftService.findAll();
 		assertEquals(0, aircraftService.findAllCount().intValue());
@@ -72,5 +79,6 @@ public class AircraftTest extends AbstractEntityCRUDTest<Aircraft>{
 		aircraftService.delete(instance1.getUuid());
 		assertEquals(0, aircraftService.findAllCount().intValue());
 	}
+
 
 }

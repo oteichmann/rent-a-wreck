@@ -9,7 +9,6 @@ import javax.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
-import org.jboss.arquillian.transaction.api.annotation.Transactional;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.runner.RunWith;
 
@@ -24,7 +23,7 @@ import com.prodyna.pac.rentawreck.backend.common.service.RoleService;
  * 
  */
 @RunWith(Arquillian.class)
-@Transactional
+//@Transactional
 public class RoleTest extends AbstractEntityCRUDTest<Role> {
 	
 	@Inject
@@ -34,7 +33,7 @@ public class RoleTest extends AbstractEntityCRUDTest<Role> {
 	public static WebArchive createDeployment() {
 		return TestDeploymentFactory.getInstance().getBackendCommonDeployment();
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see com.prodyna.pac.rentawreck.backend.common.AbstractEntityCRUDTest#getService()
 	 */
@@ -47,10 +46,18 @@ public class RoleTest extends AbstractEntityCRUDTest<Role> {
 	 * @see com.prodyna.pac.rentawreck.backend.common.AbstractEntityCRUDTest#getCRUDEntity()
 	 */
 	@Override
-	public Role getCRUDEntity() {
+	public Role createCRUDEntity() {
 		Role role = new Role();
 		role.setUuid(UUID.randomUUID().toString());
 		role.setName("user");
+		return role;
+	}
+
+	/* (non-Javadoc)
+	 * @see com.prodyna.pac.rentawreck.backend.common.AbstractEntityCRUDTest#updateCRUDEntity(com.prodyna.pac.rentawreck.backend.common.model.AbstractEntity)
+	 */
+	@Override
+	protected Role updateCRUDEntity(Role role) {
 		return role;
 	}
 

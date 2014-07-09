@@ -9,7 +9,6 @@ import javax.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
-import org.jboss.arquillian.transaction.api.annotation.Transactional;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.runner.RunWith;
 
@@ -24,7 +23,7 @@ import com.prodyna.pac.rentawreck.backend.rentable.model.Pilot;
 import com.prodyna.pac.rentawreck.backend.rentable.service.PilotService;
 
 @RunWith(Arquillian.class)
-@Transactional
+//@Transactional
 public class PilotTest extends AbstractEntityCRUDTest<Pilot> {
 
 	@Inject
@@ -50,7 +49,7 @@ public class PilotTest extends AbstractEntityCRUDTest<Pilot> {
 	 * @see com.prodyna.pac.rentawreck.backend.common.AbstractEntityCRUDTest#getCRUDEntity()
 	 */
 	@Override
-	public Pilot getCRUDEntity() {
+	public Pilot createCRUDEntity() {
 		
 		User user = new User();
 		user.setUuid(UUID.randomUUID().toString());
@@ -75,6 +74,22 @@ public class PilotTest extends AbstractEntityCRUDTest<Pilot> {
 		licenseSet.add(license);
 		
 		pilot.setLicenses(licenseSet);
+		
+		return pilot;
+	}
+	
+
+	/* (non-Javadoc)
+	 * @see com.prodyna.pac.rentawreck.backend.common.AbstractEntityCRUDTest#updateCRUDEntity(com.prodyna.pac.rentawreck.backend.common.model.AbstractEntity)
+	 */
+	@Override
+	protected Pilot updateCRUDEntity(Pilot pilot) {
+		License license = new License();
+		license.setUuid(UUID.randomUUID().toString());
+		license.setAircraftType(AircraftType.BOEING);
+		license.setValidTill(new Date());
+		
+		pilot.getLicenses().add(license);
 		
 		return pilot;
 	}

@@ -34,8 +34,6 @@ public interface AbstractEntityPersistenceService<T extends AbstractEntity> {
 	 */
 	@POST
 	@Path("/{uuid}")
-	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.APPLICATION_JSON)
 	@RolesAllowed("admin")
 	public T create(@PathParam("uuid") String uuid, T entity);
 	
@@ -44,6 +42,9 @@ public interface AbstractEntityPersistenceService<T extends AbstractEntity> {
 	 * @param entity The new entity.
 	 * @return The persisted version of the entity.
 	 */
+	@POST
+	@Path("/hidden-create")
+	@RolesAllowed("admin")
 	public T create(T entity);
 
 	/**
@@ -54,7 +55,6 @@ public interface AbstractEntityPersistenceService<T extends AbstractEntity> {
 	@GET
 	@NoCache
 	@Path("/{uuid}")
-	@Produces(MediaType.APPLICATION_JSON)
 	@PermitAll
 	public T read(@PathParam("uuid") String uuid);
 	
@@ -65,8 +65,6 @@ public interface AbstractEntityPersistenceService<T extends AbstractEntity> {
 	 */
 	@PUT
 	@Path("/{uuid}")
-	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.APPLICATION_JSON)
 	@RolesAllowed({"admin"})
 	public T update(@PathParam("uuid") String uuid, T entity);
 
@@ -75,6 +73,9 @@ public interface AbstractEntityPersistenceService<T extends AbstractEntity> {
 	 * @param entity The entity to update.
 	 * @return The updated version of the entity.
 	 */
+	@PUT
+	@Path("/hidden-update")
+	@RolesAllowed("admin")
 	public T update(T entity);
 	
 	/**
@@ -92,7 +93,6 @@ public interface AbstractEntityPersistenceService<T extends AbstractEntity> {
 	 */
 	@GET
 	@NoCache
-	@Produces(MediaType.APPLICATION_JSON)
 	@PermitAll
 	public List<T> findAll();
 

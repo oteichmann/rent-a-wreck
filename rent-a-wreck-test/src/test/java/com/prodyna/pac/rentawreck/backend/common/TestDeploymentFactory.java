@@ -38,19 +38,13 @@ public class TestDeploymentFactory {
 		wa.addAsResource("META-INF/test-persistence.xml", "META-INF/persistence.xml");
 		wa.addAsResource("META-INF/beans.xml");
 		wa.addAsWebInfResource("test-ds.xml", "test-ds.xml");
-		System.out.println(wa.toString(true));
 
 		return wa;
 	}
 	
 	private WebArchive createBackendRentableDeployment() {
-		WebArchive wa = ShrinkWrap.create(WebArchive.class, "raw-test.war");
-		wa.addPackages(true, "com.prodyna.pac.rentawreck.backend.common",  "com.prodyna.pac.rentawreck.backend.rentable");
-		wa.deletePackage("com.prodyna.pac.rentawreck.backend.common.monitoring");
-		wa.addAsResource("META-INF/test-persistence.xml", "META-INF/persistence.xml");
-		wa.addAsResource("META-INF/beans.xml");
-		wa.addAsWebInfResource("test-ds.xml", "test-ds.xml");
-		System.out.println(wa.toString(true));     
+		WebArchive wa = createBackendCommonDeployment();
+		wa.addPackages(true, "com.prodyna.pac.rentawreck.backend.rentable");
 		
 		return wa;
 	}

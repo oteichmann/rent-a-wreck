@@ -3,10 +3,11 @@
  */
 package com.prodyna.pac.rentawreck.backend.common;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+
 import org.jboss.arquillian.junit.InSequence;
-import org.jboss.arquillian.transaction.api.annotation.TransactionMode;
-import org.jboss.arquillian.transaction.api.annotation.Transactional;
-import org.junit.Assert;
 import org.junit.Test;
 
 import com.prodyna.pac.rentawreck.backend.common.model.AbstractEntity;
@@ -22,27 +23,45 @@ public abstract class AbstractEntityCRUDTest<T extends AbstractEntity> {
 	
 	protected abstract AbstractEntityPersistenceService<T> getService();
 	
-	protected abstract T getCRUDEntity();
+	protected abstract T createCRUDEntity();
+	protected abstract T updateCRUDEntity(T persitedEntity);
 
 	@Test
 	@InSequence(0)
-	@Transactional(TransactionMode.ROLLBACK)
+//	@Transactional(TransactionMode.ROLLBACK)
 	public void testCRUDOperations(){
 		
-		T entity = getCRUDEntity();
-		
-		Assert.assertNull(getService().read(entity.getUuid()));
-		Assert.assertEquals(0, getService().findAllCount().intValue());
-		
+		T entity = createCRUDEntity();
+		assertNull(getService().read(entity.getUuid()));
+
 		T persitedEntity = getService().create(entity);
-		Assert.assertEquals(1, getService().findAllCount().intValue());
+		assertEquals(entity.getUuid(), persitedEntity.getUuid());
+		assertsAfterCreate(persitedEntity);
+
+		assertNotNull(getService().read(entity.getUuid()));
 		
-		T updatedEntity = getService().update(persitedEntity);
+		T updatedEntity = updateCRUDEntity(persitedEntity);
+		updatedEntity = getService().update(updatedEntity);
+		assertEquals(entity.getUuid(), updatedEntity.getUuid());
+		assertsAfterUpdate(updatedEntity);
 		
-		getService().delete(updatedEntity.getUuid());
-		
-		Assert.assertNull(getService().read(entity.getUuid()));
-		Assert.assertEquals(0, getService().findAllCount().intValue());
-		
+		getService().delete(entity.getUuid());
+		assertNull(getService().read(entity.getUuid()));
+	}
+	
+	/**
+	 * This method can be overridden for custom test case asserts.
+	 * @param persitedEntity 
+	 */
+	protected void assertsAfterCreate(T persitedEntity) {
+		return;
+	}
+
+	/**
+	 * This method can be overridden for custom test case asserts.
+	 * @param updatedEntity 
+	 */
+	protected void assertsAfterUpdate(T updatedEntity) {
+		return;
 	}
 }
