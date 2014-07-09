@@ -4,7 +4,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
-import java.util.logging.Logger;
 
 import javax.annotation.Resource;
 import javax.ejb.SessionContext;
@@ -13,6 +12,8 @@ import javax.inject.Inject;
 import javax.persistence.NoResultException;
 import javax.persistence.TemporalType;
 import javax.persistence.TypedQuery;
+
+import org.slf4j.Logger;
 
 import com.prodyna.pac.rentawreck.backend.common.monitoring.Monitored;
 import com.prodyna.pac.rentawreck.backend.common.service.exception.ValidationException;
@@ -39,7 +40,7 @@ public class CharterServiceBean extends AbstractEntityPersistenceServiceBean<Cha
 	private SessionContext sessionContext;
 	
 	@Inject
-	private Logger log;
+	private Logger logger;
 	
 	@Inject 
 	private PilotService pilotService;
@@ -57,7 +58,7 @@ public class CharterServiceBean extends AbstractEntityPersistenceServiceBean<Cha
 	 */
 	@Override
 	protected Logger getLooger() {
-		return log;
+		return logger;
 	}
 	
 	/* (non-Javadoc)
@@ -105,7 +106,7 @@ public class CharterServiceBean extends AbstractEntityPersistenceServiceBean<Cha
 	 */
 	@Override
 	public Charter updateCharterDates(String uuid, Date charterStart, Date charterEnd) {
-		log.fine("updatePilotCharterDates");
+		logger.debug("updatePilotCharterDates");
 		
 		// Validate date range
 		if(!charterEnd.after(charterStart)) {
@@ -128,7 +129,7 @@ public class CharterServiceBean extends AbstractEntityPersistenceServiceBean<Cha
 	 */
 	@Override
 	public Charter updateCharterStatus(String uuid, CharterStatus newCharterStatus) {
-		log.fine("updatePilotCharterStatus");
+		logger.debug("updatePilotCharterStatus");
 		
 		if(newCharterStatus == null) {
 			throw new ValidationException("New status is missing.");

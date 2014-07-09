@@ -1,12 +1,11 @@
 package com.prodyna.pac.rentawreck.backend.common.service.impl;
 
-import java.util.logging.Logger;
-
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.TypedQuery;
 
 import org.jboss.security.auth.spi.Util;
+import org.slf4j.Logger;
 
 import com.prodyna.pac.rentawreck.backend.common.model.Role;
 import com.prodyna.pac.rentawreck.backend.common.model.User;
@@ -25,7 +24,7 @@ import com.prodyna.pac.rentawreck.backend.common.service.UserService;
 public class UserServiceBean extends AbstractEntityPersistenceServiceBean<User> implements UserService {
 
 	@Inject
-	private Logger log;
+	private Logger logger;
 	
 	@Inject
 	private RoleService roleService;
@@ -98,7 +97,7 @@ public class UserServiceBean extends AbstractEntityPersistenceServiceBean<User> 
 	 */
 	@Override
 	protected Logger getLooger() {
-		return log;
+		return logger;
 	}
 
 	/* (non-Javadoc)

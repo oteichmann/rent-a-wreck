@@ -2,11 +2,12 @@ package com.prodyna.pac.rentawreck.backend.common.service.impl;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.logging.Logger;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
+
+import org.slf4j.Logger;
 
 import com.prodyna.pac.rentawreck.backend.common.model.AbstractEntity;
 import com.prodyna.pac.rentawreck.backend.common.service.AbstractEntityPersistenceService;
@@ -31,6 +32,7 @@ public abstract class AbstractEntityPersistenceServiceBean<T extends AbstractEnt
 	
 	@Override
 	public T read(String uuid) {
+		getLooger().debug(String.format("Get %s by UUID: %s", getEntityClass().getName(), uuid));
 		T entity = getEntityManager().find(getEntityClass(), uuid);
 		return entity;
 	}
@@ -57,6 +59,7 @@ public abstract class AbstractEntityPersistenceServiceBean<T extends AbstractEnt
 	
 	@Override
 	public List<T> findAll() {
+		getLooger().info(String.format("Get list of %s", getEntityClass().getName()));
 		TypedQuery<T> query = em.createNamedQuery(getFindAllNamedQuery(), getEntityClass());
 		List<T> results = query.getResultList();
 
@@ -84,11 +87,11 @@ public abstract class AbstractEntityPersistenceServiceBean<T extends AbstractEnt
 	private void validateUuid(String uuid, T entity) {
 		if(uuid != null && entity.getUuid() != null) {
 			if(!uuid.equalsIgnoreCase(entity.getUuid())) {
-				getLooger().severe("UUID's must match!");	
+				getLooger().error("UUID's must match!");	
 				// TODO : Throw an exceptions.	
 			}
 		} else {
-			getLooger().severe("UUID must be set!");
+			getLooger().error("UUID must be set!");
 			// TODO : Throw an exceptions.	
 		}
 	}

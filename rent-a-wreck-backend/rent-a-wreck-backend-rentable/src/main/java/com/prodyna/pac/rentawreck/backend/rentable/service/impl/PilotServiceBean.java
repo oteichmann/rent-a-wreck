@@ -1,11 +1,11 @@
 package com.prodyna.pac.rentawreck.backend.rentable.service.impl;
 
-import java.util.logging.Logger;
-
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
+
+import org.slf4j.Logger;
 
 import com.prodyna.pac.rentawreck.backend.common.monitoring.Monitored;
 import com.prodyna.pac.rentawreck.backend.common.service.impl.AbstractEntityPersistenceServiceBean;
@@ -23,7 +23,7 @@ import com.prodyna.pac.rentawreck.backend.rentable.service.PilotService;
 public class PilotServiceBean extends AbstractEntityPersistenceServiceBean<Pilot> implements PilotService {
 
 	@Inject
-	private Logger log;
+	private Logger logger;
 	
 	/* (non-Javadoc)
 	 * @see com.prodyna.pac.rentawreck.backend.common.service.impl.AbstractEntityPersistenceServiceBean#getEntityClass()
@@ -38,7 +38,7 @@ public class PilotServiceBean extends AbstractEntityPersistenceServiceBean<Pilot
 	 */
 	@Override
 	protected Logger getLooger() {
-		return log;
+		return logger;
 	}
 	
 	/* (non-Javadoc)

@@ -16,6 +16,18 @@
 		</dependency>
 		<dependency>
 			<groupId>com.prodyna.pac.rentawreck</groupId>
+			<artifactId>rent-a-wreck-backend-auth</artifactId>
+			<type>ejb</type>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.prodyna.pac.rentawreck</groupId>
+			<artifactId>rent-a-wreck-backend-common</artifactId>
+			<type>ejb</type>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.prodyna.pac.rentawreck</groupId>
 			<artifactId>rent-a-wreck-backend-rentable</artifactId>
 			<type>ejb</type>
 			<scope>provided</scope>

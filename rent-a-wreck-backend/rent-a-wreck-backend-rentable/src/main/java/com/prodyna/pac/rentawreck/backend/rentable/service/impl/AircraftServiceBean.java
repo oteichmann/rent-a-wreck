@@ -2,10 +2,11 @@ package com.prodyna.pac.rentawreck.backend.rentable.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+
+import org.slf4j.Logger;
 
 import com.prodyna.pac.rentawreck.backend.common.monitoring.Monitored;
 import com.prodyna.pac.rentawreck.backend.common.service.impl.AbstractEntityPersistenceServiceBean;
@@ -26,7 +27,7 @@ import com.prodyna.pac.rentawreck.backend.rentable.service.CharterService;
 public class AircraftServiceBean extends AbstractEntityPersistenceServiceBean<Aircraft> implements AircraftService {
 
 	@Inject
-	private Logger log;
+	private Logger logger;
 
 	@Inject
 	private CharterService charterService;
@@ -44,7 +45,7 @@ public class AircraftServiceBean extends AbstractEntityPersistenceServiceBean<Ai
 	 */
 	@Override
 	protected Logger getLooger() {
-		return log;
+		return logger;
 	}
 
 	/* (non-Javadoc)

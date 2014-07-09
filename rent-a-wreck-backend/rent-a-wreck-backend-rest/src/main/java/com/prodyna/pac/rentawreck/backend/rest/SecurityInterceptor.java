@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -20,10 +19,10 @@ import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.NewCookie;
 import javax.ws.rs.ext.Provider;
 
-import org.jboss.logging.Logger;
 import org.jboss.resteasy.core.ResourceMethodInvoker;
 import org.jboss.resteasy.util.Base64;
 import org.picketbox.util.StringUtil;
+import org.slf4j.Logger;
 
 import com.prodyna.pac.rentawreck.backend.common.model.TokenSubject;
 import com.prodyna.pac.rentawreck.backend.common.service.AuthenticationService;
@@ -38,7 +37,8 @@ import com.prodyna.pac.rentawreck.backend.rest.util.ResponseMessageBuilder;
 @Provider
 public class SecurityInterceptor implements javax.ws.rs.container.ContainerRequestFilter {
 	
-	private static final Logger log = Logger.getLogger(SecurityInterceptor.class);
+	@Inject
+	private Logger logger;
 	
     private static final String AUTHORIZATION_PROPERTY = "Authorization";
     private static final String AUTHENTICATION_SCHEME = "Basic";
@@ -128,8 +128,8 @@ public class SecurityInterceptor implements javax.ws.rs.container.ContainerReque
             final String password = tokenizer.nextToken();
              
             //Verifying Username and password
-            log.debug(username);
-            log.debug(password);
+            logger.debug(username);
+            logger.debug(password);
         	
             TokenSubject tokenSubject = authenticationService.login(username, password);
             return tokenSubject;

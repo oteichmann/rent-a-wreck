@@ -1,9 +1,9 @@
 package com.prodyna.pac.rentawreck.backend.rentable.service.impl;
 
-import java.util.logging.Logger;
-
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+
+import org.slf4j.Logger;
 
 import com.prodyna.pac.rentawreck.backend.common.monitoring.Monitored;
 import com.prodyna.pac.rentawreck.backend.common.service.impl.AbstractEntityPersistenceServiceBean;
@@ -21,7 +21,7 @@ import com.prodyna.pac.rentawreck.backend.rentable.service.LicenseService;
 public class LicenseServiceBean extends AbstractEntityPersistenceServiceBean<License> implements LicenseService {
 
 	@Inject
-	private Logger log;
+	private Logger logger;
 	
 	/* (non-Javadoc)
 	 * @see com.prodyna.pac.rentawreck.backend.common.service.impl.AbstractEntityPersistenceServiceBean#getEntityClass()
@@ -36,7 +36,7 @@ public class LicenseServiceBean extends AbstractEntityPersistenceServiceBean<Lic
 	 */
 	@Override
 	protected Logger getLooger() {
-		return log;
+		return logger;
 	}
 	
 	/* (non-Javadoc)

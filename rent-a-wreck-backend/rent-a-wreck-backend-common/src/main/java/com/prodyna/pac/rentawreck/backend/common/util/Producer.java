@@ -1,13 +1,15 @@
 package com.prodyna.pac.rentawreck.backend.common.util;
 
 import java.lang.management.ManagementFactory;
-import java.util.logging.Logger;
 
 import javax.enterprise.inject.Produces;
 import javax.enterprise.inject.spi.InjectionPoint;
 import javax.management.MBeanServer;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * This class uses CDI to alias Java EE resources, such as the persistence context, to CDI beans.
@@ -18,7 +20,7 @@ import javax.persistence.PersistenceContext;
  * 
  * <pre>
  * &#064;Inject
- * private Logger log;
+ * private Logger logger;
  * </pre>
  *
  * @author Oliver Teichmann
@@ -31,8 +33,8 @@ public class Producer {
 	private EntityManager em;
 
 	@Produces
-	public Logger produceLog(InjectionPoint injectionPoint) {
-		return Logger.getLogger(injectionPoint.getMember().getDeclaringClass().getName());
+	public Logger produceLogger(final InjectionPoint injectionPoint) {
+		return LoggerFactory.getLogger(injectionPoint.getMember().getDeclaringClass());
 	}
 	
 	@Produces
