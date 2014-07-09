@@ -3,6 +3,7 @@ package com.prodyna.pac.rentawreck.backend.common.rest;
 import java.net.URL;
 
 import org.jboss.arquillian.container.test.api.Deployment;
+import org.jboss.arquillian.extension.rest.client.ArquillianResteasyResource;
 //import org.jboss.arquillian.extension.rest.client.ArquillianResteasyResource;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.test.api.ArquillianResource;
@@ -36,12 +37,12 @@ public class ArquillianResteasyExtensionSampleTest {
 	 * @param customerResource
 	 *            configured resource ready for use, injected by Arquillian
 	 */
-//	@Test
-//	public void generateUuid(@ArquillianResteasyResource UtilService utilService) {
-//		StringResponse response = utilService.gernerateUUID();
-//
-//		Assert.assertNotNull(response);
-//		Assert.assertNotNull(response.getValue());
-//		System.out.println(response.getValue());
-//	}
+	@Test
+	public void generateUuid(@ArquillianResteasyResource UtilService utilService) {
+		StringResponse response = utilService.gernerateUUID();
+
+		Assert.assertNotNull(response);
+		Assert.assertNotNull(response.getValue());
+		System.out.println(response.getValue());
+	}
 }

@@ -1,4 +1,4 @@
-package com.prodyna.pac.rentawreck.dbutil.scripts;
+package com.prodyna.pac.rentawreck.backend.common.util.scripts;
 
 public interface InitDatabase {
 

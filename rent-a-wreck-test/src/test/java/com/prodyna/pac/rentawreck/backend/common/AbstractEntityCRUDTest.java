@@ -8,6 +8,8 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
 import org.jboss.arquillian.junit.InSequence;
+import org.jboss.arquillian.transaction.api.annotation.TransactionMode;
+import org.jboss.arquillian.transaction.api.annotation.Transactional;
 import org.junit.Test;
 
 import com.prodyna.pac.rentawreck.backend.common.model.AbstractEntity;
@@ -28,7 +30,7 @@ public abstract class AbstractEntityCRUDTest<T extends AbstractEntity> {
 
 	@Test
 	@InSequence(0)
-//	@Transactional(TransactionMode.ROLLBACK)
+	@Transactional(TransactionMode.ROLLBACK)
 	public void testCRUDOperations(){
 		
 		T entity = createCRUDEntity();

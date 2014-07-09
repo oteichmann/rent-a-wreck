@@ -1,4 +1,4 @@
-package com.prodyna.pac.rentawreck.backend.common;
+package com.prodyna.pac.rentawreck.backend.common.util;
 
 
 import static org.junit.Assert.assertEquals;
@@ -16,10 +16,10 @@ import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import com.prodyna.pac.rentawreck.backend.TestDeploymentFactory;
 import com.prodyna.pac.rentawreck.backend.common.service.RoleService;
-import com.prodyna.pac.rentawreck.dbutil.DatabaseUtilScript;
-import com.prodyna.pac.rentawreck.dbutil.DatabaseUtilService;
-import com.prodyna.pac.rentawreck.dbutil.scripts.InitDatabase;
+import com.prodyna.pac.rentawreck.backend.common.service.UserService;
+import com.prodyna.pac.rentawreck.backend.common.util.scripts.InitDatabase;
 
 @RunWith(Arquillian.class)
 @Transactional
@@ -32,12 +32,12 @@ public class DatabaseUtilTest {
 	private RoleService roleService;
 
 	@Inject
-	private RoleService userService;
+	private UserService	 userService;
 	
 	@Deployment
 	public static WebArchive createDeployment() {
-		WebArchive wa = TestDeploymentFactory.getInstance().getBackendCommonDeployment();
-		wa.addPackages(true, "com.prodyna.pac.rentawreck.dbutil");
+		WebArchive wa = TestDeploymentFactory.getInstance().getBackendAuthDeployment();
+		wa.addPackages(true, "com.prodyna.pac.rentawreck.common.util");
 		
 		return wa;
 	}

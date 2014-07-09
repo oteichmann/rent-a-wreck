@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.prodyna.pac.rentawreck.backend.common;
+package com.prodyna.pac.rentawreck.backend.auth;
 
 import java.util.UUID;
 
@@ -9,9 +9,12 @@ import javax.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
+import org.jboss.arquillian.transaction.api.annotation.Transactional;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.runner.RunWith;
 
+import com.prodyna.pac.rentawreck.backend.TestDeploymentFactory;
+import com.prodyna.pac.rentawreck.backend.common.AbstractEntityCRUDTest;
 import com.prodyna.pac.rentawreck.backend.common.model.Role;
 import com.prodyna.pac.rentawreck.backend.common.service.AbstractEntityPersistenceService;
 import com.prodyna.pac.rentawreck.backend.common.service.RoleService;
@@ -23,7 +26,7 @@ import com.prodyna.pac.rentawreck.backend.common.service.RoleService;
  * 
  */
 @RunWith(Arquillian.class)
-//@Transactional
+@Transactional
 public class RoleTest extends AbstractEntityCRUDTest<Role> {
 	
 	@Inject
@@ -31,7 +34,7 @@ public class RoleTest extends AbstractEntityCRUDTest<Role> {
 	
 	@Deployment
 	public static WebArchive createDeployment() {
-		return TestDeploymentFactory.getInstance().getBackendCommonDeployment();
+		return TestDeploymentFactory.getInstance().getBackendAuthDeployment();
 	}
 	
 	/* (non-Javadoc)

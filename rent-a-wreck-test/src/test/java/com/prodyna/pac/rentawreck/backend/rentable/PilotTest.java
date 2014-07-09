@@ -9,11 +9,12 @@ import javax.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
+import org.jboss.arquillian.transaction.api.annotation.Transactional;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.runner.RunWith;
 
+import com.prodyna.pac.rentawreck.backend.TestDeploymentFactory;
 import com.prodyna.pac.rentawreck.backend.common.AbstractEntityCRUDTest;
-import com.prodyna.pac.rentawreck.backend.common.TestDeploymentFactory;
 import com.prodyna.pac.rentawreck.backend.common.model.User;
 import com.prodyna.pac.rentawreck.backend.common.service.AbstractEntityPersistenceService;
 import com.prodyna.pac.rentawreck.backend.common.service.UserService;
@@ -23,7 +24,7 @@ import com.prodyna.pac.rentawreck.backend.rentable.model.Pilot;
 import com.prodyna.pac.rentawreck.backend.rentable.service.PilotService;
 
 @RunWith(Arquillian.class)
-//@Transactional
+@Transactional
 public class PilotTest extends AbstractEntityCRUDTest<Pilot> {
 
 	@Inject

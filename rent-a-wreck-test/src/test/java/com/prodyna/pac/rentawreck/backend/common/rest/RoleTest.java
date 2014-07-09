@@ -3,11 +3,14 @@
  */
 package com.prodyna.pac.rentawreck.backend.common.rest;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.fail;
 
 import java.util.Arrays;
 import java.util.UUID;
 
+import javax.inject.Inject;
 import javax.ws.rs.NotAuthorizedException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -15,21 +18,19 @@ import org.jboss.arquillian.container.test.api.RunAsClient;
 import org.jboss.arquillian.extension.rest.client.ArquillianResteasyResource;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.junit.InSequence;
-import org.jboss.arquillian.transaction.api.annotation.TransactionMode;
-import org.jboss.arquillian.transaction.api.annotation.Transactional;
-import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
 
-import com.prodyna.pac.rentawreck.backend.common.TestDeploymentFactory;
+import com.prodyna.pac.rentawreck.backend.TestDeploymentFactory;
 import com.prodyna.pac.rentawreck.backend.common.model.Role;
 import com.prodyna.pac.rentawreck.backend.common.service.RoleService;
+import com.prodyna.pac.rentawreck.backend.common.util.DatabaseUtilScript;
+import com.prodyna.pac.rentawreck.backend.common.util.DatabaseUtilServiceREST;
+import com.prodyna.pac.rentawreck.backend.common.util.scripts.InitDatabase;
 import com.prodyna.pac.rentawreck.backend.rest.JaxRsActivator;
-import com.prodyna.pac.rentawreck.dbutil.DatabaseUtilScript;
-import com.prodyna.pac.rentawreck.dbutil.DatabaseUtilServiceREST;
-import com.prodyna.pac.rentawreck.dbutil.scripts.InitDatabase;
 
 /**
  * RoleTest
@@ -41,11 +42,13 @@ import com.prodyna.pac.rentawreck.dbutil.scripts.InitDatabase;
 //@Transactional
 public class RoleTest extends AbstractArquillianResteasyTest {
 	
+	@Inject
+	private Logger logger;
+	
 	@Deployment(testable=false)
 	public static WebArchive createDeployment() {
-		WebArchive wa = TestDeploymentFactory.getInstance().getBackendCommonDeployment();
+		WebArchive wa = TestDeploymentFactory.getInstance().getBackendAuthDeployment();
 		wa.addPackages(true, "com.prodyna.pac.rentawreck.backend.rest");
-		wa.addPackages(true, "com.prodyna.pac.rentawreck.dbutil");
 		wa.deleteClass(JaxRsActivator.class);
 		wa.addClass(TestJaxRsActivator.class);
 		
@@ -61,7 +64,7 @@ public class RoleTest extends AbstractArquillianResteasyTest {
 		try {
 			databaseUtilService.executeDatabaseUtilScript(databaseUtilScript);
 		} catch (Throwable t) {
-			System.err.println(t.getMessage());
+			logger.error(t.getMessage(), t);
 		}
 	}
 

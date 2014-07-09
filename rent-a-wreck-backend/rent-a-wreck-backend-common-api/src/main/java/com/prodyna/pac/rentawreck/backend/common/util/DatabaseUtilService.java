@@ -1,4 +1,4 @@
-package com.prodyna.pac.rentawreck.dbutil;
+package com.prodyna.pac.rentawreck.backend.common.util;
 
 import java.util.List;
 

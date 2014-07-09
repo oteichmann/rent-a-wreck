@@ -22,12 +22,6 @@
 		</dependency>
 		<dependency>
 			<groupId>com.prodyna.pac.rentawreck</groupId>
-			<artifactId>rent-a-wreck-backend-common</artifactId>
-			<type>ejb</type>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>com.prodyna.pac.rentawreck</groupId>
 			<artifactId>rent-a-wreck-backend-rentable</artifactId>
 			<type>ejb</type>
 			<scope>provided</scope>
@@ -38,13 +32,6 @@
 			<classifier>classes</classifier>
 			<version>${project.version}</version>
 			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.jboss.spec</groupId>
-			<artifactId>jboss-javaee-7.0</artifactId>
-			<version>${version.jboss.spec.javaee.7.0}</version>
-			<type>pom</type>
-			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
@@ -80,24 +67,9 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<groupId>org.hibernate.javax.persistence</groupId>
-			<artifactId>hibernate-jpa-2.1-api</artifactId>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
 			<groupId>org.jboss.resteasy</groupId>
-			<artifactId>resteasy-jaxrs</artifactId>
+			<artifactId>resteasy-jackson-provider</artifactId>
 			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.jboss.resteasy</groupId>
-			<artifactId>resteasy-jackson2-provider</artifactId>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.picketbox</groupId>
-			<artifactId>picketbox</artifactId>
-			<version>4.0.20.Final</version>
 		</dependency>
 		<!-- <dependency> -->
 		<!-- <groupId>org.jboss.security</groupId> -->
