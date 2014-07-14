@@ -39,11 +39,11 @@ public class Charter extends AbstractEntity {
 	private CharterStatus charterStatus;
 	
 	@NotNull
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date charterStart;
 
 	@NotNull
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date charterEnd;
 
 	@ManyToOne(optional = false)

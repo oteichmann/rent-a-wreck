@@ -59,7 +59,7 @@ public abstract class AbstractEntityPersistenceServiceBean<T extends AbstractEnt
 	
 	@Override
 	public List<T> findAll() {
-		getLooger().info(String.format("Get list of %s", getEntityClass().getName()));
+		getLooger().debug(String.format("Get list of %s", getEntityClass().getName()));
 		TypedQuery<T> query = em.createNamedQuery(getFindAllNamedQuery(), getEntityClass());
 		List<T> results = query.getResultList();
 

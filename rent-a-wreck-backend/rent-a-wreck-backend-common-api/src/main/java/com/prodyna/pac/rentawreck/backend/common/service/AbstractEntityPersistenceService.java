@@ -39,6 +39,9 @@ public interface AbstractEntityPersistenceService<T extends AbstractEntity> {
 	
 	/**
 	 * Persists a new entity.
+	 * 
+	 * Resteasy annotations are required as test client can not be set when interface has rest and non-rest operations.
+	 * 
 	 * @param entity The new entity.
 	 * @return The persisted version of the entity.
 	 */

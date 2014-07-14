@@ -1,8 +1,10 @@
 package com.prodyna.pac.rentawreck.backend.rentable.service.impl;
 
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -121,7 +123,9 @@ public class CharterServiceBean extends AbstractEntityPersistenceServiceBean<Cha
 		charter.setCharterStart(charterStart);
 		charter.setCharterEnd(charterEnd);
 		
-		return read(uuid);
+		fixDates(charter);
+		
+		return update(charter);
 	}
 
 	/* (non-Javadoc)
@@ -144,6 +148,12 @@ public class CharterServiceBean extends AbstractEntityPersistenceServiceBean<Cha
 				(newCharterStatus.equals(CharterStatus.RETURNED) && charter.getCharterStatus().equals(CharterStatus.LENT)) || 
 				(newCharterStatus.equals(CharterStatus.CANCELED) && charter.getCharterStatus().equals(CharterStatus.RESERVED))) {
 			
+			Date now = new Date();
+			if(newCharterStatus.equals(CharterStatus.LENT)) {
+				if(charter.getCharterStart().after(now) ||  charter.getCharterEnd().before(now)) {
+					throw new ValidationException("Aircraft can only be lent during reservation time.");
+				}				
+			}
 			charter.setCharterStatus(newCharterStatus);
 			return update(charter);
 		} else {
@@ -183,7 +193,7 @@ public class CharterServiceBean extends AbstractEntityPersistenceServiceBean<Cha
 	public Charter getActiveAircraftCharter(String aircraftUuid) {
 		Date now = new Date();
 		TypedQuery<Charter> query = em.createQuery("SELECT c FROM Charter c JOIN c.aircraft a WHERE c.charterStart <= :today AND c.charterEnd >= :today AND a.uuid = :aircraftUuid AND c.charterStatus IN (:activeCharterStatusList)", getEntityClass());
-		query.setParameter("today", now, TemporalType.DATE);
+		query.setParameter("today", now, TemporalType.TIMESTAMP);
 		query.setParameter("aircraftUuid", aircraftUuid);
 		query.setParameter("activeCharterStatusList", Arrays.asList(new CharterStatus[] {CharterStatus.RESERVED, CharterStatus.LENT}));
 		
@@ -231,6 +241,7 @@ public class CharterServiceBean extends AbstractEntityPersistenceServiceBean<Cha
 		}
 		
 		// Validate date range
+		fixDates(charter);
 		if(!charter.getCharterEnd().after(charter.getCharterStart())) {
 			throw new ValidationException("The end date of the charter must be after the start date.");
 		}
@@ -268,4 +279,29 @@ public class CharterServiceBean extends AbstractEntityPersistenceServiceBean<Cha
 		return query.getSingleResult().intValue();
 	}
 
+
+	/**
+	 * Utility method to set date times. Required as client can not maintain times.
+	 * @param charter
+	 */
+	private Charter fixDates(Charter charter) {
+		
+		GregorianCalendar endDate = new GregorianCalendar();
+		endDate.setTime(charter.getCharterEnd());
+		endDate.set(Calendar.HOUR_OF_DAY, 23);
+		endDate.set(Calendar.MINUTE, 59);
+		endDate.set(Calendar.SECOND, 59);
+		
+		charter.setCharterEnd(endDate.getTime());
+		
+		GregorianCalendar startDate = new GregorianCalendar();
+		startDate.setTime(charter.getCharterStart());
+		startDate.set(Calendar.HOUR_OF_DAY, 0);
+		startDate.set(Calendar.MINUTE, 0);
+		startDate.set(Calendar.SECOND, 0);
+		
+		charter.setCharterStart(startDate.getTime());
+		
+		return charter;
+	}
 }

@@ -11,7 +11,6 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
 import com.prodyna.pac.rentawreck.backend.common.model.AbstractEntity;
-import com.prodyna.pac.rentawreck.backend.common.service.rest.DateFormat;
 
 /**
  * License
@@ -36,8 +35,7 @@ public class License extends AbstractEntity {
 	private AircraftType aircraftType;
 	
 	@NotNull
-	@Temporal(TemporalType.DATE)
-	@DateFormat("yyyy-MM-dd")
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date validTill;
 
 	public AircraftType getAircraftType() {
