@@ -85,7 +85,7 @@ angular.module('rawDirectives.datePicker', [])
 			inputId : '@inputId',
 			inputLabel : '@inputLabel'
 		},
-		templateUrl: 'views/directives/datePicker.html',
+		templateUrl: 'views/directives/datepicker.html',
 		controller: 'DatePickerCtrl'
 	}
 	
