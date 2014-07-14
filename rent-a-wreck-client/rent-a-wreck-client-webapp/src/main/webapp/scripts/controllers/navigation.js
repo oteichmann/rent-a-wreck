@@ -20,6 +20,12 @@ rawControllers.controller('navigationCtrl', function($rootScope, $scope, $cookie
 		return false;
 	};
 
+	$scope.username = function () {
+		if(UserSession && UserSession.user) {
+		return UserSession.user.username;
+		}
+	}
+
 	/**
 	 * Validate authentication cookie on load - (Cookie Auto-Login ;-)
 	 */

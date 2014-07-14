@@ -14,7 +14,7 @@
 		</ul>
 		</li>
 		<li  ng-switch="isLoggedIn()">
-			<a ng-click="logout()" ng-switch-when="true">Logout</a>
+			<a ng-click="logout()" ng-switch-when="true">Logout, {{ username() }}</a>
 			<a href="#/login" ng-switch-default>Login</a>
 		</li>
 	</ul>
