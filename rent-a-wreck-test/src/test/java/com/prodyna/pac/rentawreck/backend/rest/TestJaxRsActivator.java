@@ -1,4 +1,4 @@
-package com.prodyna.pac.rentawreck.backend.common.rest;
+package com.prodyna.pac.rentawreck.backend.rest;
 
 /*
  * JBoss, Home of Professional Open Source

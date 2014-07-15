@@ -1,13 +1,8 @@
-package com.prodyna.pac.rentawreck.backend.common.util.scripts;
+package com.prodyna.pac.rentawreck.backend.common.util;
 
-public interface InitDatabase {
+public interface DatabaseScripts {
 
-	public String[] INIT_DATABASE = new String[] {
-			// "DELETE FROM `raw_charters`",
-			// "DELETE FROM `raw_licenses`",
-			// "DELETE FROM `raw_pilots`",
-			// "DELETE FROM `raw_aircraft`",
-
+	public String[] CREATE_ROLES_AND_ADMIN = new String[] {
 			"DELETE FROM `raw_users_roles`;", 
 			"DELETE FROM `raw_roles`;",
 			"DELETE FROM `raw_users`;",

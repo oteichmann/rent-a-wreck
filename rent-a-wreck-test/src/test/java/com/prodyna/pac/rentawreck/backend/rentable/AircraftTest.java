@@ -17,7 +17,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.prodyna.pac.rentawreck.backend.TestDeploymentFactory;
-import com.prodyna.pac.rentawreck.backend.common.AbstractEntityCRUDTest;
+import com.prodyna.pac.rentawreck.backend.common.service.AbstractEntityCRUDTest;
 import com.prodyna.pac.rentawreck.backend.common.service.AbstractEntityPersistenceService;
 import com.prodyna.pac.rentawreck.backend.rentable.model.Aircraft;
 import com.prodyna.pac.rentawreck.backend.rentable.model.AircraftType;

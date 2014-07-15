@@ -14,8 +14,8 @@ import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.runner.RunWith;
 
 import com.prodyna.pac.rentawreck.backend.TestDeploymentFactory;
-import com.prodyna.pac.rentawreck.backend.common.AbstractEntityCRUDTest;
 import com.prodyna.pac.rentawreck.backend.common.model.User;
+import com.prodyna.pac.rentawreck.backend.common.service.AbstractEntityCRUDTest;
 import com.prodyna.pac.rentawreck.backend.common.service.AbstractEntityPersistenceService;
 import com.prodyna.pac.rentawreck.backend.common.service.UserService;
 import com.prodyna.pac.rentawreck.backend.rentable.model.AircraftType;

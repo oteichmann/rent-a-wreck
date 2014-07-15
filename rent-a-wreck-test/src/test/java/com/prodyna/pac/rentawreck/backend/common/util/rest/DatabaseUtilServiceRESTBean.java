@@ -1,4 +1,4 @@
-package com.prodyna.pac.rentawreck.backend.common.util;
+package com.prodyna.pac.rentawreck.backend.common.util.rest;
 
 import java.util.List;
 

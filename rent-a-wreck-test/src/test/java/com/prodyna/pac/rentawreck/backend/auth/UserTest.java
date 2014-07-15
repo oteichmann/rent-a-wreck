@@ -1,5 +1,7 @@
 package com.prodyna.pac.rentawreck.backend.auth;
 
+import static org.junit.Assert.*;
+
 import java.util.UUID;
 
 import javax.inject.Inject;
@@ -11,8 +13,8 @@ import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.runner.RunWith;
 
 import com.prodyna.pac.rentawreck.backend.TestDeploymentFactory;
-import com.prodyna.pac.rentawreck.backend.common.AbstractEntityCRUDTest;
 import com.prodyna.pac.rentawreck.backend.common.model.User;
+import com.prodyna.pac.rentawreck.backend.common.service.AbstractEntityCRUDTest;
 import com.prodyna.pac.rentawreck.backend.common.service.AbstractEntityPersistenceService;
 import com.prodyna.pac.rentawreck.backend.common.service.UserService;
 
@@ -59,6 +61,14 @@ public class UserTest extends AbstractEntityCRUDTest<User> {
 	protected User updateCRUDEntity(User user) {
 		user.setFirstName("Test");
 		return user;
+	}
+	
+	/* (non-Javadoc)
+	 * @see com.prodyna.pac.rentawreck.backend.common.AbstractEntityCRUDTest#assertsAfterUpdate(com.prodyna.pac.rentawreck.backend.common.model.AbstractEntity)
+	 */
+	@Override
+	protected void assertsAfterUpdate(User user) {
+		assertEquals("Test", user.getFirstName());
 	}
 	
 }

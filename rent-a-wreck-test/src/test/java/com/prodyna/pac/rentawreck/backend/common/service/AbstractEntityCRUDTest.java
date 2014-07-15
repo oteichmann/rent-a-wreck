@@ -1,11 +1,11 @@
 /**
  * 
  */
-package com.prodyna.pac.rentawreck.backend.common;
+package com.prodyna.pac.rentawreck.backend.common.service;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
+import static org.junit.Assert.*;
+
+import java.util.List;
 
 import org.jboss.arquillian.junit.InSequence;
 import org.jboss.arquillian.transaction.api.annotation.TransactionMode;
@@ -41,6 +41,11 @@ public abstract class AbstractEntityCRUDTest<T extends AbstractEntity> {
 		assertsAfterCreate(persitedEntity);
 
 		assertNotNull(getService().read(entity.getUuid()));
+		assertEquals(new Integer(1), getService().findAllCount());
+		List<T> entityList = getService().findAll();
+		assertNotNull(entityList);
+		assertFalse(entityList.isEmpty());
+		assertEquals(new Integer(1), new Integer(entityList.size()));
 		
 		T updatedEntity = updateCRUDEntity(persitedEntity);
 		updatedEntity = getService().update(updatedEntity);

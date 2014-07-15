@@ -1,9 +1,6 @@
 package com.prodyna.pac.rentawreck.backend.common.util;
 
-
 import static org.junit.Assert.assertEquals;
-
-import java.util.Arrays;
 
 import javax.inject.Inject;
 
@@ -19,7 +16,6 @@ import org.junit.runner.RunWith;
 import com.prodyna.pac.rentawreck.backend.TestDeploymentFactory;
 import com.prodyna.pac.rentawreck.backend.common.service.RoleService;
 import com.prodyna.pac.rentawreck.backend.common.service.UserService;
-import com.prodyna.pac.rentawreck.backend.common.util.scripts.InitDatabase;
 
 @RunWith(Arquillian.class)
 @Transactional
@@ -48,7 +44,7 @@ public class DatabaseUtilTest {
 	public void testDatabaseUtilService() throws Exception {
 		
 		DatabaseUtilScript databaseUtilScript = new DatabaseUtilScript();
-		databaseUtilScript.setSqlStatements(Arrays.asList(InitDatabase.INIT_DATABASE));
+		databaseUtilScript.addSqlStatements(DatabaseScripts.CREATE_ROLES_AND_ADMIN);
 		databaseUtilService.executeDatabaseUtilScript(databaseUtilScript);
 		
 		assertEquals(new Integer(2), roleService.findAllCount());

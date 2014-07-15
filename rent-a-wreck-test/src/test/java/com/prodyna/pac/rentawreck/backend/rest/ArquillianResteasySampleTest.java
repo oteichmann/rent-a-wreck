@@ -1,4 +1,4 @@
-package com.prodyna.pac.rentawreck.backend.common.rest;
+package com.prodyna.pac.rentawreck.backend.rest;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
