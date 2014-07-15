@@ -31,4 +31,11 @@
 			</plugin>
 		</plugins>
 	</build>
+	<dependencies>
+		<dependency>
+			<groupId>com.prodyna.pac.rentawreck</groupId>
+			<artifactId>rent-a-wreck-app</artifactId>
+			<type>ear</type>
+		</dependency>
+	</dependencies>
 </project>
