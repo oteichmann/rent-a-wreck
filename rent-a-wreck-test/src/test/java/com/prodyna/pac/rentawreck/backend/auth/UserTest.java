@@ -1,6 +1,8 @@
 package com.prodyna.pac.rentawreck.backend.auth;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
 import java.util.UUID;
 
@@ -8,8 +10,11 @@ import javax.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
+import org.jboss.arquillian.junit.InSequence;
+import org.jboss.arquillian.transaction.api.annotation.TransactionMode;
 import org.jboss.arquillian.transaction.api.annotation.Transactional;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.prodyna.pac.rentawreck.backend.TestDeploymentFactory;
@@ -23,7 +28,7 @@ import com.prodyna.pac.rentawreck.backend.common.service.UserService;
 public class UserTest extends AbstractEntityCRUDTest<User> {
 
 	@Inject
-	private UserService service;
+	private UserService userService;
 	
 	@Deployment
 	public static WebArchive createDeployment() {
@@ -35,7 +40,7 @@ public class UserTest extends AbstractEntityCRUDTest<User> {
 	 */
 	@Override
 	protected AbstractEntityPersistenceService<User> getService() {
-		return service;
+		return userService;
 	}
 
 	/* (non-Javadoc)
@@ -71,4 +76,46 @@ public class UserTest extends AbstractEntityCRUDTest<User> {
 		assertEquals("Test", user.getFirstName());
 	}
 	
+	@Test
+	@InSequence(1)
+	@Transactional(TransactionMode.ROLLBACK)
+	public void testFindByUsername(){
+		User user = new User();
+		user.setUuid(UUID.randomUUID().toString());
+		user.setUsername("admin");
+		user.setPassword("admin");
+		user.setFirstName("Rent-A-Wreck");
+		user.setLastName("Administrator");
+		user.setEmail("admin@rent-a-wreck.com");
+		
+		userService.create(user);
+		
+		User findByUsername = userService.findByUsername("does-not-exist");
+		assertNull(findByUsername);
+		findByUsername = userService.findByUsername("admin");
+		assertNotNull(findByUsername);
+	}
+	
+	@Test
+	@InSequence(2)
+	@Transactional(TransactionMode.ROLLBACK)
+	public void testUpdatePassword(){
+		User user = new User();
+		user.setUuid(UUID.randomUUID().toString());
+		user.setUsername("admin");
+		user.setPassword("admin");
+		user.setFirstName("Rent-A-Wreck");
+		user.setLastName("Administrator");
+		user.setEmail("admin@rent-a-wreck.com");
+		
+		user = userService.create(user);
+		System.err.println(user.getPassword());
+		
+		user.setPassword("test");
+		User user2 = userService.update(user);
+		System.err.println(user2.getPassword());
+		
+		User user3 = userService.updateUserPassword(user.getUuid(), "test");
+		System.err.println(user3.getPassword());
+	}
 }

@@ -2,6 +2,7 @@ package com.prodyna.pac.rentawreck.backend.common.service.impl;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
 
 import org.jboss.security.auth.spi.Util;
@@ -123,7 +124,12 @@ public class UserServiceBean extends AbstractEntityPersistenceServiceBean<User> 
 	public User findByUsername(String username) {
 		TypedQuery<User> query = em.createQuery("SELECT x FROM User x WHERE x.username = :username", User.class);
 		query.setParameter("username", username);
-		return query.getSingleResult();
+
+		try {
+			return query.getSingleResult();
+		} catch (NoResultException e) {
+			return null;
+		}
 	}
 
 }
