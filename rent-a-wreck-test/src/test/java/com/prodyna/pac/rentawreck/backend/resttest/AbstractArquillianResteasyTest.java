@@ -21,14 +21,20 @@ public class AbstractArquillianResteasyTest {
 	
     protected WebTarget createWebTarget() {
     	Client client = ClientBuilder.newClient();
-    	client.register(new AuthenticationClientRequestFilter(USERNAME, PASSWORD));
+    	client.register(new BasicAuthenticationClientRequestFilter(USERNAME, PASSWORD));
         WebTarget target = client.target(deploymentURL.toString() + "rest");
         return target;
     }
     
     protected ResteasyWebTarget createResteasyWebTarget() {
     	ResteasyClient client = new ResteasyClientBuilder().build();
-    	client.register(new AuthenticationClientRequestFilter(USERNAME, PASSWORD));
+    	client.register(new BasicAuthenticationClientRequestFilter(USERNAME, PASSWORD));
+    	ResteasyWebTarget target = client.target(deploymentURL.toString() + "rest");
+    	return target;
+    }
+    
+    protected ResteasyWebTarget createUnauthenticatedResteasyWebTarget() {
+    	ResteasyClient client = new ResteasyClientBuilder().build();
     	ResteasyWebTarget target = client.target(deploymentURL.toString() + "rest");
     	return target;
     }

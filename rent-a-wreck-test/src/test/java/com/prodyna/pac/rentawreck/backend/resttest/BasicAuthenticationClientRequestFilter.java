@@ -7,11 +7,11 @@ import javax.ws.rs.client.ClientRequestFilter;
 
 import org.jboss.security.Base64Encoder;
 
-public class AuthenticationClientRequestFilter implements ClientRequestFilter {
+public class BasicAuthenticationClientRequestFilter implements ClientRequestFilter {
 
     private String auth;
 
-    public AuthenticationClientRequestFilter(String username, String password) {
+    public BasicAuthenticationClientRequestFilter(String username, String password) {
         try {
 			auth = "Basic " + Base64Encoder.encode(String.format("%s:%s", username, password).getBytes());
 		} catch (IOException e) {
