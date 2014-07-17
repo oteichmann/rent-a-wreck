@@ -2,6 +2,7 @@ package com.prodyna.pac.rentawreck.backend.rentable.model;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -32,10 +33,12 @@ public class License extends AbstractEntity {
 	public static final String NQ_FIND_ALL_COUNT = "License.findAllCount";
 
 	@NotNull
+	@Column(name="aircraft_type")
 	private AircraftType aircraftType;
 	
 	@NotNull
 	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name="valid_till")
 	private Date validTill;
 
 	public AircraftType getAircraftType() {

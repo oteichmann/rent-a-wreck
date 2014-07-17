@@ -3,16 +3,19 @@
  */
 package com.prodyna.pac.rentawreck.backend.auth;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.util.UUID;
 
 import javax.ejb.EJBTransactionRolledbackException;
 import javax.inject.Inject;
 import javax.persistence.PersistenceException;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
+import javax.validation.ConstraintViolationException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
@@ -96,6 +99,16 @@ public class RoleTest extends AbstractEntityCRUDTest<Role> {
 			fail("Should fail because of not null constraints.");
 		} catch (ValidationException e) {
 			assertFalse(StringUtil.isNullOrEmpty(e.getMessage()));
+		}
+		
+		Role roleX = new Role();
+		roleX.setUuid(UUID.randomUUID().toString());
+		
+		try {
+			roleService.create(roleX);
+			fail("Should fail because of not null constraints.");
+		} catch (EJBTransactionRolledbackException e) {
+			assertTrue(e.getCause() instanceof ConstraintViolationException);
 		}
 	}
 	

@@ -6,6 +6,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 
 import com.prodyna.pac.rentawreck.backend.common.model.AbstractEntity;
@@ -17,7 +18,7 @@ import com.prodyna.pac.rentawreck.backend.common.model.AbstractEntity;
  * 
  */
 @Entity
-@Table(name = "raw_aircrafts")
+@Table(name = "raw_aircrafts", uniqueConstraints = @UniqueConstraint(columnNames = "id"))
 @NamedQueries({ 
 	@NamedQuery(name = Aircraft.NQ_FIND_ALL, query = "SELECT x FROM Aircraft x"),
 	@NamedQuery(name = Aircraft.NQ_FIND_ALL_COUNT, query = "SELECT COUNT(x) FROM Aircraft x") 

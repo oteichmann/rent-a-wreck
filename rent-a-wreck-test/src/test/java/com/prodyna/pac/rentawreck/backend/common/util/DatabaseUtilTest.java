@@ -44,11 +44,11 @@ public class DatabaseUtilTest {
 	public void testDatabaseUtilService() throws Exception {
 		
 		DatabaseUtilScript databaseUtilScript = new DatabaseUtilScript();
-		databaseUtilScript.addSqlStatements(DatabaseScripts.CREATE_ROLES_AND_ADMIN);
+		databaseUtilScript.addSqlStatements(DatabaseScripts.CREATE_ROLES_AND_USERS);
 		databaseUtilService.executeDatabaseUtilScript(databaseUtilScript);
 		
 		assertEquals(new Integer(2), roleService.findAllCount());
-		assertEquals(new Integer(1), userService.findAllCount());
+		assertEquals(new Integer(2), userService.findAllCount());
 	}
 
 	

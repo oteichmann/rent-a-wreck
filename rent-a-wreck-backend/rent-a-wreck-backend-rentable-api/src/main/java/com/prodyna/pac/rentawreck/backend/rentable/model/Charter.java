@@ -2,9 +2,11 @@ package com.prodyna.pac.rentawreck.backend.rentable.model;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -36,20 +38,25 @@ public class Charter extends AbstractEntity {
 	
 	@NotNull
 	@Enumerated(EnumType.STRING)
+	@Column(name = "charter_status")
 	private CharterStatus charterStatus;
 	
 	@NotNull
 	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "charter_start")
 	private Date charterStart;
 
 	@NotNull
 	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "charter_end")
 	private Date charterEnd;
 
 	@ManyToOne(optional = false)
+	@JoinColumn(name = "aircraft")
 	private Aircraft aircraft;
 	
 	@ManyToOne(optional = false)
+	@JoinColumn(name = "pilot")
 	private Pilot pilot;
 
 	public Aircraft getAircraft() {

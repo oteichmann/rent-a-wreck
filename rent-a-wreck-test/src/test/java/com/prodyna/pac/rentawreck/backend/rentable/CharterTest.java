@@ -29,7 +29,6 @@ import com.prodyna.pac.rentawreck.backend.rentable.model.Aircraft;
 import com.prodyna.pac.rentawreck.backend.rentable.model.AircraftType;
 import com.prodyna.pac.rentawreck.backend.rentable.model.Charter;
 import com.prodyna.pac.rentawreck.backend.rentable.model.CharterStatus;
-import com.prodyna.pac.rentawreck.backend.rentable.model.License;
 import com.prodyna.pac.rentawreck.backend.rentable.model.Pilot;
 import com.prodyna.pac.rentawreck.backend.rentable.service.AircraftService;
 import com.prodyna.pac.rentawreck.backend.rentable.service.CharterService;
@@ -47,9 +46,6 @@ public class CharterTest extends AbstractEntityCRUDTest<Charter> {
 
 	@Inject
 	private PilotService pilotService;
-
-	@Inject
-	private License licenseService;
 
 	@Inject
 	private UserService userService;

@@ -56,7 +56,7 @@ public class RoleTest extends AbstractArquillianResteasyTest {
 	public void initDatabase() {
 		DatabaseUtilServiceREST databaseUtilService = createResteasyWebTarget().proxy(DatabaseUtilServiceREST.class);
 		DatabaseUtilScript databaseUtilScript = new DatabaseUtilScript();
-		databaseUtilScript.addSqlStatements(DatabaseScripts.CREATE_ROLES_AND_ADMIN);
+		databaseUtilScript.addSqlStatements(DatabaseScripts.CREATE_ROLES_AND_USERS);
 		try {
 			databaseUtilService.executeDatabaseUtilScript(databaseUtilScript);
 		} catch (Throwable t) {

@@ -31,22 +31,12 @@ public class TestDeploymentFactory {
         return instance;
     }
 	
-	private WebArchive createBackendCommonDeploymentBKP() {
-		WebArchive wa = ShrinkWrap.create(WebArchive.class, "raw-test.war");
-		wa.addPackages(true, "com.prodyna.pac.rentawreck.backend.common");
-		wa.deletePackage("com.prodyna.pac.rentawreck.backend.common.monitoring");
-		wa.addAsResource("META-INF/test-persistence.xml", "META-INF/persistence.xml");
-		wa.addAsResource("META-INF/beans.xml");
-		wa.addAsWebInfResource("test-ds.xml", "test-ds.xml");
-
-		return wa;
-	}
-	
 	private WebArchive createBackendAuthDeployment() {
 		WebArchive wa = ShrinkWrap.create(WebArchive.class, "raw-test.war");
 		wa.addPackages(true, "com.prodyna.pac.rentawreck.backend.common");
 		wa.deletePackage("com.prodyna.pac.rentawreck.backend.common.monitoring");
 		wa.addPackages(true, "com.prodyna.pac.rentawreck.backend.auth");
+		wa.addPackages(true, "com.prodyna.pac.rentawreck.backend.rest");
 		wa.addAsResource("META-INF/test-persistence.xml", "META-INF/persistence.xml");
 		wa.addAsResource("META-INF/beans.xml");
 		wa.addAsWebInfResource("test-ds.xml", "test-ds.xml");

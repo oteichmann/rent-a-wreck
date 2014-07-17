@@ -1,10 +1,14 @@
 package com.prodyna.pac.rentawreck.backend.rentable;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.util.UUID;
 
+import javax.ejb.EJBTransactionRolledbackException;
 import javax.inject.Inject;
+import javax.persistence.PersistenceException;
+import javax.validation.ConstraintViolationException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
@@ -12,11 +16,11 @@ import org.jboss.arquillian.junit.InSequence;
 import org.jboss.arquillian.transaction.api.annotation.TransactionMode;
 import org.jboss.arquillian.transaction.api.annotation.Transactional;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.prodyna.pac.rentawreck.backend.TestDeploymentFactory;
+import com.prodyna.pac.rentawreck.backend.common.model.Role;
 import com.prodyna.pac.rentawreck.backend.common.service.AbstractEntityCRUDTest;
 import com.prodyna.pac.rentawreck.backend.common.service.AbstractEntityPersistenceService;
 import com.prodyna.pac.rentawreck.backend.rentable.model.Aircraft;
@@ -29,7 +33,7 @@ public class AircraftTest extends AbstractEntityCRUDTest<Aircraft>{
 
 	@Inject
 	private AircraftService aircraftService;
-	
+
 	@Deployment
 	public static WebArchive createDeployment() {
 		return TestDeploymentFactory.getInstance().getBackendRentableDeployment();
@@ -64,23 +68,46 @@ public class AircraftTest extends AbstractEntityCRUDTest<Aircraft>{
 		aircraft.setId("B52");
 		return aircraft;
 	}
-
+	
 	@Test
 	@InSequence(1)
 	@Transactional(TransactionMode.ROLLBACK)
-	public void simpleTest() {
-		aircraftService.findAll();
-		assertEquals(0, aircraftService.findAllCount().intValue());
-		Aircraft instance0 = new Aircraft();
-		instance0.setUuid(UUID.randomUUID().toString());
-		instance0.setId("B52");
-		instance0.setType(AircraftType.BOEING);
-		Aircraft instance1 = aircraftService.create(instance0);
-		Assert.assertNotNull(instance1.getUuid());
-		assertEquals(1, aircraftService.findAllCount().intValue());
-		aircraftService.delete(instance1.getUuid());
-		assertEquals(0, aircraftService.findAllCount().intValue());
+	public void testNullConstraints(){
+		Aircraft aircraft = new Aircraft();
+		aircraft.setUuid(UUID.randomUUID().toString());
+		
+		try {
+			aircraftService.create(aircraft);
+			fail("Should fail because of not null constraints.");
+		} catch (EJBTransactionRolledbackException e) {
+			assertTrue(e.getCause() instanceof ConstraintViolationException);
+		}
 	}
-
-
+	
+	@Test
+	@InSequence(2)
+	@Transactional(TransactionMode.ROLLBACK)
+	public void testUniqueConstraints(){
+		Aircraft aircraftA = new Aircraft();
+		aircraftA.setUuid(UUID.randomUUID().toString());
+		aircraftA.setId("B52");
+		aircraftA.setType(AircraftType.BOEING);
+		
+		aircraftService.create(aircraftA);
+		
+		Aircraft aircraftB = new Aircraft();
+		aircraftB.setUuid(UUID.randomUUID().toString());
+		aircraftB.setId("B52");
+		aircraftB.setType(AircraftType.BOEING);
+		
+		Role roleB = new Role();
+		roleB.setUuid(UUID.randomUUID().toString());
+		roleB.setName("test");
+		try {
+			aircraftService.create(aircraftB);
+			fail("Should fail because of unique constraint violation.");
+		} catch (EJBTransactionRolledbackException e) {
+			assertTrue(e.getCause() instanceof PersistenceException);
+		}
+	}
 }
