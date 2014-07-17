@@ -18,11 +18,6 @@
 			<artifactId>rent-a-wreck-backend-auth-api</artifactId>
 			<scope>provided</scope>
 		</dependency>
-		<dependency>
-			<groupId>com.prodyna.pac.rentawreck</groupId>
-			<artifactId>rent-a-wreck-backend-common-api</artifactId>
-			<scope>provided</scope>
-		</dependency>
 	</dependencies>
 
 	<build>
