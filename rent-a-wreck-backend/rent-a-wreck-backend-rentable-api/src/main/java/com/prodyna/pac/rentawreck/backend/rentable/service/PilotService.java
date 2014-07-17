@@ -4,6 +4,7 @@
 package com.prodyna.pac.rentawreck.backend.rentable.service;
 
 import javax.annotation.security.PermitAll;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -22,6 +23,8 @@ import com.prodyna.pac.rentawreck.backend.rentable.model.Pilot;
  *
  */
 @Path("/pilot")
+@Consumes(MediaType.APPLICATION_JSON)
+@Produces(MediaType.APPLICATION_JSON)
 public interface PilotService extends AbstractEntityPersistenceService<Pilot> {
 	
 	/**
@@ -32,7 +35,6 @@ public interface PilotService extends AbstractEntityPersistenceService<Pilot> {
 	@GET
 	@NoCache
 	@Path("/user/{user_uuid}")
-	@Produces(MediaType.APPLICATION_JSON)
 	@PermitAll
 	public Pilot readPilotForUser(@PathParam("user_uuid") String userUuid);
 

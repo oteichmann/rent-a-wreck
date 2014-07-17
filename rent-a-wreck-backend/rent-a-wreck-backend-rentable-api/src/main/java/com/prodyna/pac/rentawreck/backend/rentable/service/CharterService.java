@@ -33,6 +33,8 @@ import com.prodyna.pac.rentawreck.backend.rentable.model.CharterStatus;
  *
  */
 @Path("/charter")
+@Consumes(MediaType.APPLICATION_JSON)
+@Produces(MediaType.APPLICATION_JSON)
 public interface CharterService extends AbstractEntityPersistenceService<Charter> {
 	
 	/**
@@ -45,8 +47,6 @@ public interface CharterService extends AbstractEntityPersistenceService<Charter
 	 */
 	@POST
 	@Path("/create/{uuid}")
-	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.APPLICATION_JSON)
 	@RolesAllowed({"user" , "admin"})
 	public Charter createCharter(@PathParam("uuid") String uuid, Charter charter);
 	
@@ -62,8 +62,6 @@ public interface CharterService extends AbstractEntityPersistenceService<Charter
 	 */
 	@PUT
 	@Path("/{uuid}/dates")
-	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.APPLICATION_JSON)
 	@RolesAllowed({"user" , "admin"})
 	public Charter updateCharterDates(@PathParam("uuid") String uuid,
 			@QueryParam("charterStart") @DateFormat("yyyy-MM-dd") Date charterStart, @QueryParam("charterEnd") @DateFormat("yyyy-MM-dd") Date charterEnd);
@@ -76,8 +74,6 @@ public interface CharterService extends AbstractEntityPersistenceService<Charter
 	 */
 	@PUT
 	@Path("/{uuid}/state")
-	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.APPLICATION_JSON)
 	@RolesAllowed({"user" , "admin"})
 	public Charter updateCharterStatus(@PathParam("uuid") String uuid,
 			@QueryParam("newCharterStatus") CharterStatus newCharterStatus);
@@ -90,7 +86,6 @@ public interface CharterService extends AbstractEntityPersistenceService<Charter
 	@GET
 	@NoCache
 	@Path("/aircraft/{aircraft_uuid}")
-	@Produces(MediaType.APPLICATION_JSON)
 	@PermitAll
 	List<Charter> getAircraftCharters(@PathParam("aircraft_uuid") String aircraftUuid);
 	
@@ -114,7 +109,6 @@ public interface CharterService extends AbstractEntityPersistenceService<Charter
 	@GET
 	@NoCache
 	@Path("/aircraft/active/{aircraft_uuid}")
-	@Produces(MediaType.APPLICATION_JSON)
 	@PermitAll
 	Charter getActiveAircraftCharter(@PathParam("aircraft_uuid") String aircraftUuid);
 
@@ -125,7 +119,6 @@ public interface CharterService extends AbstractEntityPersistenceService<Charter
 	@GET
 	@NoCache
 	@Path("/overdue")
-	@Produces(MediaType.APPLICATION_JSON)
 	@PermitAll
 	List<Charter> getOverdueCharters();
 

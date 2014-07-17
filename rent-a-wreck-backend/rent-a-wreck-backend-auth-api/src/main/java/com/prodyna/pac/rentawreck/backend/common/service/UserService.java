@@ -17,6 +17,8 @@ import com.prodyna.pac.rentawreck.backend.common.model.User;
  * 
  */
 @Path("/user")
+@Consumes(MediaType.APPLICATION_JSON)
+@Produces(MediaType.APPLICATION_JSON)
 public interface UserService extends AbstractEntityPersistenceService<User> {
 
 	/**
@@ -28,8 +30,6 @@ public interface UserService extends AbstractEntityPersistenceService<User> {
 	 */
 	@PUT
 	@Path("/update/")
-	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.APPLICATION_JSON)
 	@RolesAllowed("admin")
 	User updateUserPassword(@QueryParam("uuid") String uuid, @QueryParam("password") String password);
 	

@@ -6,6 +6,7 @@ package com.prodyna.pac.rentawreck.backend.rentable.service;
 import java.util.List;
 
 import javax.annotation.security.PermitAll;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -24,6 +25,8 @@ import com.prodyna.pac.rentawreck.backend.rentable.model.AircraftCharterStatus;
  *
  */
 @Path("/aircraft")
+@Consumes(MediaType.APPLICATION_JSON)
+@Produces(MediaType.APPLICATION_JSON)
 public interface AircraftService extends AbstractEntityPersistenceService<Aircraft> {
 	
 	/**
@@ -33,7 +36,6 @@ public interface AircraftService extends AbstractEntityPersistenceService<Aircra
 	@GET
 	@NoCache
 	@Path("/status-list")
-	@Produces(MediaType.APPLICATION_JSON)
 	@PermitAll
 	List<AircraftCharterStatus> getAircraftCharterStatusList();
 
