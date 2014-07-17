@@ -35,14 +35,16 @@ public class MonitoringInterceptor {
 	 */
 	@AroundInvoke
 	public Object monitorPerformance(final InvocationContext ctx) throws Exception {
-		final long startTimeMillis = System.currentTimeMillis();
+		String className = ctx.getTarget().getClass().getName();
 		Method method = ctx.getMethod();
+		String methodName = method.getName();
+
 		Object result = null;
+		final long startTimeMillis = System.currentTimeMillis();
 		result = ctx.proceed();
 		final long endTimeMillis = System.currentTimeMillis();
 
-		this.monitoringService.addMethodExecutionDuration(method.getDeclaringClass().getName(), method.getName(),
-				endTimeMillis - startTimeMillis);
+		this.monitoringService.addMethodExecutionDuration(className, methodName, endTimeMillis - startTimeMillis);
 
 		return result;
 	}
