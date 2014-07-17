@@ -12,8 +12,8 @@ after_success:
 - echo "https://${GH_TOKEN}:@github.com" > .git/credentials
 - git remote rm origin
 - git remote add origin https://oteichmann:${GH_TOKEN}@github.com/oteichmann/artifact-repo.git
-- touch test
-- git commit -am "test"
+- git add --all
+- git commit -am "build done!"
 - git push origin master
 env:
   global:
