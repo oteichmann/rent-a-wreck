@@ -8,6 +8,7 @@ import javax.ws.rs.core.Response;
 
 import com.prodyna.pac.rentawreck.backend.common.model.TokenSubject;
 import com.prodyna.pac.rentawreck.backend.common.model.User;
+import com.prodyna.pac.rentawreck.backend.common.monitoring.Monitored;
 import com.prodyna.pac.rentawreck.backend.common.service.AuthenticationService;
 import com.prodyna.pac.rentawreck.backend.rest.service.AuthenticationServiceREST;
 import com.prodyna.pac.rentawreck.backend.rest.service.request.LoginRequest;
@@ -16,6 +17,7 @@ import com.prodyna.pac.rentawreck.backend.rest.util.AuthenticationCookieUtil;
 import com.prodyna.pac.rentawreck.backend.rest.util.ResponseMessageBuilder;
 
 @Stateless
+@Monitored
 public class AuthenticationServiceRESTBean implements AuthenticationServiceREST {
 	
 	@Inject
