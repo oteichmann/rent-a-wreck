@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<security-domain name="rent-a-wreck">
+    <authentication>
+        <login-module code="org.jboss.security.auth.spi.DatabaseServerLoginModule" flag="required">
+            <module-option name="debug" value="true"/>
+            <module-option name="dsJndiName" value="java:jboss/datasources/rent-a-wreck"/>
+            <module-option name="principalsQuery" value="SELECT password FROM raw_users WHERE username=?"/>
+            <module-option name="rolesQuery" value="SELECT r.name, 'Roles' FROM raw_roles r LEFT JOIN raw_users_roles ur ON r.uuid = ur.role_uuid WHERE ur.user_uuid = (SELECT u.uuid FROM raw_users u WHERE u.username = ?)"/>
+            <module-option name="unauthenticatedIdentity" value="guest"/>
+            <module-option name="hashAlgorithm" value="MD5"/>
+            <module-option name="hashEncoding" value="rfc2617"/>
+        </login-module>
+    </authentication>
+</security-domain>

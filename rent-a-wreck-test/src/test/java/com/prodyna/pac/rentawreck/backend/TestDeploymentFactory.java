@@ -51,9 +51,10 @@ public class TestDeploymentFactory {
 	
 	private WebArchive createBackendAuthDeploymentREST() {
 		WebArchive wa = createBackendAuthDeployment();
-		wa.deleteClass(JaxRsActivator.class);
 		wa.addPackages(true, "com.prodyna.pac.rentawreck.backend.rest");
+		wa.deleteClass(JaxRsActivator.class);
 		wa.addPackages(false, "com.prodyna.pac.rentawreck.backend.resttest");
+		wa.addAsWebInfResource("test-security-domain.xml", "test-security-domain.xml");
 		
 		return wa;
 	}
