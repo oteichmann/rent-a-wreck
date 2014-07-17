@@ -279,6 +279,13 @@
 					</configuration>
 					<inherited>true</inherited>
 				</plugin>
+				<plugin>
+					<artifactId>maven-surefire-plugin</artifactId>
+					<version>${version.surefire.plugin}</version>
+					<configuration>
+						<skip>true</skip>
+					</configuration>
+				</plugin>
 			</plugins>
 		</pluginManagement>
 	</build>
