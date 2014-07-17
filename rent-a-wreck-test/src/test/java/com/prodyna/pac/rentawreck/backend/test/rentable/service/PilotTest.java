@@ -1,4 +1,4 @@
-package com.prodyna.pac.rentawreck.backend.rentable;
+package com.prodyna.pac.rentawreck.backend.test.rentable.service;
 
 import java.util.Date;
 import java.util.HashSet;
@@ -15,13 +15,13 @@ import org.junit.runner.RunWith;
 
 import com.prodyna.pac.rentawreck.backend.TestDeploymentFactory;
 import com.prodyna.pac.rentawreck.backend.common.model.User;
-import com.prodyna.pac.rentawreck.backend.common.service.AbstractEntityCRUDTest;
 import com.prodyna.pac.rentawreck.backend.common.service.AbstractEntityPersistenceService;
 import com.prodyna.pac.rentawreck.backend.common.service.UserService;
 import com.prodyna.pac.rentawreck.backend.rentable.model.AircraftType;
 import com.prodyna.pac.rentawreck.backend.rentable.model.License;
 import com.prodyna.pac.rentawreck.backend.rentable.model.Pilot;
 import com.prodyna.pac.rentawreck.backend.rentable.service.PilotService;
+import com.prodyna.pac.rentawreck.backend.test.AbstractEntityCRUDTest;
 
 @RunWith(Arquillian.class)
 @Transactional
@@ -39,7 +39,7 @@ public class PilotTest extends AbstractEntityCRUDTest<Pilot> {
 	}
 	
 	/* (non-Javadoc)
-	 * @see com.prodyna.pac.rentawreck.backend.common.AbstractEntityCRUDTest#getService()
+	 * @see com.prodyna.pac.rentawreck.backend.test.common.AbstractEntityCRUDTest#getService()
 	 */
 	@Override
 	protected AbstractEntityPersistenceService<Pilot> getService() {
@@ -47,7 +47,7 @@ public class PilotTest extends AbstractEntityCRUDTest<Pilot> {
 	}
 
 	/* (non-Javadoc)
-	 * @see com.prodyna.pac.rentawreck.backend.common.AbstractEntityCRUDTest#getCRUDEntity()
+	 * @see com.prodyna.pac.rentawreck.backend.test.common.AbstractEntityCRUDTest#getCRUDEntity()
 	 */
 	@Override
 	public Pilot createCRUDEntity() {
@@ -81,7 +81,7 @@ public class PilotTest extends AbstractEntityCRUDTest<Pilot> {
 	
 
 	/* (non-Javadoc)
-	 * @see com.prodyna.pac.rentawreck.backend.common.AbstractEntityCRUDTest#updateCRUDEntity(com.prodyna.pac.rentawreck.backend.common.model.AbstractEntity)
+	 * @see com.prodyna.pac.rentawreck.backend.test.common.AbstractEntityCRUDTest#updateCRUDEntity(com.prodyna.pac.rentawreck.backend.test.common.model.AbstractEntity)
 	 */
 	@Override
 	protected Pilot updateCRUDEntity(Pilot pilot) {

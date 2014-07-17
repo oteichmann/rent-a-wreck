@@ -1,4 +1,4 @@
-package com.prodyna.pac.rentawreck.backend.auth;
+package com.prodyna.pac.rentawreck.backend.test.auth.service;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -19,9 +19,9 @@ import org.junit.runner.RunWith;
 
 import com.prodyna.pac.rentawreck.backend.TestDeploymentFactory;
 import com.prodyna.pac.rentawreck.backend.common.model.User;
-import com.prodyna.pac.rentawreck.backend.common.service.AbstractEntityCRUDTest;
 import com.prodyna.pac.rentawreck.backend.common.service.AbstractEntityPersistenceService;
 import com.prodyna.pac.rentawreck.backend.common.service.UserService;
+import com.prodyna.pac.rentawreck.backend.test.AbstractEntityCRUDTest;
 
 @RunWith(Arquillian.class)
 @Transactional
@@ -36,7 +36,7 @@ public class UserTest extends AbstractEntityCRUDTest<User> {
 	}
 
 	/* (non-Javadoc)
-	 * @see com.prodyna.pac.rentawreck.backend.common.AbstractEntityCRUDTest#getService()
+	 * @see com.prodyna.pac.rentawreck.backend.test.common.AbstractEntityCRUDTest#getService()
 	 */
 	@Override
 	protected AbstractEntityPersistenceService<User> getService() {
@@ -44,7 +44,7 @@ public class UserTest extends AbstractEntityCRUDTest<User> {
 	}
 
 	/* (non-Javadoc)
-	 * @see com.prodyna.pac.rentawreck.backend.common.AbstractEntityCRUDTest#getCRUDEntity()
+	 * @see com.prodyna.pac.rentawreck.backend.test.common.AbstractEntityCRUDTest#getCRUDEntity()
 	 */
 	@Override
 	public User createCRUDEntity() {
@@ -60,7 +60,7 @@ public class UserTest extends AbstractEntityCRUDTest<User> {
 	}
 
 	/* (non-Javadoc)
-	 * @see com.prodyna.pac.rentawreck.backend.common.AbstractEntityCRUDTest#updateCRUDEntity(com.prodyna.pac.rentawreck.backend.common.model.AbstractEntity)
+	 * @see com.prodyna.pac.rentawreck.backend.test.common.AbstractEntityCRUDTest#updateCRUDEntity(com.prodyna.pac.rentawreck.backend.test.common.model.AbstractEntity)
 	 */
 	@Override
 	protected User updateCRUDEntity(User user) {
@@ -69,7 +69,7 @@ public class UserTest extends AbstractEntityCRUDTest<User> {
 	}
 	
 	/* (non-Javadoc)
-	 * @see com.prodyna.pac.rentawreck.backend.common.AbstractEntityCRUDTest#assertsAfterUpdate(com.prodyna.pac.rentawreck.backend.common.model.AbstractEntity)
+	 * @see com.prodyna.pac.rentawreck.backend.test.common.AbstractEntityCRUDTest#assertsAfterUpdate(com.prodyna.pac.rentawreck.backend.test.common.model.AbstractEntity)
 	 */
 	@Override
 	protected void assertsAfterUpdate(User user) {

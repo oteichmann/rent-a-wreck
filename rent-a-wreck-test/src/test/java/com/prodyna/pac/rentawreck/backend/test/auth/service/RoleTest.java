@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.prodyna.pac.rentawreck.backend.auth;
+package com.prodyna.pac.rentawreck.backend.test.auth.service;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -29,10 +29,10 @@ import org.picketbox.util.StringUtil;
 
 import com.prodyna.pac.rentawreck.backend.TestDeploymentFactory;
 import com.prodyna.pac.rentawreck.backend.common.model.Role;
-import com.prodyna.pac.rentawreck.backend.common.service.AbstractEntityCRUDTest;
 import com.prodyna.pac.rentawreck.backend.common.service.AbstractEntityPersistenceService;
 import com.prodyna.pac.rentawreck.backend.common.service.RoleService;
 import com.prodyna.pac.rentawreck.backend.common.service.exception.ValidationException;
+import com.prodyna.pac.rentawreck.backend.test.AbstractEntityCRUDTest;
 
 /**
  * RoleTest
@@ -53,7 +53,7 @@ public class RoleTest extends AbstractEntityCRUDTest<Role> {
 	}
 	
 	/* (non-Javadoc)
-	 * @see com.prodyna.pac.rentawreck.backend.common.AbstractEntityCRUDTest#getService()
+	 * @see com.prodyna.pac.rentawreck.backend.test.common.AbstractEntityCRUDTest#getService()
 	 */
 	@Override
 	protected AbstractEntityPersistenceService<Role> getService() {
@@ -61,7 +61,7 @@ public class RoleTest extends AbstractEntityCRUDTest<Role> {
 	}
 
 	/* (non-Javadoc)
-	 * @see com.prodyna.pac.rentawreck.backend.common.AbstractEntityCRUDTest#getCRUDEntity()
+	 * @see com.prodyna.pac.rentawreck.backend.test.common.AbstractEntityCRUDTest#getCRUDEntity()
 	 */
 	@Override
 	public Role createCRUDEntity() {
@@ -72,7 +72,7 @@ public class RoleTest extends AbstractEntityCRUDTest<Role> {
 	}
 
 	/* (non-Javadoc)
-	 * @see com.prodyna.pac.rentawreck.backend.common.AbstractEntityCRUDTest#updateCRUDEntity(com.prodyna.pac.rentawreck.backend.common.model.AbstractEntity)
+	 * @see com.prodyna.pac.rentawreck.backend.test.common.AbstractEntityCRUDTest#updateCRUDEntity(com.prodyna.pac.rentawreck.backend.test.common.model.AbstractEntity)
 	 */
 	@Override
 	protected Role updateCRUDEntity(Role role) {
@@ -81,7 +81,7 @@ public class RoleTest extends AbstractEntityCRUDTest<Role> {
 	}
 	
 	/* (non-Javadoc)
-	 * @see com.prodyna.pac.rentawreck.backend.common.AbstractEntityCRUDTest#assertsAfterUpdate(com.prodyna.pac.rentawreck.backend.common.model.AbstractEntity)
+	 * @see com.prodyna.pac.rentawreck.backend.test.common.AbstractEntityCRUDTest#assertsAfterUpdate(com.prodyna.pac.rentawreck.backend.test.common.model.AbstractEntity)
 	 */
 	@Override
 	protected void assertsAfterUpdate(Role role) {

@@ -1,4 +1,4 @@
-package com.prodyna.pac.rentawreck.backend.rentable;
+package com.prodyna.pac.rentawreck.backend.test.rentable.service;
 
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
@@ -21,11 +21,11 @@ import org.junit.runner.RunWith;
 
 import com.prodyna.pac.rentawreck.backend.TestDeploymentFactory;
 import com.prodyna.pac.rentawreck.backend.common.model.Role;
-import com.prodyna.pac.rentawreck.backend.common.service.AbstractEntityCRUDTest;
 import com.prodyna.pac.rentawreck.backend.common.service.AbstractEntityPersistenceService;
 import com.prodyna.pac.rentawreck.backend.rentable.model.Aircraft;
 import com.prodyna.pac.rentawreck.backend.rentable.model.AircraftType;
 import com.prodyna.pac.rentawreck.backend.rentable.service.AircraftService;
+import com.prodyna.pac.rentawreck.backend.test.AbstractEntityCRUDTest;
 
 @RunWith(Arquillian.class)
 @Transactional
@@ -40,7 +40,7 @@ public class AircraftTest extends AbstractEntityCRUDTest<Aircraft>{
 	}
 	
 	/* (non-Javadoc)
-	 * @see com.prodyna.pac.rentawreck.backend.common.AbstractEntityCRUDTest#getService()
+	 * @see com.prodyna.pac.rentawreck.backend.test.common.AbstractEntityCRUDTest#getService()
 	 */
 	@Override
 	protected AbstractEntityPersistenceService<Aircraft> getService() {
@@ -48,7 +48,7 @@ public class AircraftTest extends AbstractEntityCRUDTest<Aircraft>{
 	}
 
 	/* (non-Javadoc)
-	 * @see com.prodyna.pac.rentawreck.backend.common.AbstractEntityCRUDTest#getCRUDEntity()
+	 * @see com.prodyna.pac.rentawreck.backend.test.common.AbstractEntityCRUDTest#getCRUDEntity()
 	 */
 	@Override
 	public Aircraft createCRUDEntity() {
@@ -61,7 +61,7 @@ public class AircraftTest extends AbstractEntityCRUDTest<Aircraft>{
 	}
 
 	/* (non-Javadoc)
-	 * @see com.prodyna.pac.rentawreck.backend.common.AbstractEntityCRUDTest#updateCRUDEntity(com.prodyna.pac.rentawreck.backend.common.model.AbstractEntity)
+	 * @see com.prodyna.pac.rentawreck.backend.test.common.AbstractEntityCRUDTest#updateCRUDEntity(com.prodyna.pac.rentawreck.backend.test.common.model.AbstractEntity)
 	 */
 	@Override
 	protected Aircraft updateCRUDEntity(Aircraft aircraft) {

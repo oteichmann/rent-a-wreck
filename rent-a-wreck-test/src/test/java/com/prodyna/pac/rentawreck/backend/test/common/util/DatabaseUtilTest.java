@@ -1,4 +1,4 @@
-package com.prodyna.pac.rentawreck.backend.common.util;
+package com.prodyna.pac.rentawreck.backend.test.common.util;
 
 import static org.junit.Assert.assertEquals;
 
@@ -16,6 +16,9 @@ import org.junit.runner.RunWith;
 import com.prodyna.pac.rentawreck.backend.TestDeploymentFactory;
 import com.prodyna.pac.rentawreck.backend.common.service.RoleService;
 import com.prodyna.pac.rentawreck.backend.common.service.UserService;
+import com.prodyna.pac.rentawreck.backend.common.util.DatabaseScripts;
+import com.prodyna.pac.rentawreck.backend.common.util.DatabaseUtilScript;
+import com.prodyna.pac.rentawreck.backend.common.util.DatabaseUtilService;
 
 @RunWith(Arquillian.class)
 @Transactional

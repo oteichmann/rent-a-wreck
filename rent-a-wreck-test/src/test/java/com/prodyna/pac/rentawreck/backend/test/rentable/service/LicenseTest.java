@@ -1,4 +1,4 @@
-package com.prodyna.pac.rentawreck.backend.rentable;
+package com.prodyna.pac.rentawreck.backend.test.rentable.service;
 
 import java.util.GregorianCalendar;
 import java.util.UUID;
@@ -12,11 +12,11 @@ import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.runner.RunWith;
 
 import com.prodyna.pac.rentawreck.backend.TestDeploymentFactory;
-import com.prodyna.pac.rentawreck.backend.common.service.AbstractEntityCRUDTest;
 import com.prodyna.pac.rentawreck.backend.common.service.AbstractEntityPersistenceService;
 import com.prodyna.pac.rentawreck.backend.rentable.model.AircraftType;
 import com.prodyna.pac.rentawreck.backend.rentable.model.License;
 import com.prodyna.pac.rentawreck.backend.rentable.service.LicenseService;
+import com.prodyna.pac.rentawreck.backend.test.AbstractEntityCRUDTest;
 
 @RunWith(Arquillian.class)
 @Transactional
@@ -31,7 +31,7 @@ public class LicenseTest extends AbstractEntityCRUDTest<License> {
 	}
 	
 	/* (non-Javadoc)
-	 * @see com.prodyna.pac.rentawreck.backend.common.AbstractEntityCRUDTest#getService()
+	 * @see com.prodyna.pac.rentawreck.backend.test.common.AbstractEntityCRUDTest#getService()
 	 */
 	@Override
 	protected AbstractEntityPersistenceService<License> getService() {
@@ -39,7 +39,7 @@ public class LicenseTest extends AbstractEntityCRUDTest<License> {
 	}
 
 	/* (non-Javadoc)
-	 * @see com.prodyna.pac.rentawreck.backend.common.AbstractEntityCRUDTest#getCRUDEntity()
+	 * @see com.prodyna.pac.rentawreck.backend.test.common.AbstractEntityCRUDTest#getCRUDEntity()
 	 */
 	@Override
 	public License createCRUDEntity() {
@@ -52,7 +52,7 @@ public class LicenseTest extends AbstractEntityCRUDTest<License> {
 	}
 
 	/* (non-Javadoc)
-	 * @see com.prodyna.pac.rentawreck.backend.common.AbstractEntityCRUDTest#updateCRUDEntity(com.prodyna.pac.rentawreck.backend.common.model.AbstractEntity)
+	 * @see com.prodyna.pac.rentawreck.backend.test.common.AbstractEntityCRUDTest#updateCRUDEntity(com.prodyna.pac.rentawreck.backend.test.common.model.AbstractEntity)
 	 */
 	@Override
 	protected License updateCRUDEntity(License license) {

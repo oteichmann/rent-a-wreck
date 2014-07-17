@@ -1,4 +1,4 @@
-package com.prodyna.pac.rentawreck.backend.rentable;
+package com.prodyna.pac.rentawreck.backend.test.rentable.service;
 
 import static org.junit.Assert.assertEquals;
 
@@ -21,7 +21,6 @@ import org.junit.runner.RunWith;
 import com.prodyna.pac.rentawreck.backend.TestDeploymentFactory;
 import com.prodyna.pac.rentawreck.backend.common.model.Role;
 import com.prodyna.pac.rentawreck.backend.common.model.User;
-import com.prodyna.pac.rentawreck.backend.common.service.AbstractEntityCRUDTest;
 import com.prodyna.pac.rentawreck.backend.common.service.AbstractEntityPersistenceService;
 import com.prodyna.pac.rentawreck.backend.common.service.RoleService;
 import com.prodyna.pac.rentawreck.backend.common.service.UserService;
@@ -33,6 +32,7 @@ import com.prodyna.pac.rentawreck.backend.rentable.model.Pilot;
 import com.prodyna.pac.rentawreck.backend.rentable.service.AircraftService;
 import com.prodyna.pac.rentawreck.backend.rentable.service.CharterService;
 import com.prodyna.pac.rentawreck.backend.rentable.service.PilotService;
+import com.prodyna.pac.rentawreck.backend.test.AbstractEntityCRUDTest;
 
 @RunWith(Arquillian.class)
 @Transactional
@@ -60,7 +60,7 @@ public class CharterTest extends AbstractEntityCRUDTest<Charter> {
 	}
 	
 	/* (non-Javadoc)
-	 * @see com.prodyna.pac.rentawreck.backend.common.AbstractEntityCRUDTest#getService()
+	 * @see com.prodyna.pac.rentawreck.backend.test.common.AbstractEntityCRUDTest#getService()
 	 */
 	@Override
 	protected AbstractEntityPersistenceService<Charter> getService() {
@@ -68,7 +68,7 @@ public class CharterTest extends AbstractEntityCRUDTest<Charter> {
 	}
 
 	/* (non-Javadoc)
-	 * @see com.prodyna.pac.rentawreck.backend.common.AbstractEntityCRUDTest#getCRUDEntity()
+	 * @see com.prodyna.pac.rentawreck.backend.test.common.AbstractEntityCRUDTest#getCRUDEntity()
 	 */
 	@Override
 	public Charter createCRUDEntity() {
@@ -111,7 +111,7 @@ public class CharterTest extends AbstractEntityCRUDTest<Charter> {
 	}
 
 	/* (non-Javadoc)
-	 * @see com.prodyna.pac.rentawreck.backend.common.AbstractEntityCRUDTest#updateCRUDEntity(com.prodyna.pac.rentawreck.backend.common.model.AbstractEntity)
+	 * @see com.prodyna.pac.rentawreck.backend.test.common.AbstractEntityCRUDTest#updateCRUDEntity(com.prodyna.pac.rentawreck.backend.test.common.model.AbstractEntity)
 	 */
 	@Override
 	protected Charter updateCRUDEntity(Charter charter) {

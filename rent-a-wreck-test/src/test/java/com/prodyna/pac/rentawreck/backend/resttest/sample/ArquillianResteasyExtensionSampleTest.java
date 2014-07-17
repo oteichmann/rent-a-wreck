@@ -1,4 +1,4 @@
-package com.prodyna.pac.rentawreck.backend.rest;
+package com.prodyna.pac.rentawreck.backend.resttest.sample;
 
 import java.net.URL;
 
@@ -16,6 +16,7 @@ import org.junit.runner.RunWith;
 import com.prodyna.pac.rentawreck.backend.rest.service.StringResponse;
 import com.prodyna.pac.rentawreck.backend.rest.service.UtilService;
 import com.prodyna.pac.rentawreck.backend.rest.service.impl.UtilServiceBean;
+import com.prodyna.pac.rentawreck.backend.resttest.TestJaxRsActivator;
 
 @RunWith(Arquillian.class)
 public class ArquillianResteasyExtensionSampleTest {

@@ -1,4 +1,4 @@
-package com.prodyna.pac.rentawreck.backend.rentable;
+package com.prodyna.pac.rentawreck.backend.test.rentable.service;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;

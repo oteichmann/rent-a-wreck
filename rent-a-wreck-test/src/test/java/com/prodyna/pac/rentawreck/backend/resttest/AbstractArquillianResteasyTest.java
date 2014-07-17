@@ -1,4 +1,4 @@
-package com.prodyna.pac.rentawreck.backend.rest;
+package com.prodyna.pac.rentawreck.backend.resttest;
 
 import java.net.URL;
 

@@ -1,4 +1,4 @@
-package com.prodyna.pac.rentawreck.backend.auth.rest;
+package com.prodyna.pac.rentawreck.backend.resttest.auth.service;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
@@ -25,10 +25,8 @@ import com.prodyna.pac.rentawreck.backend.common.model.Role;
 import com.prodyna.pac.rentawreck.backend.common.service.RoleService;
 import com.prodyna.pac.rentawreck.backend.common.util.DatabaseScripts;
 import com.prodyna.pac.rentawreck.backend.common.util.DatabaseUtilScript;
-import com.prodyna.pac.rentawreck.backend.common.util.rest.DatabaseUtilServiceREST;
-import com.prodyna.pac.rentawreck.backend.rest.AbstractArquillianResteasyTest;
-import com.prodyna.pac.rentawreck.backend.rest.JaxRsActivator;
-import com.prodyna.pac.rentawreck.backend.rest.TestJaxRsActivator;
+import com.prodyna.pac.rentawreck.backend.resttest.AbstractArquillianResteasyTest;
+import com.prodyna.pac.rentawreck.backend.resttest.DatabaseUtilServiceREST;
 
 /**
  * RoleTest
@@ -44,10 +42,7 @@ public class RoleTest extends AbstractArquillianResteasyTest {
 	
 	@Deployment(testable=false)
 	public static WebArchive createDeployment() {
-		WebArchive wa = TestDeploymentFactory.getInstance().getBackendAuthDeployment();
-		wa.addPackages(true, "com.prodyna.pac.rentawreck.backend.rest");
-		wa.deleteClass(JaxRsActivator.class);
-		wa.addClass(TestJaxRsActivator.class);
+		WebArchive wa = TestDeploymentFactory.getInstance().getBackendAuthDeploymentREST();
 		
 		return wa;
 	}

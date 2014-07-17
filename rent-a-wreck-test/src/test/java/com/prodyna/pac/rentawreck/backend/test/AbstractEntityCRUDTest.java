@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.prodyna.pac.rentawreck.backend.common.service;
+package com.prodyna.pac.rentawreck.backend.test;
 
 import static org.junit.Assert.*;
 
