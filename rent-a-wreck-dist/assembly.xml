@@ -10,7 +10,7 @@
 	<fileSets>
 		<fileSet>
 			<directory>database</directory>
-			<outputDirectory>/</outputDirectory>
+			<outputDirectory>/database</outputDirectory>
 			<includes>
 				<include>*.sql</include>
 				<include>README.txt</include>
@@ -25,4 +25,5 @@
 			</includes>
 		</dependencySet>
 	</dependencySets>
+
 </assembly>
