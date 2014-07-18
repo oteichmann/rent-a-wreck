@@ -1,4 +1,4 @@
-package com.prodyna.pac.rentawreck.backend.common.util;
+package com.prodyna.pac.rentawreck.backend.util;
 
 import java.io.Serializable;
 import java.util.ArrayList;

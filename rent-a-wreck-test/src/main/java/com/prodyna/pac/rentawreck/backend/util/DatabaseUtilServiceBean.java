@@ -1,4 +1,4 @@
-package com.prodyna.pac.rentawreck.backend.common.util;
+package com.prodyna.pac.rentawreck.backend.util;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,8 +10,8 @@ import javax.persistence.Query;
 
 import org.slf4j.Logger;
 
-import com.prodyna.pac.rentawreck.backend.common.util.DatabaseUtilScript;
-import com.prodyna.pac.rentawreck.backend.common.util.DatabaseUtilService;
+import com.prodyna.pac.rentawreck.backend.util.DatabaseUtilScript;
+import com.prodyna.pac.rentawreck.backend.util.DatabaseUtilService;
 
 /**
  * DBUtilService

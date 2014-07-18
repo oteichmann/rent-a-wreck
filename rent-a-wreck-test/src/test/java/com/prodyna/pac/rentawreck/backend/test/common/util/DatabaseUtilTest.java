@@ -16,9 +16,9 @@ import org.junit.runner.RunWith;
 import com.prodyna.pac.rentawreck.backend.TestDeploymentFactory;
 import com.prodyna.pac.rentawreck.backend.common.service.RoleService;
 import com.prodyna.pac.rentawreck.backend.common.service.UserService;
-import com.prodyna.pac.rentawreck.backend.common.util.DatabaseScripts;
-import com.prodyna.pac.rentawreck.backend.common.util.DatabaseUtilScript;
-import com.prodyna.pac.rentawreck.backend.common.util.DatabaseUtilService;
+import com.prodyna.pac.rentawreck.backend.util.DatabaseScripts;
+import com.prodyna.pac.rentawreck.backend.util.DatabaseUtilScript;
+import com.prodyna.pac.rentawreck.backend.util.DatabaseUtilService;
 
 @RunWith(Arquillian.class)
 @Transactional

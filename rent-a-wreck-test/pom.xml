@@ -31,7 +31,6 @@
 			<artifactId>rent-a-wreck-backend-rest</artifactId>
 			<classifier>classes</classifier>
 			<version>${project.version}</version>
-			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>

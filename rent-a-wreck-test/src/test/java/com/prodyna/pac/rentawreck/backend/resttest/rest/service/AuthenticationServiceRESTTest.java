@@ -21,15 +21,15 @@ import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 
 import com.prodyna.pac.rentawreck.backend.TestDeploymentFactory;
-import com.prodyna.pac.rentawreck.backend.common.util.DatabaseScripts;
-import com.prodyna.pac.rentawreck.backend.common.util.DatabaseUtilScript;
 import com.prodyna.pac.rentawreck.backend.rest.service.AuthenticationServiceConstants;
 import com.prodyna.pac.rentawreck.backend.rest.service.AuthenticationServiceREST;
 import com.prodyna.pac.rentawreck.backend.rest.service.request.LoginRequest;
 import com.prodyna.pac.rentawreck.backend.rest.service.request.TokenRequest;
 import com.prodyna.pac.rentawreck.backend.resttest.AbstractArquillianResteasyTest;
-import com.prodyna.pac.rentawreck.backend.resttest.DatabaseUtilServiceREST;
 import com.prodyna.pac.rentawreck.backend.resttest.TokenAuthenticationClientRequestFilter;
+import com.prodyna.pac.rentawreck.backend.util.DatabaseScripts;
+import com.prodyna.pac.rentawreck.backend.util.DatabaseUtilScript;
+import com.prodyna.pac.rentawreck.backend.util.rest.DatabaseUtilServiceREST;
 
 /**
  * RoleTest

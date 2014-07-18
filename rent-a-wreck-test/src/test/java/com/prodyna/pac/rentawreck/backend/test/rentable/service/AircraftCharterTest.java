@@ -22,9 +22,6 @@ import org.junit.runner.RunWith;
 import com.prodyna.pac.rentawreck.backend.TestDeploymentFactory;
 import com.prodyna.pac.rentawreck.backend.common.model.User;
 import com.prodyna.pac.rentawreck.backend.common.service.UserService;
-import com.prodyna.pac.rentawreck.backend.common.util.DatabaseScripts;
-import com.prodyna.pac.rentawreck.backend.common.util.DatabaseUtilScript;
-import com.prodyna.pac.rentawreck.backend.common.util.DatabaseUtilService;
 import com.prodyna.pac.rentawreck.backend.rentable.model.AircraftCharterStatus;
 import com.prodyna.pac.rentawreck.backend.rentable.model.Charter;
 import com.prodyna.pac.rentawreck.backend.rentable.model.License;
@@ -33,6 +30,9 @@ import com.prodyna.pac.rentawreck.backend.rentable.service.AircraftService;
 import com.prodyna.pac.rentawreck.backend.rentable.service.CharterService;
 import com.prodyna.pac.rentawreck.backend.rentable.service.LicenseService;
 import com.prodyna.pac.rentawreck.backend.rentable.service.PilotService;
+import com.prodyna.pac.rentawreck.backend.util.DatabaseScripts;
+import com.prodyna.pac.rentawreck.backend.util.DatabaseUtilScript;
+import com.prodyna.pac.rentawreck.backend.util.DatabaseUtilService;
 
 @RunWith(Arquillian.class)
 @Transactional

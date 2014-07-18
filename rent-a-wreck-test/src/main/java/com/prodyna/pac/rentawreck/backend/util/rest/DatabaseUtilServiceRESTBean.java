@@ -1,4 +1,4 @@
-package com.prodyna.pac.rentawreck.backend.resttest;
+package com.prodyna.pac.rentawreck.backend.util.rest;
 
 import java.util.List;
 
@@ -6,9 +6,9 @@ import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.ws.rs.core.Response;
 
-import com.prodyna.pac.rentawreck.backend.common.util.DatabaseUtilScript;
-import com.prodyna.pac.rentawreck.backend.common.util.DatabaseUtilService;
 import com.prodyna.pac.rentawreck.backend.rest.util.ResponseMessageBuilder;
+import com.prodyna.pac.rentawreck.backend.util.DatabaseUtilScript;
+import com.prodyna.pac.rentawreck.backend.util.DatabaseUtilService;
 
 /**
  * DBUtilService

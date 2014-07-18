@@ -1,4 +1,4 @@
-package com.prodyna.pac.rentawreck.backend.resttest;
+package com.prodyna.pac.rentawreck.backend.util.rest;
 
 import java.util.List;
 
@@ -10,7 +10,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import com.prodyna.pac.rentawreck.backend.common.util.DatabaseUtilScript;
+import com.prodyna.pac.rentawreck.backend.util.DatabaseUtilScript;
 
 /**
  * DBUtilService
