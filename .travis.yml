@@ -5,7 +5,7 @@ before_script:
 - git config --global user.name "${GIT_EMAIL}"
 - git clone https://github.com/oteichmann/artifact-repo /home/travis/build/oteichmann/artifact-repo
 script:
-- mvn -P arquillian-embedded -Dinternal.snapshotRepository.path=file:///home/travis/build/oteichmann/artifact-repo/master/snapshots clean deploy
+- mvn -P arquillian-embedded deploy -Dinternal.snapshotRepository.path=file:///home/travis/build/oteichmann/artifact-repo/master/snapshots -Dinternal.releaseRepository.path=file:///home/travis/build/oteichmann/artifact-repo/master/releases clean deploy
 after_success:
 - cd /home/travis/build/oteichmann/artifact-repo
 - git config credential.helper "store --file=.git/credentials"
@@ -13,7 +13,7 @@ after_success:
 - git remote rm origin
 - git remote add origin https://oteichmann:${GH_TOKEN}@github.com/oteichmann/artifact-repo.git
 - git add --all
-- git commit -am "build done!"
+- git commit -am "rent-a-wreck build done!"
 - git push origin master
 env:
   global:
